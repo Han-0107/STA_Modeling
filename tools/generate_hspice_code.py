@@ -2,11 +2,12 @@ import os.path
 import re
 import itertools
 
-def new_cir(new_vol, new_pulse_rise_fall, new_cap, new_val, cir_path):
+def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
     with open(cir_path, 'r') as file:
         hspice_code = file.read()
 
-        # VOL
+    new_val = new_vol/2
+    # VOL
     hspice_code = re.sub(r'(\.param VOL=)(\d+(\.\d+)?)', r'\g<1>{}'.format(new_vol), hspice_code)
 
     # transition time
@@ -37,11 +38,10 @@ def main(cir_path):
     vols = [1,2,3,4,5]
     pulses = [2e-9,3e-9,4e-9,5e-9]
     caps = [0.2e-12,0.3e-12,0.4e-12,0.5e-12]
-    vals = [x/2 for x in vols]
 
 
-    for v, pulse, cap, val in itertools.product(vols, pulses, caps, vals):
-        new_cir(v, pulse, cap, val, cir_path)
+    for v, pulse, cap in itertools.product(vols, pulses, caps):
+        new_cir(v, pulse, cap, cir_path)
 
 
 if __name__ == '__main__':
