@@ -1,0 +1,32 @@
+* NAND Gate
+.include /hpc/home/connect.yluo208/yangluo/nand/nand/new_Libs/7nm_TT_160803.pm
+.include /hpc/home/connect.yluo208/yangluo/nand/nand/new_Libs/asap7sc6t_26_R.cdl
+
+.tran 0.0000001n 50n
+
+.control
+
+set fileout="output.txt"
+
+* 定义不同的 VOL 值
+foreach VOL in '0.6 0.63 0.7 0.73 0.77 0.8' begin
+    .param VOL={VOL}
+    .param ST={VOL/2}
+    VDD VDD 0 DC {VOL}
+    VSS VSS 0 DC 0
+    VIN_B b 0 DC {VOL}
+    foreach trise in '0 2.5p 5p 7.5p 10p 15p 20p 40p 80p 160p 320p 340p' begin
+        .param trise={trise}
+        VIN_AN an 0 PULSE(0 {VOL} 0 {trise} {trise} 20n 40n)
+        foreach Cout in '0.36p 0.72p 1.44p 2.88p 4.32p 5.76p 11.52p 23.04p 34.56p 46.08p 92.16p 115.2p' begin
+            Cout y 0 {Cout}
+            X1 an b VDD VSS y AND2x2_ASAP7_6t_R
+            run
+            .measure tran tpLH TRIG V(an) VAL={ST} RISE=1 TARG V(y) VAL={ST} FALL=1
+            echo "VOL={VOL} trise={trise} Cout={Cout} tpLH=$&tpLH" >> @fileout
+        end
+    end
+end
+.endc
+
+.end
