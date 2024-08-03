@@ -1,4 +1,4 @@
-# STA Modeling by hspice
+# hspice by Python
 
 1. Put the basic circuit to "./Circuits/XXX.cir".
 1. run "python ./tools/generate_hspice.py".
