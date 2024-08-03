@@ -35,7 +35,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
 
 def main(cir_path):
 
-    vols = [0.6, 0.63, 0.7, 0.73, 0.77, 0.8]
+    vols = [0.6, 0.63, 0.7, 0.77, 0.8]
     pulses = [0, 2.5e-12, 5e-12, 7.5e-12, 10e-12, 15e-12, 20e-12, 40e-12, 80e-12, 160e-12, 320e-12, 340e-12]
     caps = [0.36e-15, 0.72e-15, 1.44e-15, 2.88e-15, 4.32e-15, 5.76e-15, 11.52e-15, 23.04e-15, 34.56e-15, 46.08e-15, 92.16e-15, 115.2e-15]
 
@@ -44,7 +44,7 @@ def main(cir_path):
 
 
 if __name__ == '__main__':
-    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/nand_1.1V.cir'
+    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/nand_model.cir'
     main(cir_path)
 
 
