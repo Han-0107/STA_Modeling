@@ -26,8 +26,9 @@ def extract_data_to_csv(file_path, csv_writer):
     pattern = r"\d+\.\d+e-\d+"
     matches = re.findall(pattern, data)
     if len(matches) >= 2:
+        first_match = matches[0]
         second_match = matches[1]
-        csv_writer.writerow([second_match, second_value, third_value, fourth_value])
+        csv_writer.writerow([first_match, second_match, second_value, third_value, fourth_value])
     else:
         print(f"Less than two matches found in {file_path}")
         csv_writer.writerow(['', second_value, third_value, fourth_value])
@@ -41,12 +42,12 @@ def process_files(folder_path):
     csv_file = "All_data.csv"
     with open(csv_file, mode='w', newline='') as file:
         csv_writer = csv.writer(file)
-        csv_writer.writerow(["Data", "VOL", "Trans", "Cap"])
+        csv_writer.writerow(["Tphl", "Tplh", "VOL", "Trans", "Cap"])
         for file_path in files:
             extract_data_to_csv(file_path, csv_writer)
     
     print(f"Data extracted from {len(files)} files saved to {csv_file}")
 
 if __name__ == "__main__":
-    folder_path = r"/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated"
+    folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated'
     process_files(folder_path)
