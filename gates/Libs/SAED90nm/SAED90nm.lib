@@ -1,0 +1,977 @@
+***********************************************************************
+****                                                               ****
+****  Copyright (C) 2013-2016 Synopsys, Inc.                       ****
+****                                                               ****
+***********************************************************************
+****                                                               ****
+****  The 90nm Generic Library ("Library") is unsupported          ****    
+****  Confidential Information of Synopsys, Inc. ("Synopsys")      ****    
+****  provided to you as Documentation under the terms of the      ****    
+****  End User Software License Agreement between you or your      ****    
+****  employer and Synopsys ("License Agreement") and you agree    ****    
+****  not to distribute or disclose the Library without the        ****    
+****  prior written consent of Synopsys. The Library IS NOT an     ****    
+****  item of Licensed Software or Licensed Product under the      ****    
+****  License Agreement.  Synopsys and/or its licensors own        ****    
+****  and shall retain all right, title and interest in and        ****    
+****  to the Library and all modifications thereto, including      ****    
+****  all intellectual property rights embodied therein. All       ****    
+****  rights in and to any Library modifications you make are      ****    
+****  hereby assigned to Synopsys. If you do not agree with        ****    
+****  this notice, including the disclaimer below, then you        ****    
+****  are not authorized to use the Library.                       ****    
+****                                                               ****  
+****                                                               ****      
+****  THIS LIBRARY IS BEING DISTRIBUTED BY SYNOPSYS SOLELY ON AN   ****
+****  "AS IS" BASIS, WITH NO INTELLECUTAL PROPERTY                 ****
+****  INDEMNIFICATION AND NO SUPPORT. ANY EXPRESS OR IMPLIED       ****
+****  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       ****
+****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR   ****
+****  PURPOSE ARE HEREBY DISCLAIMED. IN NO EVENT SHALL SYNOPSYS    ****
+****  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,     ****
+****  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT      ****
+****  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;     ****
+****  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)     ****
+****  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN    ****
+****  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE    ****
+****  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS      ****
+****  DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF         ****
+****  SUCH DAMAGE.                                                 **** 		
+****                                                               ****  
+***********************************************************************
+****                                                               ****
+****  The data contained in the file is created for educational    **** 
+****  and training purposes only and  is not recommended           ****
+****  for fabrication                                              ****
+****                                                               ****
+***********************************************************************
+
+
+******************************************************************************************
+******************************************************************************************
+**********                   SAED_EDK90 1P9M 1.2v / 2.5v                 *****************
+******************************************************************************************
+******************************************************************************************
+
+******************************************************************************************
+* history: 
+* 24.02.2007 - Initial Creation
+* 08.03.2007 - 
+*  1.pppoly_wos renamed to rppoly_wos
+*  2.Added rnpoly_wos, rppoly, rnpoly models to library. 
+*  3.Device list updated
+*  4.Added model library usage table
+* 27.04.2007 - Added size limitations for all MOS devices
+* 31.05.2007 - Added PD diode
+
+******************************************************************************************
+**************** List of devices supported by this library *******************************
+******************************************************************************************
+***** 2.5V thick oxide devices: n25, p25
+***** 1.2V thin oxide standard vth devices: n12, p12
+***** 1.2V thin oxide high vth devices: n12_hvt, p12_hvt
+***** 1.2V thin oxide low vth devices: n12_lvt, p12_lvt
+***** Unsilicided P+ Poly resistor: rppoly_wos (device call prefix is X: e.g "Xr1 a b rppoly_wos")
+***** Unsilicided N+ Poly resistor: rnpoly_wos (device call prefix is X: e.g "Xr1 a b rnpoly_wos")
+***** Silicided P+ Poly resistor: rppoly (device call prefix is X: e.g "Xr1 a b rppoly")
+***** Silicided N+ Poly resistor: rnpoly (device call prefix is X: e.g "Xr1 a b rnpoly")
+***** N+/Psub ESD diode:            ND
+***** P+/NWel ESD diode:            PD
+
+******************************************************************************************
+*****************************Model library usage table  **********************************
+******************************************************************************************
+***Following postfixes should be added atef the path mentioned in the library call
+** TT_25     - 2.5V 	     Typical N & Typical P
+** FF_25     - 2.5V 	     Fast N    & Fast P
+** SS_25     - 2.5V 	     Slow N    & Slow P
+** SF_25     - 2.5V 	     Slow N    & Fast P
+** FS_25     - 2.5V 	     Fast N    & Slow P
+** TT_12     - 1.2V Std Vth  Typical N & Typical P    
+** FF_12     - 1.2V Std Vth  Fast N    & Fast P       
+** SS_12     - 1.2V Std Vth  Slow N    & Slow P       
+** SF_12     - 1.2V Std Vth  Slow N    & Fast P       
+** FS_12     - 1.2V Std Vth  Fast N    & Slow P       
+** TT_12_hvt - 1.2V High Vth Typical N & Typical P    
+** FF_12_hvt - 1.2V High Vth Fast N    & Fast P       
+** SS_12_hvt - 1.2V High Vth Slow N    & Slow P       
+** SF_12_hvt - 1.2V High Vth Slow N    & Fast P       
+** FS_12_hvt - 1.2V High Vth Fast N    & Slow P       
+** TT_12_lvt - 1.2V Low Vth  Typical N & Typical P    
+** FF_12_lvt - 1.2V Low Vth  Fast N    & Fast P       
+** SS_12_lvt - 1.2V Low Vth  Slow N    & Slow P       
+** SF_12_lvt - 1.2V Low Vth  Slow N    & Fast P       
+** FS_12_lvt - 1.2V Low Vth  Fast N    & Slow P       
+** res_t     - Resistors' models with Typical parameters (Rsh, TCR1, TCR2, VCR1 and VCR2)      
+** res_l     - Resistors' models with lower bound parameters (Rsh, TCR1, TCR2, VCR1 and VCR2)      
+** res_w     - Resistors' models with higher bound parameters (Rsh, TCR1, TCR2, VCR1 and VCR2)      
+** diode     - N+/Psub and P+/NWell ESD deiode model
+
+******************************************************************************************
+*******************              2.5V MOSFET Model                    ********************
+******************************************************************************************
+.LIB TT_25
+.param vth_mult_hv_n=1
+.param tox_mult_hv_n=1
+
+.param vth_mult_hv_p=1
+.param tox_mult_hv_p=1
+
+.lib 'SAED90nm.lib' mos25
+.ENDL TT_25
+
+.LIB SS_25
+.param vth_mult_hv_n=1.05
+.param tox_mult_hv_n=1.05
+
+.param vth_mult_hv_p=1.05
+.param tox_mult_hv_p=1.05
+
+.lib 'SAED90nm.lib' mos25
+.ENDL SS_25
+
+.LIB FF_25
+.param vth_mult_hv_n=0.95
+.param tox_mult_hv_n=0.95
+
+.param vth_mult_hv_p=0.95
+.param tox_mult_hv_p=0.95
+.lib 'SAED90nm.lib' mos25
+.ENDL FF_25
+
+.LIB SF_25
+.param vth_mult_hv_n=1.05
+.param tox_mult_hv_n=1
+
+.param vth_mult_hv_p=0.95
+.param tox_mult_hv_p=1
+
+.lib 'SAED90nm.lib' mos25
+.ENDL SF_25
+
+.LIB FS_25
+.param vth_mult_hv_n=0.95
+.param tox_mult_hv_n=1
+
+.param vth_mult_hv_p=1.05
+.param tox_mult_hv_p=1
+
+.lib 'SAED90nm.lib' mos25
+.ENDL FS_25
+****************************************************************************************
+*******************        1.2V STD Vth MOSFET Model                  ******************
+****************************************************************************************
+ .LIB TT_12
+.param vth_mult_12_n=1
+.param tox_mult_12_n=1
+.param vth_mult_12_p=1
+.param tox_mult_12_p=1
+.lib 'SAED90nm.lib' mos12
+.ENDL TT_12
+
+.LIB SS_12
+.param vth_mult_12_n=1.05
+.param tox_mult_12_n=1.05
+.param vth_mult_12_p=1.05
+.param tox_mult_12_p=1.05
+.lib 'SAED90nm.lib' mos12
+.ENDL SS_12
+
+.LIB FF_12
+.param vth_mult_12_n=0.95
+.param tox_mult_12_n=0.95
+.param vth_mult_12_p=0.95
+.param tox_mult_12_p=0.95
+.lib 'SAED90nm.lib' mos12
+.ENDL FF_12
+
+.LIB SF_12
+.param vth_mult_12_n=1.05
+.param tox_mult_12_n=1
+.param vth_mult_12_p=0.95
+.param tox_mult_12_p=1
+.lib 'SAED90nm.lib' mos12
+.ENDL SF_12
+
+.LIB FS_12
+.param vth_mult_12_n=0.95
+.param tox_mult_12_n=1
+.param vth_mult_12_p=1.05
+.param tox_mult_12_p=1
+.lib 'SAED90nm.lib' mos12
+.ENDL FS_12
+************************************************************************************
+************************************************************************************
+*******************        1.2V Low Vth MOSFET Model                  **************
+************************************************************************************
+ .LIB TT_12_LVT
+.param vth_mult_12_lvt_n=0.8
+.param tox_mult_12_lvt_n=1
+.param vth_mult_12_lvt_p=0.8
+.param tox_mult_12_lvt_p=1
+.lib 'SAED90nm.lib' mos12_lvt
+.ENDL TT_12_LVT
+
+.LIB SS_12_LVT
+.param vth_mult_12_lvt_n=1.05*0.8
+.param tox_mult_12_lvt_n=1.05
+.param vth_mult_12_lvt_p=1.05*0.8
+.param tox_mult_12_lvt_p=1.05
+.lib 'SAED90nm.lib' mos12_lvt
+.ENDL SS_12_LVT
+
+.LIB FF_12_LVT
+.param vth_mult_12_lvt_n=0.95*0.8
+.param tox_mult_12_lvt_n=0.95
+.param vth_mult_12_lvt_p=0.95*0.8
+.param tox_mult_12_lvt_p=0.95
+.lib 'SAED90nm.lib' mos12_lvt
+.ENDL FF_12_LVT
+
+.LIB SF_12_LVT
+.param vth_mult_12_lvt_n=1.05*0.8
+.param tox_mult_12_lvt_n=1
+.param vth_mult_12_lvt_p=0.95*0.8
+.param tox_mult_12_lvt_p=1
+.lib 'SAED90nm.lib' mos12_lvt
+.ENDL SF_12_LVT
+
+.LIB FS_12_LVT
+.param vth_mult_12_lvt_n=0.95*0.8
+.param tox_mult_12_lvt_n=1
+.param vth_mult_12_lvt_p=1.05*0.8
+.param tox_mult_12_lvt_p=1
+.lib 'SAED90nm.lib' mos12_lvt
+.ENDL FS_12_LVT
+************************************************************************************
+************************************************************************************
+*******************        1.2V High Vth MOSFET Model                  *************
+************************************************************************************
+ .LIB TT_12_HVT
+.param vth_mult_12_hvt_n=1.2
+.param tox_mult_12_hvt_n=1
+.param vth_mult_12_hvt_p=1.2
+.param tox_mult_12_hvt_p=1
+.lib 'SAED90nm.lib' mos12_hvt
+.ENDL TT_12_HVT
+
+.LIB SS_12_HVT
+.param vth_mult_12_hvt_n=1.05*1.2
+.param tox_mult_12_hvt_n=1.05
+.param vth_mult_12_hvt_p=1.05*1.2
+.param tox_mult_12_hvt_p=1.05
+.lib 'SAED90nm.lib' mos12_hvt
+.ENDL SS_12_HVT
+
+.LIB FF_12_HVT
+.param vth_mult_12_hvt_n=0.95*1.2
+.param tox_mult_12_hvt_n=0.95
+.param vth_mult_12_hvt_p=0.95*1.2
+.param tox_mult_12_hvt_p=0.95
+.lib 'SAED90nm.lib' mos12_hvt
+.ENDL FF_12_HVT
+
+.LIB SF_12_HVT
+.param vth_mult_12_hvt_n=1.05*1.2
+.param tox_mult_12_hvt_n=1
+.param vth_mult_12_hvt_p=0.95*1.2
+.param tox_mult_12_hvt_p=1
+.lib 'SAED90nm.lib' mos12_hvt
+.ENDL SF_12_HVT
+
+.LIB FS_12_HVT
+.param vth_mult_12_hvt_n=0.95*1.2
+.param tox_mult_12_hvt_n=1
+.param vth_mult_12_hvt_p=1.05*1.2
+.param tox_mult_12_hvt_p=1
+.lib 'SAED90nm.lib' mos12_hvt
+.ENDL FS_12_HVT
+************************************************************************************
+###############################################################################################
+############################## 1.2v Thin Oxide Standard Vth Devices ###########################
+###############################################################################################
+
+.LIB mos12
+ 
+.model  n12.1  nmos  level = 54
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '0.397*vth_mult_12_n'  
++ toxe    = '2.05e-9*tox_mult_12_n' 
++ toxp    = '1.4e-9*tox_mult_12_n' 
++ toxm    = '2.05e-9*tox_mult_12_n'
++ toxref  = '2.05e-9*tox_mult_12_n'
+******************************************************************
++lmin=0.1e-6 lmax=20e-6 wmin=0.12e-6 wmax=9e-4
+
++version = 4.0          binunit = 1            paramchk= 1            mobmod  = 0          
++capmod  = 2            igcmod  = 1            igbmod  = 1            geomod  = 1          
++diomod  = 1            rdsmod  = 0            rbodymod= 1            rgatemod= 1          
++permod  = 1            acnqsmod= 0            trnqsmod= 0          
+
++tnom    = 27           
++dtox    = 0.65e-9      epsrox  = 3.9          wint    = 5e-009       lint    = 7.5e-009   
++ll      = 0            wl      = 0            lln     = 1            wln     = 1          
++lw      = 0            ww      = 0            lwn     = 1            wwn     = 1          
++lwl     = 0            wwl     = 0            xpart   = 0            toxref  = 2.05e-9   
++xl      = -40e-9
++k1      = 0.4          k2      = 0.01         k3      = 0          
++k3b     = 0            w0      = 2.5e-006     dvt0    = 1            dvt1    = 2       
++dvt2    = -0.032       dvt0w   = 0            dvt1w   = 0            dvt2w   = 0          
++dsub    = 0.1          minv    = 0.05         voffl   = 0            dvtp0   = 1.2e-009     
++dvtp1   = 0.1          lpe0    = 0            lpeb    = 0            xj      = 2.8e-008   
++ngate   = 2e+020       ndep    = 1.94e+018    nsd     = 2e+020       phin    = 0          
++cdsc    = 0.0002       cdscb   = 0            cdscd   = 0            cit     = 0          
++voff    = -0.13        nfactor = 1.7          eta0    = 0.0074       etab    = 0          
++vfb     = -0.55        u0      = 0.0547       ua      = 6e-010       ub      = 1.2e-018     
++uc      = -3e-011      vsat    = 113760       a0      = 1.0          ags     = 1e-020     
++a1      = 0            a2      = 1            b0      = -1e-020      b1      = 0          
++keta    = 0.04         dwg     = 0            dwb     = 0            pclm    = 0.06       
++pdiblc1 = 0.001        pdiblc2 = 0.001        pdiblcb = -0.005       drout   = 0.5        
++pvag    = 1e-020       delta   = 0.01         pscbe1  = 8.14e+008    pscbe2  = 1e-007     
++fprout  = 0.2          pdits   = 0.08         pditsd  = 0.23         pditsl  = 2.3e+006   
++rsh     = 5            rdsw    = 180          rsw     = 90           rdw     = 90        
++rdswmin = 0            rdwmin  = 0            rswmin  = 0            prwg    = 0          
++prwb    = 6.8e-011     wr      = 1            alpha0  = 0.074        alpha1  = 0.005      
++beta0   = 30           agidl   = 0.0002       bgidl   = 2.1e+009     cgidl   = 0.0002     
++egidl   = 0.8          
+
++aigbacc = 0.012        bigbacc = 0.0028       cigbacc = 0.002     
++nigbacc = 1            aigbinv = 0.014        bigbinv = 0.004        cigbinv = 0.004      
++eigbinv = 1.1          nigbinv = 3            aigc    = 0.012        bigc    = 0.0028     
++cigc    = 0.002        aigsd   = 0.012        bigsd   = 0.0028       cigsd   = 0.002     
++nigc    = 1            poxedge = 1            pigcd   = 1            ntox    = 1          
+
++xrcrg1  = 12           xrcrg2  = 5          
++cgso    = 1.9e-010     cgdo    = 1.9e-010     cgbo    = 2.56e-011    cgdl    = 2.653e-10     
++cgsl    = 2.653e-10    ckappas = 0.03         ckappad = 0.03         acde    = 1          
++moin    = 15           noff    = 0.9          voffcv  = 0.02       
+
++kt1     = -0.11        kt1l    = 0            kt2     = 0.022        ute     = -1.5       
++ua1     = 4.31e-009    ub1     = 7.61e-018    uc1     = -5.6e-011    prt     = 0          
++at      = 33000      
+
++fnoimod = 1            tnoimod = 0          
+
++jss     = 0.0001       jsws    = 1e-011       jswgs   = 1e-010       njs     = 1          
++ijthsfwd= 0.01         ijthsrev= 0.001        bvs     = 10           xjbvs   = 1          
++jsd     = 0.0001       jswd    = 1e-011       jswgd   = 1e-010       njd     = 1          
++ijthdfwd= 0.01         ijthdrev= 0.001        bvd     = 10           xjbvd   = 1          
++pbs     = 1            cjs     = 0.0005       mjs     = 0.5          pbsws   = 1          
++cjsws   = 5e-010       mjsws   = 0.33         pbswgs  = 1            cjswgs  = 3e-010     
++mjswgs  = 0.33         pbd     = 1            cjd     = 0.0005       mjd     = 0.5        
++pbswd   = 1            cjswd   = 5e-010       mjswd   = 0.33         pbswgd  = 1          
++cjswgd  = 5e-010       mjswgd  = 0.33         tpb     = 0.005        tcj     = 0.001      
++tpbsw   = 0.005        tcjsw   = 0.001        tpbswg  = 0.005        tcjswg  = 0.001      
++xtis    = 3            xtid    = 3          
+
++dmcg    = 0e-006       dmci    = 0e-006       dmdg    = 0e-006       dmcgt   = 0e-007     
++dwj     = 0.0e-008     xgw     = 0e-007       xgl     = 0e-008     
+
++rshg    = 0.4          gbmin   = 1e-010       rbpb    = 5            rbpd    = 15         
++rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
+
+ 
+.model  p12.1  pmos  level = 54
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '-0.276*vth_mult_12_p'  
++ toxe    = '2.15e-009*tox_mult_12_p' 
++ toxp    = '1.4e-009*tox_mult_12_p' 
++ toxm    = '2.15e-009*tox_mult_12_p' 
++ toxref  = '2.15e-009*tox_mult_12_p'
+******************************************************************
++lmin=0.1e-6 lmax=20e-6 wmin=0.12e-6 wmax=9e-4
+
++version = 4.0          binunit = 1            paramchk= 1            mobmod  = 0          
++capmod  = 2            igcmod  = 1            igbmod  = 1            geomod  = 1          
++diomod  = 1            rdsmod  = 0            rbodymod= 1            rgatemod= 1          
++permod  = 1            acnqsmod= 0            trnqsmod= 0          
+
++tnom    = 27           
++dtox    = 0.75e-9      epsrox  = 3.9          wint    = 5e-009       lint    = 7.5e-009   
++ll      = 0            wl      = 0            lln     = 1            wln     = 1          
++lw      = 0            ww      = 0            lwn     = 1            wwn     = 1          
++lwl     = 0            wwl     = 0            xpart   = 0            toxref  = 2.15e-009   
++xl      = -40e-9
++k1      = 0.4          k2      = -0.01        k3      = 0          
++k3b     = 0            w0      = 2.5e-006     dvt0    = 1            dvt1    = 2       
++dvt2    = -0.032       dvt0w   = 0            dvt1w   = 0            dvt2w   = 0          
++dsub    = 0.1          minv    = 0.05         voffl   = 0            dvtp0   = 1e-009     
++dvtp1   = 0.05         lpe0    = 0            lpeb    = 0            xj      = 2.8e-008   
++ngate   = 2e+020       ndep    = 1.43e+018    nsd     = 2e+020       phin    = 0          
++cdsc    = 0.000258     cdscb   = 0            cdscd   = 6.1e-008     cit     = 0          
++voff    = -0.126       nfactor = 1.7          eta0    = 0.0074       etab    = 0          
++vfb     = 0.55         u0      = 0.00711      ua      = 2.0e-009     ub      = 0.5e-018     
++uc      = -3e-011      vsat    = 70000        a0      = 1.0          ags     = 1e-020     
++a1      = 0            a2      = 1            b0      = 0            b1      = 0          
++keta    = -0.047       dwg     = 0            dwb     = 0            pclm    = 0.12       
++pdiblc1 = 0.001        pdiblc2 = 0.001        pdiblcb = 3.4e-008     drout   = 0.56       
++pvag    = 1e-020       delta   = 0.01         pscbe1  = 8.14e+008    pscbe2  = 9.58e-007  
++fprout  = 0.2          pdits   = 0.08         pditsd  = 0.23         pditsl  = 2.3e+006   
++rsh     = 5            rdsw    = 200          rsw     = 100          rdw     = 100        
++rdswmin = 0            rdwmin  = 0            rswmin  = 0            prwg    = 3.22e-008  
++prwb    = 6.8e-011     wr      = 1            alpha0  = 0.074        alpha1  = 0.005      
++beta0   = 30           agidl   = 0.0002       bgidl   = 2.1e+009     cgidl   = 0.0002     
++egidl   = 0.8          
+
++aigbacc = 0.012        bigbacc = 0.0028       cigbacc = 0.002     
++nigbacc = 1            aigbinv = 0.014        bigbinv = 0.004        cigbinv = 0.004      
++eigbinv = 1.1          nigbinv = 3            aigc    = 0.69         bigc    = 0.0012     
++cigc    = 0.0008       aigsd   = 0.0087       bigsd   = 0.0012       cigsd   = 0.0008     
++nigc    = 1            poxedge = 1            pigcd   = 1            ntox    = 1 
+         
++xrcrg1  = 12           xrcrg2  = 5          
++cgso    = 1.8e-010     cgdo    = 1.8e-010     cgbo    = 2.56e-011    cgdl    = 2.653e-10
++cgsl    = 2.653e-10    ckappas = 0.03         ckappad = 0.03         acde    = 1
++moin    = 15           noff    = 0.9          voffcv  = 0.02
+
++kt1     = -0.11        kt1l    = 0            kt2     = 0.022        ute     = -1.5       
++ua1     = 4.31e-009    ub1     = 7.61e-018    uc1     = -5.6e-011    prt     = 0          
++at      = 33000      
+
++fnoimod = 1            tnoimod = 0          
+
++jss     = 0.0001       jsws    = 1e-011       jswgs   = 1e-010       njs     = 1          
++ijthsfwd= 0.01         ijthsrev= 0.001        bvs     = 10           xjbvs   = 1          
++jsd     = 0.0001       jswd    = 1e-011       jswgd   = 1e-010       njd     = 1          
++ijthdfwd= 0.01         ijthdrev= 0.001        bvd     = 10           xjbvd   = 1          
++pbs     = 1            cjs     = 0.0005       mjs     = 0.5          pbsws   = 1          
++cjsws   = 5e-010       mjsws   = 0.33         pbswgs  = 1            cjswgs  = 3e-010     
++mjswgs  = 0.33         pbd     = 1            cjd     = 0.0005       mjd     = 0.5        
++pbswd   = 1            cjswd   = 5e-010       mjswd   = 0.33         pbswgd  = 1          
++cjswgd  = 5e-010       mjswgd  = 0.33         tpb     = 0.005        tcj     = 0.001      
++tpbsw   = 0.005        tcjsw   = 0.001        tpbswg  = 0.005        tcjswg  = 0.001      
++xtis    = 3            xtid    = 3          
+
++dmcg    = 0e-006       dmci    = 0e-006       dmdg    = 0e-006       dmcgt   = 0e-007     
++dwj     = 0.0e-008     xgw     = 0e-007       xgl     = 0e-008     
+
++rshg    = 0.4          gbmin   = 1e-010       rbpb    = 5            rbpd    = 15         
++rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
+
+.ENDL mos12
+
+###############################################################################################
+############################## 1.2v Thin Oxide Low Vth Devices ################################
+###############################################################################################
+
+.LIB mos12_lvt
+ 
+.model  n12_lvt.1  nmos  level = 54
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '0.397*vth_mult_12_lvt_n'  
++ toxe    = '2.05e-9*tox_mult_12_lvt_n' 
++ toxp    = '1.4e-9*tox_mult_12_lvt_n' 
++ toxm    = '2.05e-9*tox_mult_12_lvt_n'
++ toxref  = '2.05e-9*tox_mult_12_lvt_n'
+******************************************************************
++lmin=0.1e-6 lmax=20e-6 wmin=0.12e-6 wmax=9e-4
+
++version = 4.0          binunit = 1            paramchk= 1            mobmod  = 0          
++capmod  = 2            igcmod  = 1            igbmod  = 1            geomod  = 1          
++diomod  = 1            rdsmod  = 0            rbodymod= 1            rgatemod= 1          
++permod  = 1            acnqsmod= 0            trnqsmod= 0          
+
++tnom    = 27           
++dtox    = 0.65e-9      epsrox  = 3.9          wint    = 5e-009       lint    = 7.5e-009   
++ll      = 0            wl      = 0            lln     = 1            wln     = 1          
++lw      = 0            ww      = 0            lwn     = 1            wwn     = 1          
++lwl     = 0            wwl     = 0            xpart   = 0            toxref  = 2.05e-9   
++xl      = -40e-9
++k1      = 0.4          k2      = 0.01         k3      = 0          
++k3b     = 0            w0      = 2.5e-006     dvt0    = 1            dvt1    = 2       
++dvt2    = -0.032       dvt0w   = 0            dvt1w   = 0            dvt2w   = 0          
++dsub    = 0.1          minv    = 0.05         voffl   = 0            dvtp0   = 1.2e-009     
++dvtp1   = 0.1          lpe0    = 0            lpeb    = 0            xj      = 2.8e-008   
++ngate   = 2e+020       ndep    = 1.94e+018    nsd     = 2e+020       phin    = 0          
++cdsc    = 0.0002       cdscb   = 0            cdscd   = 0            cit     = 0          
++voff    = -0.13        nfactor = 1.7          eta0    = 0.0074       etab    = 0          
++vfb     = -0.55        u0      = 0.0547       ua      = 6e-010       ub      = 1.2e-018     
++uc      = -3e-011      vsat    = 113760       a0      = 1.0          ags     = 1e-020     
++a1      = 0            a2      = 1            b0      = -1e-020      b1      = 0          
++keta    = 0.04         dwg     = 0            dwb     = 0            pclm    = 0.06       
++pdiblc1 = 0.001        pdiblc2 = 0.001        pdiblcb = -0.005       drout   = 0.5        
++pvag    = 1e-020       delta   = 0.01         pscbe1  = 8.14e+008    pscbe2  = 1e-007     
++fprout  = 0.2          pdits   = 0.08         pditsd  = 0.23         pditsl  = 2.3e+006   
++rsh     = 5            rdsw    = 180          rsw     = 90           rdw     = 90        
++rdswmin = 0            rdwmin  = 0            rswmin  = 0            prwg    = 0          
++prwb    = 6.8e-011     wr      = 1            alpha0  = 0.074        alpha1  = 0.005      
++beta0   = 30           agidl   = 0.0002       bgidl   = 2.1e+009     cgidl   = 0.0002     
++egidl   = 0.8          
+
++aigbacc = 0.012        bigbacc = 0.0028       cigbacc = 0.002     
++nigbacc = 1            aigbinv = 0.014        bigbinv = 0.004        cigbinv = 0.004      
++eigbinv = 1.1          nigbinv = 3            aigc    = 0.012        bigc    = 0.0028     
++cigc    = 0.002        aigsd   = 0.012        bigsd   = 0.0028       cigsd   = 0.002     
++nigc    = 1            poxedge = 1            pigcd   = 1            ntox    = 1          
+
++xrcrg1  = 12           xrcrg2  = 5          
++cgso    = 1.9e-010     cgdo    = 1.9e-010     cgbo    = 2.56e-011    cgdl    = 2.653e-10     
++cgsl    = 2.653e-10    ckappas = 0.03         ckappad = 0.03         acde    = 1          
++moin    = 15           noff    = 0.9          voffcv  = 0.02       
+
++kt1     = -0.11        kt1l    = 0            kt2     = 0.022        ute     = -1.5       
++ua1     = 4.31e-009    ub1     = 7.61e-018    uc1     = -5.6e-011    prt     = 0          
++at      = 33000      
+
++fnoimod = 1            tnoimod = 0          
+
++jss     = 0.0001       jsws    = 1e-011       jswgs   = 1e-010       njs     = 1          
++ijthsfwd= 0.01         ijthsrev= 0.001        bvs     = 10           xjbvs   = 1          
++jsd     = 0.0001       jswd    = 1e-011       jswgd   = 1e-010       njd     = 1          
++ijthdfwd= 0.01         ijthdrev= 0.001        bvd     = 10           xjbvd   = 1          
++pbs     = 1            cjs     = 0.0005       mjs     = 0.5          pbsws   = 1          
++cjsws   = 5e-010       mjsws   = 0.33         pbswgs  = 1            cjswgs  = 3e-010     
++mjswgs  = 0.33         pbd     = 1            cjd     = 0.0005       mjd     = 0.5        
++pbswd   = 1            cjswd   = 5e-010       mjswd   = 0.33         pbswgd  = 1          
++cjswgd  = 5e-010       mjswgd  = 0.33         tpb     = 0.005        tcj     = 0.001      
++tpbsw   = 0.005        tcjsw   = 0.001        tpbswg  = 0.005        tcjswg  = 0.001      
++xtis    = 3            xtid    = 3          
+
++dmcg    = 0e-006       dmci    = 0e-006       dmdg    = 0e-006       dmcgt   = 0e-007     
++dwj     = 0.0e-008     xgw     = 0e-007       xgl     = 0e-008     
+
++rshg    = 0.4          gbmin   = 1e-010       rbpb    = 5            rbpd    = 15         
++rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
+
+ 
+.model  p12_lvt.1  pmos  level = 54
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '-0.276*vth_mult_12_lvt_p'  
++ toxe    = '2.15e-009*tox_mult_12_lvt_p' 
++ toxp    = '1.4e-009*tox_mult_12_lvt_p' 
++ toxm    = '2.15e-009*tox_mult_12_lvt_p' 
++ toxref  = '2.15e-009*tox_mult_12_lvt_p'
+******************************************************************
++lmin=0.1e-6 lmax=20e-6 wmin=0.12e-6 wmax=9e-4
+
++version = 4.0          binunit = 1            paramchk= 1            mobmod  = 0          
++capmod  = 2            igcmod  = 1            igbmod  = 1            geomod  = 1          
++diomod  = 1            rdsmod  = 0            rbodymod= 1            rgatemod= 1          
++permod  = 1            acnqsmod= 0            trnqsmod= 0          
+
++tnom    = 27           
++dtox    = 0.75e-9      epsrox  = 3.9          wint    = 5e-009       lint    = 7.5e-009   
++ll      = 0            wl      = 0            lln     = 1            wln     = 1          
++lw      = 0            ww      = 0            lwn     = 1            wwn     = 1          
++lwl     = 0            wwl     = 0            xpart   = 0            toxref  = 2.15e-009   
++xl      = -40e-9
++k1      = 0.4          k2      = -0.01        k3      = 0          
++k3b     = 0            w0      = 2.5e-006     dvt0    = 1            dvt1    = 2       
++dvt2    = -0.032       dvt0w   = 0            dvt1w   = 0            dvt2w   = 0          
++dsub    = 0.1          minv    = 0.05         voffl   = 0            dvtp0   = 1e-009     
++dvtp1   = 0.05         lpe0    = 0            lpeb    = 0            xj      = 2.8e-008   
++ngate   = 2e+020       ndep    = 1.43e+018    nsd     = 2e+020       phin    = 0          
++cdsc    = 0.000258     cdscb   = 0            cdscd   = 6.1e-008     cit     = 0          
++voff    = -0.126       nfactor = 1.7          eta0    = 0.0074       etab    = 0          
++vfb     = 0.55         u0      = 0.00711      ua      = 2.0e-009     ub      = 0.5e-018     
++uc      = -3e-011      vsat    = 70000        a0      = 1.0          ags     = 1e-020     
++a1      = 0            a2      = 1            b0      = 0            b1      = 0          
++keta    = -0.047       dwg     = 0            dwb     = 0            pclm    = 0.12       
++pdiblc1 = 0.001        pdiblc2 = 0.001        pdiblcb = 3.4e-008     drout   = 0.56       
++pvag    = 1e-020       delta   = 0.01         pscbe1  = 8.14e+008    pscbe2  = 9.58e-007  
++fprout  = 0.2          pdits   = 0.08         pditsd  = 0.23         pditsl  = 2.3e+006   
++rsh     = 5            rdsw    = 200          rsw     = 100          rdw     = 100        
++rdswmin = 0            rdwmin  = 0            rswmin  = 0            prwg    = 3.22e-008  
++prwb    = 6.8e-011     wr      = 1            alpha0  = 0.074        alpha1  = 0.005      
++beta0   = 30           agidl   = 0.0002       bgidl   = 2.1e+009     cgidl   = 0.0002     
++egidl   = 0.8          
+
++aigbacc = 0.012        bigbacc = 0.0028       cigbacc = 0.002     
++nigbacc = 1            aigbinv = 0.014        bigbinv = 0.004        cigbinv = 0.004      
++eigbinv = 1.1          nigbinv = 3            aigc    = 0.69         bigc    = 0.0012     
++cigc    = 0.0008       aigsd   = 0.0087       bigsd   = 0.0012       cigsd   = 0.0008     
++nigc    = 1            poxedge = 1            pigcd   = 1            ntox    = 1 
+         
++xrcrg1  = 12           xrcrg2  = 5          
++cgso    = 1.8e-010     cgdo    = 1.8e-010     cgbo    = 2.56e-011    cgdl    = 2.653e-10
++cgsl    = 2.653e-10    ckappas = 0.03         ckappad = 0.03         acde    = 1
++moin    = 15           noff    = 0.9          voffcv  = 0.02
+
++kt1     = -0.11        kt1l    = 0            kt2     = 0.022        ute     = -1.5       
++ua1     = 4.31e-009    ub1     = 7.61e-018    uc1     = -5.6e-011    prt     = 0          
++at      = 33000      
+
++fnoimod = 1            tnoimod = 0          
+
++jss     = 0.0001       jsws    = 1e-011       jswgs   = 1e-010       njs     = 1          
++ijthsfwd= 0.01         ijthsrev= 0.001        bvs     = 10           xjbvs   = 1          
++jsd     = 0.0001       jswd    = 1e-011       jswgd   = 1e-010       njd     = 1          
++ijthdfwd= 0.01         ijthdrev= 0.001        bvd     = 10           xjbvd   = 1          
++pbs     = 1            cjs     = 0.0005       mjs     = 0.5          pbsws   = 1          
++cjsws   = 5e-010       mjsws   = 0.33         pbswgs  = 1            cjswgs  = 3e-010     
++mjswgs  = 0.33         pbd     = 1            cjd     = 0.0005       mjd     = 0.5        
++pbswd   = 1            cjswd   = 5e-010       mjswd   = 0.33         pbswgd  = 1          
++cjswgd  = 5e-010       mjswgd  = 0.33         tpb     = 0.005        tcj     = 0.001      
++tpbsw   = 0.005        tcjsw   = 0.001        tpbswg  = 0.005        tcjswg  = 0.001      
++xtis    = 3            xtid    = 3          
+
++dmcg    = 0e-006       dmci    = 0e-006       dmdg    = 0e-006       dmcgt   = 0e-007     
++dwj     = 0.0e-008     xgw     = 0e-007       xgl     = 0e-008     
+
++rshg    = 0.4          gbmin   = 1e-010       rbpb    = 5            rbpd    = 15         
++rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
+
+.ENDL mos12_lvt
+
+###############################################################################################
+############################## 1.2v Thin Oxide High Vth Devices ###############################
+###############################################################################################
+
+.LIB mos12_hvt
+ 
+.model  n12_hvt.1  nmos  level = 54
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '0.397*vth_mult_12_hvt_n'  
++ toxe    = '2.05e-9*tox_mult_12_hvt_n' 
++ toxp    = '1.4e-9*tox_mult_12_hvt_n' 
++ toxm    = '2.05e-9*tox_mult_12_hvt_n'
++ toxref  = '2.05e-9*tox_mult_12_hvt_n'
+******************************************************************
++lmin=0.1e-6 lmax=20e-6 wmin=0.12e-6 wmax=9e-4
+
++version = 4.0          binunit = 1            paramchk= 1            mobmod  = 0          
++capmod  = 2            igcmod  = 1            igbmod  = 1            geomod  = 1          
++diomod  = 1            rdsmod  = 0            rbodymod= 1            rgatemod= 1          
++permod  = 1            acnqsmod= 0            trnqsmod= 0          
+
++tnom    = 27           
++dtox    = 0.65e-9      epsrox  = 3.9          wint    = 5e-009       lint    = 7.5e-009   
++ll      = 0            wl      = 0            lln     = 1            wln     = 1          
++lw      = 0            ww      = 0            lwn     = 1            wwn     = 1          
++lwl     = 0            wwl     = 0            xpart   = 0            toxref  = 2.05e-9   
++xl      = -40e-9
++k1      = 0.4          k2      = 0.01         k3      = 0          
++k3b     = 0            w0      = 2.5e-006     dvt0    = 1            dvt1    = 2       
++dvt2    = -0.032       dvt0w   = 0            dvt1w   = 0            dvt2w   = 0          
++dsub    = 0.1          minv    = 0.05         voffl   = 0            dvtp0   = 1.2e-009     
++dvtp1   = 0.1          lpe0    = 0            lpeb    = 0            xj      = 2.8e-008   
++ngate   = 2e+020       ndep    = 1.94e+018    nsd     = 2e+020       phin    = 0          
++cdsc    = 0.0002       cdscb   = 0            cdscd   = 0            cit     = 0          
++voff    = -0.13        nfactor = 1.7          eta0    = 0.0074       etab    = 0          
++vfb     = -0.55        u0      = 0.0547       ua      = 6e-010       ub      = 1.2e-018     
++uc      = -3e-011      vsat    = 113760       a0      = 1.0          ags     = 1e-020     
++a1      = 0            a2      = 1            b0      = -1e-020      b1      = 0          
++keta    = 0.04         dwg     = 0            dwb     = 0            pclm    = 0.06       
++pdiblc1 = 0.001        pdiblc2 = 0.001        pdiblcb = -0.005       drout   = 0.5        
++pvag    = 1e-020       delta   = 0.01         pscbe1  = 8.14e+008    pscbe2  = 1e-007     
++fprout  = 0.2          pdits   = 0.08         pditsd  = 0.23         pditsl  = 2.3e+006   
++rsh     = 5            rdsw    = 180          rsw     = 90           rdw     = 90        
++rdswmin = 0            rdwmin  = 0            rswmin  = 0            prwg    = 0          
++prwb    = 6.8e-011     wr      = 1            alpha0  = 0.074        alpha1  = 0.005      
++beta0   = 30           agidl   = 0.0002       bgidl   = 2.1e+009     cgidl   = 0.0002     
++egidl   = 0.8          
+
++aigbacc = 0.012        bigbacc = 0.0028       cigbacc = 0.002     
++nigbacc = 1            aigbinv = 0.014        bigbinv = 0.004        cigbinv = 0.004      
++eigbinv = 1.1          nigbinv = 3            aigc    = 0.012        bigc    = 0.0028     
++cigc    = 0.002        aigsd   = 0.012        bigsd   = 0.0028       cigsd   = 0.002     
++nigc    = 1            poxedge = 1            pigcd   = 1            ntox    = 1          
+
++xrcrg1  = 12           xrcrg2  = 5          
++cgso    = 1.9e-010     cgdo    = 1.9e-010     cgbo    = 2.56e-011    cgdl    = 2.653e-10     
++cgsl    = 2.653e-10    ckappas = 0.03         ckappad = 0.03         acde    = 1          
++moin    = 15           noff    = 0.9          voffcv  = 0.02       
+
++kt1     = -0.11        kt1l    = 0            kt2     = 0.022        ute     = -1.5       
++ua1     = 4.31e-009    ub1     = 7.61e-018    uc1     = -5.6e-011    prt     = 0          
++at      = 33000      
+
++fnoimod = 1            tnoimod = 0          
+
++jss     = 0.0001       jsws    = 1e-011       jswgs   = 1e-010       njs     = 1          
++ijthsfwd= 0.01         ijthsrev= 0.001        bvs     = 10           xjbvs   = 1          
++jsd     = 0.0001       jswd    = 1e-011       jswgd   = 1e-010       njd     = 1          
++ijthdfwd= 0.01         ijthdrev= 0.001        bvd     = 10           xjbvd   = 1          
++pbs     = 1            cjs     = 0.0005       mjs     = 0.5          pbsws   = 1          
++cjsws   = 5e-010       mjsws   = 0.33         pbswgs  = 1            cjswgs  = 3e-010     
++mjswgs  = 0.33         pbd     = 1            cjd     = 0.0005       mjd     = 0.5        
++pbswd   = 1            cjswd   = 5e-010       mjswd   = 0.33         pbswgd  = 1          
++cjswgd  = 5e-010       mjswgd  = 0.33         tpb     = 0.005        tcj     = 0.001      
++tpbsw   = 0.005        tcjsw   = 0.001        tpbswg  = 0.005        tcjswg  = 0.001      
++xtis    = 3            xtid    = 3          
+
++dmcg    = 0e-006       dmci    = 0e-006       dmdg    = 0e-006       dmcgt   = 0e-007     
++dwj     = 0.0e-008     xgw     = 0e-007       xgl     = 0e-008     
+
++rshg    = 0.4          gbmin   = 1e-010       rbpb    = 5            rbpd    = 15         
++rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
+
+ 
+.model  p12_hvt.1  pmos  level = 54
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '-0.276*vth_mult_12_hvt_p'  
++ toxe    = '2.15e-009*tox_mult_12_hvt_p' 
++ toxp    = '1.4e-009*tox_mult_12_hvt_p' 
++ toxm    = '2.15e-009*tox_mult_12_hvt_p' 
++ toxref  = '2.15e-009*tox_mult_12_hvt_p'
+******************************************************************
++lmin=0.1e-6 lmax=20e-6 wmin=0.12e-6 wmax=9e-4
+
++version = 4.0          binunit = 1            paramchk= 1            mobmod  = 0          
++capmod  = 2            igcmod  = 1            igbmod  = 1            geomod  = 1          
++diomod  = 1            rdsmod  = 0            rbodymod= 1            rgatemod= 1          
++permod  = 1            acnqsmod= 0            trnqsmod= 0          
+
++tnom    = 27           
++dtox    = 0.75e-9      epsrox  = 3.9          wint    = 5e-009       lint    = 7.5e-009   
++ll      = 0            wl      = 0            lln     = 1            wln     = 1          
++lw      = 0            ww      = 0            lwn     = 1            wwn     = 1          
++lwl     = 0            wwl     = 0            xpart   = 0            toxref  = 2.15e-009   
++xl      = -40e-9
++k1      = 0.4          k2      = -0.01        k3      = 0          
++k3b     = 0            w0      = 2.5e-006     dvt0    = 1            dvt1    = 2       
++dvt2    = -0.032       dvt0w   = 0            dvt1w   = 0            dvt2w   = 0          
++dsub    = 0.1          minv    = 0.05         voffl   = 0            dvtp0   = 1e-009     
++dvtp1   = 0.05         lpe0    = 0            lpeb    = 0            xj      = 2.8e-008   
++ngate   = 2e+020       ndep    = 1.43e+018    nsd     = 2e+020       phin    = 0          
++cdsc    = 0.000258     cdscb   = 0            cdscd   = 6.1e-008     cit     = 0          
++voff    = -0.126       nfactor = 1.7          eta0    = 0.0074       etab    = 0          
++vfb     = 0.55         u0      = 0.00711      ua      = 2.0e-009     ub      = 0.5e-018     
++uc      = -3e-011      vsat    = 70000        a0      = 1.0          ags     = 1e-020     
++a1      = 0            a2      = 1            b0      = 0            b1      = 0          
++keta    = -0.047       dwg     = 0            dwb     = 0            pclm    = 0.12       
++pdiblc1 = 0.001        pdiblc2 = 0.001        pdiblcb = 3.4e-008     drout   = 0.56       
++pvag    = 1e-020       delta   = 0.01         pscbe1  = 8.14e+008    pscbe2  = 9.58e-007  
++fprout  = 0.2          pdits   = 0.08         pditsd  = 0.23         pditsl  = 2.3e+006   
++rsh     = 5            rdsw    = 200          rsw     = 100          rdw     = 100        
++rdswmin = 0            rdwmin  = 0            rswmin  = 0            prwg    = 3.22e-008  
++prwb    = 6.8e-011     wr      = 1            alpha0  = 0.074        alpha1  = 0.005      
++beta0   = 30           agidl   = 0.0002       bgidl   = 2.1e+009     cgidl   = 0.0002     
++egidl   = 0.8          
+
++aigbacc = 0.012        bigbacc = 0.0028       cigbacc = 0.002     
++nigbacc = 1            aigbinv = 0.014        bigbinv = 0.004        cigbinv = 0.004      
++eigbinv = 1.1          nigbinv = 3            aigc    = 0.69         bigc    = 0.0012     
++cigc    = 0.0008       aigsd   = 0.0087       bigsd   = 0.0012       cigsd   = 0.0008     
++nigc    = 1            poxedge = 1            pigcd   = 1            ntox    = 1 
+         
++xrcrg1  = 12           xrcrg2  = 5          
++cgso    = 1.8e-010     cgdo    = 1.8e-010     cgbo    = 2.56e-011    cgdl    = 2.653e-10
++cgsl    = 2.653e-10    ckappas = 0.03         ckappad = 0.03         acde    = 1
++moin    = 15           noff    = 0.9          voffcv  = 0.02
+
++kt1     = -0.11        kt1l    = 0            kt2     = 0.022        ute     = -1.5       
++ua1     = 4.31e-009    ub1     = 7.61e-018    uc1     = -5.6e-011    prt     = 0          
++at      = 33000      
+
++fnoimod = 1            tnoimod = 0          
+
++jss     = 0.0001       jsws    = 1e-011       jswgs   = 1e-010       njs     = 1          
++ijthsfwd= 0.01         ijthsrev= 0.001        bvs     = 10           xjbvs   = 1          
++jsd     = 0.0001       jswd    = 1e-011       jswgd   = 1e-010       njd     = 1          
++ijthdfwd= 0.01         ijthdrev= 0.001        bvd     = 10           xjbvd   = 1          
++pbs     = 1            cjs     = 0.0005       mjs     = 0.5          pbsws   = 1          
++cjsws   = 5e-010       mjsws   = 0.33         pbswgs  = 1            cjswgs  = 3e-010     
++mjswgs  = 0.33         pbd     = 1            cjd     = 0.0005       mjd     = 0.5        
++pbswd   = 1            cjswd   = 5e-010       mjswd   = 0.33         pbswgd  = 1          
++cjswgd  = 5e-010       mjswgd  = 0.33         tpb     = 0.005        tcj     = 0.001      
++tpbsw   = 0.005        tcjsw   = 0.001        tpbswg  = 0.005        tcjswg  = 0.001      
++xtis    = 3            xtid    = 3          
+
++dmcg    = 0e-006       dmci    = 0e-006       dmdg    = 0e-006       dmcgt   = 0e-007     
++dwj     = 0.0e-008     xgw     = 0e-007       xgl     = 0e-008     
+
++rshg    = 0.4          gbmin   = 1e-010       rbpb    = 5            rbpd    = 15         
++rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
+
+.ENDL mos12_hvt
+
+###############################################################################################
+################################## 2.5v Thick Oxide Devices ###################################
+###############################################################################################
+
+.LIB mos25
+
+*t14y_mm_epi-params.txt.html
+.MODEL N25.1 NMOS (                                LEVEL   = 49
+****************    Corner Dependent Parameters   ****************
++ VTH0 = '0.3865307*vth_mult_hv_n'  
++ TOX  = '5.7E-9*tox_mult_hv_n' 
+******************************************************************
++LMIN=0.28E-6 LMAX=9E-4 WMIN=0.28E-6 WMAX=9E-4
+
++VERSION = 3.1            TNOM    = 27             
++XJ      = 1E-7           NCH     = 2.3549E17      
++K1      = 0.4493846      K2      = 6.175451E-3    K3      = 1E-3
++K3B     = 2.2690325      W0      = 3.883914E-7    NLX     = 2.537072E-7
++DVT0W   = 0              DVT1W   = 0              DVT2W   = 0
++DVT0    = 0.4931341      DVT1    = 0.6183031      DVT2    = -0.5
++U0      = 312.2868976    UA      = -1.069075E-9   UB      = 2.337256E-18
++UC      = 3.797563E-11   VSAT    = 1.455468E5     A0      = 1.6624611
++AGS     = 0.3169076      B0      = -7.319913E-9   B1      = 5E-6
++KETA    = -3.417855E-3   A1      = 0              A2      = 0.42692
++RDSW    = 116            PRWG    = 0.4580664      PRWB    = -0.2
++WR      = 1              WINT    = 0              LINT    = 5.025462E-9
++XL      = 3E-8           XW      = -4E-8          DWG     = -1.072999E-8
++DWB     = 4.369599E-9    VOFF    = -0.0972606     NFACTOR = 1.9252346
++CIT     = 0              CDSC    = 2.4E-4         CDSCD   = 0
++CDSCB   = 0              ETA0    = 4.1602E-3      ETAB    = 6.960007E-4
++DSUB    = 0.0281828      PCLM    = 1.937487       PDIBLC1 = 1
++PDIBLC2 = 4.740713E-3    PDIBLCB = -0.1           DROUT   = 0.8779907
++PSCBE1  = 7.991332E10    PSCBE2  = 5.16406E-10    PVAG    = 0
++DELTA   = 0.01           RSH     = 3.9            MOBMOD  = 1
++PRT     = 0              UTE     = -1.5           KT1     = -0.11
++KT1L    = 0              KT2     = 0.022          UA1     = 4.31E-9
++UB1     = -7.61E-18      UC1     = -5.6E-11       AT      = 3.3E4
++WL      = 0              WLN     = 1              WW      = 0
++WWN     = 1              WWL     = 0              LL      = 0
++LLN     = 1              LW      = 0              LWN     = 1
++LWL     = 0              CAPMOD  = 2              XPART   = 0.5
++CGDO    = 6.2E-10        CGSO    = 6.2E-10        CGBO    = 1E-12
++CJ      = 1.765922E-3    PB      = 0.99           MJ      = 0.462222
++CJSW    = 4.071015E-10   PBSW    = 0.9647854      MJSW    = 0.3610072
++CJSWG   = 3.29E-10       PBSWG   = 0.9647854      MJSWG   = 0.3610072
++CF      = 0              PVTH0   = -8.188685E-3   PRDSW   = -10
++PK2     = 2.350278E-3    WKETA   = 3.263378E-3    LKETA   = -0.0105571      )
+
+
+*t13m_epi-params.txt.html
+.MODEL P25.1 PMOS (                                LEVEL   = 49
+*********************  Corner Dependent Parameters   ****************
++ VTH0 = '-0.5883023*vth_mult_hv_p'
++ TOX  = '5.7E-9*tox_mult_hv_p'             
+*********************************************************************
++LMIN=0.28E-6 LMAX=9E-4 WMIN=0.28E-6 WMAX=9E-4
+
++VERSION = 3.1            TNOM    = 27             
++XJ      = 1E-7           NCH     = 4.1589E17      
++K1      = 0.6085299      K2      = 6.905682E-3    K3      = 0
++K3B     = 17.9765418     W0      = 1E-6           NLX     = 1E-9
++DVT0W   = 0              DVT1W   = 0              DVT2W   = 0
++DVT0    = 3.5392277      DVT1    = 0.610096       DVT2    = -0.0490074
++U0      = 140.557144     UA      = 2.214481E-9    UB      = 1E-21
++UC      = -8.59873E-11   VSAT    = 2E5            A0      = 0.8663642
++AGS     = 0.1693739      B0      = 1.567295E-6    B1      = 5E-6
++KETA    = 0.0216089      A1      = 0              A2      = 0.3
++RDSW    = 851.6557168    PRWG    = 0.1172413      PRWB    = -0.5
++WR      = 1              WINT    = -3.321993E-8   LINT    = 2.851964E-8
++XL      = 3E-8           XW      = 0              DWG     = -3.588333E-8
++DWB     = 4.174767E-8    VOFF    = -0.15          NFACTOR = 0.6610254
++CIT     = 0              CDSC    = 2.4E-4         CDSCD   = 0
++CDSCB   = 0              ETA0    = 0.349748       ETAB    = -0.0319059
++DSUB    = 0.8769813      PCLM    = 1.2130657      PDIBLC1 = 1.997944E-3
++PDIBLC2 = 0.012215       PDIBLCB = -1E-3          DROUT   = 0.7129012
++PSCBE1  = 2.619022E10    PSCBE2  = 6.68052E-9     PVAG    = 0
++DELTA   = 0.01           RSH     = 3.5            MOBMOD  = 1
++PRT     = 0              UTE     = -1.5           KT1     = -0.11
++KT1L    = 0              KT2     = 0.022          UA1     = 4.31E-9
++UB1     = -7.61E-18      UC1     = -5.6E-11       AT      = 3.3E4
++WL      = 0              WLN     = 1              WW      = 0
++WWN     = 1              WWL     = 0              LL      = 0
++LLN     = 1              LW      = 0              LWN     = 1
++LWL     = 0              CAPMOD  = 2              XPART   = 0.5
++CGDO    = 6.86E-10       CGSO    = 6.86E-10       CGBO    = 1E-12
++CJ      = 1.916752E-3    PB      = 0.9859029      MJ      = 0.4676744
++CJSW    = 3.043959E-10   PBSW    = 0.6591919      MJSW    = 0.309066
++CJSWG   = 2.5E-10        PBSWG   = 0.6591919      MJSWG   = 0.309066
++CF      = 0              PVTH0   = 3.746085E-3    PRDSW   = 31.9889934
++PK2     = 2.967274E-3    WKETA   = 0.0116744      LKETA   = -0.016374       )
+
+.ENDL mos25
+
+#########################################################################
+**********************Unsilicided P+ Poly resistor model********************
+#########################################################################
+
+############ Typical Corner ##################
+.LIB res_t
+.lib 'SAED90nm.lib' resistor
+.param r_mult   = 1
+.param deltaw   = 0.0000e+00
+.ENDL  res_t
+
+############ Low resistance Corner (Rsh minimal)#########
+.LIB res_l
+.lib 'SAED90nm.lib' resistor
+.param r_mult   = 0.85
+.param deltaw   = 0.0000e+00
+.ENDL  res_l
+
+############ High resistance Corner (Rsh maximal)#########
+.LIB res_h
+.lib 'SAED90nm.lib' resistor
+.param r_mult   = 1.15
+.param deltaw   = 0.0000e+00
+.ENDL  res_h
+
+
+**********P+ Poly Unsalicided Resistor ********
+.LIB resistor
+.subckt rppoly_wos port1 port2 
+ .param rend  = '22e-06*r_mult'
+ .param rs    = '400*r_mult' 
+ .param TCR1  = '160e-6*r_mult'
+ .param TCR2  = '0.8e-6*r_mult'
+ .param VCR1  = '600e-6*r_mult'
+ .param VCR2  = '150e-6*r_mult'
+ R1 port1 port2 '(2*rend+rs*l)/(w+deltaw)*(1 + TCR1*(TEMPER-27) + TCR2*(TEMPER-27)**2) * (1 + VCR1*abs(V(port1,port2)) + TCR2*abs(V(port1,port2))*abs(V(port1,port2)))'
+.ends rppoly_wos
+
+**********N+ Poly Unsalicided Resistor ********
+.subckt rnpoly_wos port1 port2 
+ .param rend  = '22e-06*r_mult'
+ .param rs    = '250*r_mult' 
+ .param TCR1  = '20e-6*r_mult'
+ .param TCR2  = '0.6e-6*r_mult'
+ .param VCR1  = '700e-6*r_mult'
+ .param VCR2  = '150e-6*r_mult'
+ R1 port1 port2 '(2*rend+rs*l)/(w+deltaw)*(1 + TCR1*(TEMPER-27) + TCR2*(TEMPER-27)**2) * (1 + VCR1*abs(V(port1,port2)) + TCR2*abs(V(port1,port2))*abs(V(port1,port2)))'
+.ends rnpoly_wos
+
+**********P+ Poly Salicided Resistor ********
+.subckt rppoly port1 port2 
+ .param rend  = '22e-06*r_mult' 
+ .param rs    = '150*r_mult' 
+ .param TCR1  = '3600e-6*r_mult'
+ .param TCR2  = '1.0e-6*r_mult'
+ .param VCR1  = '2500e-6*r_mult'
+ .param VCR2  = '5500e-6*r_mult'
+ R1 port1 port2 '(2*rend+rs*l)/(w+deltaw)*(1 + TCR1*(TEMPER-27) + TCR2*(TEMPER-27)**2) * (1 + VCR1*abs(V(port1,port2)) + TCR2*abs(V(port1,port2))*abs(V(port1,port2)))'
+.ends rppoly
+
+**********N+ Poly Salicided Resistor ********
+.subckt rnpoly port1 port2 
+ .param rend  = '22e-06*r_mult' 
+ .param rs    = '100*r_mult' 
+ .param TCR1  = '3300e-6*r_mult'
+ .param TCR2  = '1.0e-6*r_mult'
+ .param VCR1  = '2500e-6*r_mult'
+ .param VCR2  = '3800e-6*r_mult'
+ R1 port1 port2 '(2*rend+rs*l)/(w+deltaw)*(1 + TCR1*(TEMPER-27) + TCR2*(TEMPER-27)**2) * (1 + VCR1*abs(V(port1,port2)) + TCR2*abs(V(port1,port2))*abs(V(port1,port2)))'
+.ends rnpoly
+
+.ENDL resistor
+
+#########################################################################
+**********************N+ Psub Diode model *******************************
+#########################################################################
+
+.LIB DIODE
+
+.MODEL ND D
++ LEVEL=3         XP =0.0	    EG =1.1	  	     
++ XOI =0.0        XOM =0.0	    XM =0.0	  	     
++ WP  =0.0	  WM =0.0	    LP =0.0	  	     
++ LM  =0.0	  AF =1.0	    JSW =0.0	  	     
++ PB  =0.65	  PHP =0.8	    M	=0.2994   	     
++ FC  =0.95	  FCS =0.4	    MJSW=0.5	  	     
++ TT  =2.446e-9   BV =4.65	    RS =1e-10	  	     
++ IS  =1.485e-7   CJO =1.09e-9      CJP =0.0	  	     
++ PJ  =0.0	  N   =1.615	    IK =0.0	  	     
++ IKR =1.100e-2   IBV =2.00e-2   
++ CJSW = 4.071015E-10	CJ   = 1.765922E-3  	     
+
+.MODEL PD D
++ LEVEL=3         XP =0.0	    EG =1.1	  	     
++ XOI =0.0        XOM =0.0	    XM =0.0	  	     
++ WP  =0.0	  WM =0.0	    LP =0.0	  	     
++ LM  =0.0	  AF =1.0	    JSW =0.0	  	     
++ PB  =0.65	  PHP =0.8	    M	=0.2994   	     
++ FC  =0.95	  FCS =0.4	    MJSW=0.5	  	     
++ TT  =2.446e-9   BV =4.65	    RS =1e-10	  	     
++ IS  =1.0e-7   CJO =1.09e-9      CJP =0.0	  	     
++ PJ  =0.0	  N   =1.615	    IK =0.0	  	     
++ IKR =1.100e-2   IBV =2.00e-2   
++ CJSW = 4.071015E-10	CJ   = 1.765922E-3  	     
+
+.ENDL DIODE
