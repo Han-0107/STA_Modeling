@@ -16,9 +16,3 @@
 1. mos: /data/yaohuihan/Research/SAED32nm/SAED32nm_EDK/tech/hspice/saed32nm.lib
 2. subckt: /data/yaohuihan/Research/SAED32nm/SAED32nm_EDK/lib/stdcell_rvt/lvs/saed32nm_rvt.cdl
 3. NLDM libs: /data/yaohuihan/Research/SAED32nm/SAED32nm_EDK/lib/stdcell_rvt
-
-## SAED90nm
-
-1. mos: /data/yaohuihan/Research/SAED90nm/SAED90nm_EDK/Digital_Standard_cell_Library/spice/spice_lib/SAED90nm.lib
-2. subckt: /data/yaohuihan/Research/SAED90nm/SAED90nm_EDK/Digital_Standard_cell_Library/cdl/saed90nm.cdl
-3. NLDM libs: /data/yaohuihan/Research/SAED90nm/SAED90nm_EDK/Digital_Standard_cell_Library/synopsys/models
