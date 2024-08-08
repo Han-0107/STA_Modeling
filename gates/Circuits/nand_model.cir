@@ -1,6 +1,6 @@
 * NAND Gate
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/SAED90nm/saed90nm.cdl
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/SAED90nm/SAED90nm.lib
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/asap7/7nm_TT_160803.pm
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/asap7/asap7sc6t_26_R.cdl
 
 .temp 25
 .param VOL=1.1
@@ -12,7 +12,7 @@ VIN_B b 0 DC VOL
 
 Cout y 0 0.1p
 
-X1 an b y VDD VSS NAND2X1
+X1 an b VDD VSS y NAND2x1_ASAP7_6t_R
 
 .tran 0.000001n 10n
 

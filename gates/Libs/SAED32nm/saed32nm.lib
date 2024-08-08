@@ -1,62 +1,17 @@
-******************************************************************************************
+
 ******************************************************************************************
 **********                   saed_edk32nm  1.05v / 1.8v / 2.5v         *******************
 ******************************************************************************************
-******************************************************************************************
-***********************************************************************
-****                                                               ****
-****  The data contained in the file is created for educational    **** 
-****  and training purposes only and are not recommended           ****
-****  for fabrication                                              ****
-****                                                               ****
-***********************************************************************
-****                                                               ****
-****  Copyright (C) 2013 Synopsys, Inc.                            ****
-****                                                               ****
-***********************************************************************
-****                                                               ****
-****  The 32/28nm Generic Library ("Library") is unsupported       ****    
-****  Confidential Information of Synopsys, Inc. ("Synopsys")      ****    
-****  provided to you as Documentation under the terms of the      ****    
-****  End User Software License Agreement between you or your      ****    
-****  employer and Synopsys ("License Agreement") and you agree    ****    
-****  not to distribute or disclose the Library without the        ****    
-****  prior written consent of Synopsys. The Library IS NOT an     ****    
-****  item of Licensed Software or Licensed Product under the      ****    
-****  License Agreement.  Synopsys and/or its licensors own        ****    
-****  and shall retain all right, title and interest in and        ****    
-****  to the Library and all modifications thereto, including      ****    
-****  all intellectual property rights embodied therein. All       ****    
-****  rights in and to any Library modifications you make are      ****    
-****  hereby assigned to Synopsys. If you do not agree with        ****    
-****  this notice, including the disclaimer below, then you        ****    
-****  are not authorized to use the Library.                       ****    
-****                                                               ****  
-****                                                               ****      
-****  THIS LIBRARY IS BEING DISTRIBUTED BY SYNOPSYS SOLELY ON AN   ****
-****  "AS IS" BASIS, WITH NO INTELLECUTAL PROPERTY                 ****
-****  INDEMNIFICATION AND NO SUPPORT. ANY EXPRESS OR IMPLIED       ****
-****  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       ****
-****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR   ****
-****  PURPOSE ARE HEREBY DISCLAIMED. IN NO EVENT SHALL SYNOPSYS    ****
-****  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,     ****
-****  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT      ****
-****  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;     ****
-****  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)     ****
-****  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN    ****
-****  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE    ****
-****  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS      ****
-****  DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF         ****
-****  SUCH DAMAGE.                                                 **** 		
-****                                                               ****  
-***********************************************************************
-
-
 
 ******************************************************************************************
 * history: 
 * 24.10.2010 - initial creation
-* 02.02.2011 - 
+* 02.02.2011 - updates
+* 09.03.2016 - Changed Poly resostor names, for consistency:
+*              rppolyl -> rppoly
+*              rnpolyl -> rnpoly
+* 21.04.2016 - Changed MOS models to export simulation parameters (i, v, etc.)
+*              as part of subcircuits. Values accessed as i(xm1) instead of i(xm1.main)
 *
 ******************************************************************************************
 **************** list of devices supported by this library *******************************
@@ -68,9 +23,8 @@
 ***** 1.05v thin oxide low vth devices: n105_lvt, p105_lvt
 ***** unsilicided p+ poly resistor: rppoly_wos (device call prefix is x: e.g "xr1 a b rppoly_wos")
 ***** unsilicided n+ poly resistor: rnpoly_wos (device call prefix is x: e.g "xr1 a b rnpoly_wos")
-***** silicided p+ poly resistor: rppoly (device call prefix is x: e.g "xr1 a b rppolyl")
-***** silicided n+ poly resistor: rnpoly (device call prefix is x: e.g "xr1 a b rnpolyl")
-***** metal resistor: gen_res n1 n2 l=length r=res w=width 
+***** silicided p+ poly resistor: rppoly (device call prefix is x: e.g "xr1 a b rppoly")
+***** silicided n+ poly resistor: rnpoly (device call prefix is x: e.g "xr1 a b rnpoly")
 ***** n+/pw diode:           nd
 ***** p+/nw diode:           pd
 ***** p+/nw/sub pnp bipolar: vpnp
@@ -217,6 +171,7 @@
 
 
 
+
 .lib TT_n105_lvt 
 .param 
 + dcgso_n105_lvt_fc = 0 
@@ -266,6 +221,7 @@
 + dcjsws_p105_lvt_fc = 0 
 + daigc_p105_lvt_fc = 0 
 .endl TT_p105_lvt 
+
 
 
 
@@ -340,8 +296,9 @@
 + n25_wvaro_del = '0'
 + n25_uo_del = '0'
 + n25_cflexp_del = '0'
-
 .endl tt_n25 
+
+
 
 .lib TT_P25
 .param 
@@ -363,8 +320,9 @@
 + p25_wvaro_del = '0'
 + p25_uo_del = '0'
 + p25_cflexp_del = '0'
-
 .endl tt_p25 
+
+
 
 .lib FF_n18 
 .param 
@@ -417,106 +375,107 @@
 .endl FF_p18 
 
 
+
 .lib FF_n105_hvt 
 .param 
-+ dcgso_n105_hvt_fc = 1.93593e-12 
-+ du0_n105_hvt_fc = 10.4471 
-+ dcgdo_n105_hvt_fc = 1.93593e-12 
-+ daigsd_n105_hvt_fc = -0.00045499 
-+ dcjswgs_n105_hvt_fc = -1.0876e-11 
-+ dcjswgd_n105_hvt_fc = -1.0876e-11 
-+ drdsw_n105_hvt_fc = -250.22355 
-+ dcjs_n105_hvt_fc = -0.00010876 
-+ dvth0_n105_hvt_fc = -0.0237052 
-+ dcjswd_n105_hvt_fc = -2.18009e-12 
-+ dcgdl_n105_hvt_fc = 9.13584e-12 
-+ dlvth0_n105_hvt_fc = -0.000320867 
-+ dcgsl_n105_hvt_fc = 9.13584e-12 
-+ dcjd_n105_hvt_fc = -0.00010876 
-+ dxw_n105_hvt_fc = 60.67065e-09 
-+ dtoxe_n105_hvt_fc = -2.85495e-11 
++ dcgso_n105_hvt_fc = 4.00367e-12 
++ du0_n105_hvt_fc = 2.43533 
++ dcgdo_n105_hvt_fc = 4.00367e-12 
++ daigsd_n105_hvt_fc = -0.000452733 
++ dcjswgs_n105_hvt_fc = -1.08237e-11 
++ dcjswgd_n105_hvt_fc = -1.08237e-11 
++ drdsw_n105_hvt_fc = -0.62355 
++ dcjs_n105_hvt_fc = -0.000108237 
++ dvth0_n105_hvt_fc = -0.0226226 
++ dcjswd_n105_hvt_fc = -1.57971e-12 
++ dcgdl_n105_hvt_fc = 7.07868e-12 
++ dlvth0_n105_hvt_fc = -4.08433e-05 
++ dcgsl_n105_hvt_fc = 7.07868e-12 
++ dcjd_n105_hvt_fc = -0.000108237 
++ dxw_n105_hvt_fc = 3.65298e-09 
++ dtoxe_n105_hvt_fc = -2.84121e-11 
 + dpvth0_n105_hvt_fc = 0 
-+ dxl_n105_hvt_fc = 18.46314e-09 
-+ dcjsws_n105_hvt_fc = -2.18009e-12 
-+ daigc_n105_hvt_fc = -0.000177596 
++ dxl_n105_hvt_fc = -1.22355e-09 
++ dcjsws_n105_hvt_fc = -1.57971e-12 
++ daigc_n105_hvt_fc = -0.00028936 
 .endl FF_n105_hvt 
 
 
 
 .lib FF_p105_hvt 
 .param 
-+ dcgso_p105_hvt_fc = 2.04469e-12 
-+ du0_p105_hvt_fc = -40.5016343 
-+ dcgdo_p105_hvt_fc = 2.04469e-12 
-+ daigsd_p105_hvt_fc = -0.000306546 
-+ dcjswgs_p105_hvt_fc = -8.7008e-12 
-+ dcjswgd_p105_hvt_fc = -8.7008e-12 
-+ drdsw_p105_hvt_fc = 30.8157 
-+ dcjs_p105_hvt_fc = -9.2446e-05 
-+ dvth0_p105_hvt_fc = 0.0252639 
-+ dcjswd_p105_hvt_fc = -3.24105e-12 
-+ dcgdl_p105_hvt_fc = 9.13584e-12 
-+ dlvth0_p105_hvt_fc = 0.000280435 
-+ dcgsl_p105_hvt_fc = 9.13584e-12 
-+ dcjd_p105_hvt_fc = -9.2446e-05 
-+ dxw_p105_hvt_fc = 96.67065e-09 
-+ dtoxe_p105_hvt_fc = -2.85495e-11 
++ dcgso_p105_hvt_fc = 7.57657e-12 
++ du0_p105_hvt_fc = 35.405888 
++ dcgdo_p105_hvt_fc = 7.57657e-12 
++ daigsd_p105_hvt_fc = -0.000299776 
++ dcjswgs_p105_hvt_fc = -1.08237e-11 
++ dcjswgd_p105_hvt_fc = -1.08237e-11 
++ drdsw_p105_hvt_fc = -17.405888 
++ dcjs_p105_hvt_fc = -0.000108237 
++ dvth0_p105_hvt_fc = 0.0213657 
++ dcjswd_p105_hvt_fc = -2.79251e-12 
++ dcgdl_p105_hvt_fc = 3.68005e-12 
++ dlvth0_p105_hvt_fc = 0.000458218 
++ dcgsl_p105_hvt_fc = 3.68005e-12 
++ dcjd_p105_hvt_fc = -0.000108237 
++ dxw_p105_hvt_fc = 0.00065298e-09 
++ dtoxe_p105_hvt_fc = -2.84121e-11 
 + dpvth0_p105_hvt_fc = 0 
-+ dxl_p105_hvt_fc = -1.86314e-09 
-+ dcjsws_p105_hvt_fc = -3.24105e-12 
-+ daigc_p105_hvt_fc = -5.22513e-05 
++ dxl_p105_hvt_fc = -1.962355e-09 
++ dcjsws_p105_hvt_fc = -2.79251e-12 
++ daigc_p105_hvt_fc = -5.81149e-05 
 .endl FF_p105_hvt 
 
 
 
 .lib FF_n105_lvt 
 .param 
-+ dcgso_n105_lvt_fc = 1.18046e-12 
-+ du0_n105_lvt_fc = 8.63367 
-+ dcgdo_n105_lvt_fc = 1.18046e-12 
-+ daigsd_n105_lvt_fc = -0.000436593 
-+ dcjswgs_n105_lvt_fc = -1.03549e-11 
-+ dcjswgd_n105_lvt_fc = -1.03549e-11 
-+ drdsw_n105_lvt_fc = -3.8831 
-+ dcjs_n105_lvt_fc = -0.000103549 
-+ dvth0_n105_lvt_fc = -0.0205857 
-+ dcjswd_n105_lvt_fc = -2.19007e-12 
-+ dcgdl_n105_lvt_fc = 9.42299e-12 
-+ dlvth0_n105_lvt_fc = -0.00022147 
-+ dcgsl_n105_lvt_fc = 9.42299e-12 
-+ dcjd_n105_lvt_fc = -0.000103549 
-+ dxw_n105_lvt_fc = 3.49479e-09 
-+ dtoxe_n105_lvt_fc = -2.71817e-11 
++ dcgso_n105_lvt_fc = 4.00367e-12 
++ du0_n105_lvt_fc = 2.43533 
++ dcgdo_n105_lvt_fc = 4.00367e-12 
++ daigsd_n105_lvt_fc = -0.000452733 
++ dcjswgs_n105_lvt_fc = -1.08237e-11 
++ dcjswgd_n105_lvt_fc = -1.08237e-11 
++ drdsw_n105_lvt_fc = -0.62355 
++ dcjs_n105_lvt_fc = -0.000108237 
++ dvth0_n105_lvt_fc = -0.0226226 
++ dcjswd_n105_lvt_fc = -1.57971e-12 
++ dcgdl_n105_lvt_fc = 7.07868e-12 
++ dlvth0_n105_lvt_fc = -4.08433e-05 
++ dcgsl_n105_lvt_fc = 7.07868e-12 
++ dcjd_n105_lvt_fc = -0.000108237 
++ dxw_n105_lvt_fc = 3.65298e-09 
++ dtoxe_n105_lvt_fc = -2.84121e-11 
 + dpvth0_n105_lvt_fc = 0 
-+ dxl_n105_lvt_fc = -1.485324e-09 
-+ dcjsws_n105_lvt_fc = -2.19007e-12 
-+ daigc_n105_lvt_fc = -0.000271719 
++ dxl_n105_lvt_fc = -1.22355e-09 
++ dcjsws_n105_lvt_fc = -1.57971e-12 
++ daigc_n105_lvt_fc = -0.00028936 
 .endl FF_n105_lvt 
 
 
 
 .lib FF_p105_lvt 
 .param 
-+ dcgso_p105_lvt_fc = 1.1494e-12 
-+ du0_p105_lvt_fc = 1.00071679 
-+ dcgdo_p105_lvt_fc = 1.1494e-12 
-+ daigsd_p105_lvt_fc = -0.000290679 
-+ dcjswgs_p105_lvt_fc = -8.28395e-12 
-+ dcjswgd_p105_lvt_fc = -8.28395e-12 
-+ drdsw_p105_lvt_fc = -8.32986 
-+ dcjs_p105_lvt_fc = -0.000103549 
-+ dvth0_p105_lvt_fc = 0.0216405 
-+ dcjswd_p105_lvt_fc = -1.28919e-11 
-+ dcgdl_p105_lvt_fc = 9.47476e-12 
-+ dlvth0_p105_lvt_fc = 0 
-+ dcgsl_p105_lvt_fc = 9.47476e-12 
-+ dcjd_p105_lvt_fc = -0.000103549 
-+ dxw_p105_lvt_fc = 3.49479e-09 
-+ dtoxe_p105_lvt_fc = -2.71817e-11 
++ dcgso_p105_lvt_fc = 7.57657e-12 
++ du0_p105_lvt_fc = 35.405888 
++ dcgdo_p105_lvt_fc = 7.57657e-12 
++ daigsd_p105_lvt_fc = -0.000299776 
++ dcjswgs_p105_lvt_fc = -1.08237e-11 
++ dcjswgd_p105_lvt_fc = -1.08237e-11 
++ drdsw_p105_lvt_fc = -17.405888 
++ dcjs_p105_lvt_fc = -0.000108237 
++ dvth0_p105_lvt_fc = 0.0213657 
++ dcjswd_p105_lvt_fc = -2.79251e-12 
++ dcgdl_p105_lvt_fc = 3.68005e-12 
++ dlvth0_p105_lvt_fc = 0.000458218 
++ dcgsl_p105_lvt_fc = 3.68005e-12 
++ dcjd_p105_lvt_fc = -0.000108237 
++ dxw_p105_lvt_fc = 0.00065298e-09 
++ dtoxe_p105_lvt_fc = -2.84121e-11 
 + dpvth0_p105_lvt_fc = 0 
-+ dxl_p105_lvt_fc = -1.495324e-09 
-+ dcjsws_p105_lvt_fc = -1.28919e-11 
-+ daigc_p105_lvt_fc = -7.59382e-05 
++ dxl_p105_lvt_fc = -1.962355e-09 
++ dcjsws_p105_lvt_fc = -2.79251e-12 
++ daigc_p105_lvt_fc = -5.81149e-05 
 .endl FF_p105_lvt 
 
 
@@ -592,8 +551,9 @@
 + n25_wvaro_del = '1.7278e-09'
 + n25_uo_del = '0.00241372'
 + n25_cflexp_del = '0'
-
 .endl ff_n25 
+
+
 
 .lib FF_P25
 .param 
@@ -615,8 +575,9 @@
 + p25_wvaro_del = '1.7278e-09'
 + p25_uo_del = '0.00122749'
 + p25_cflexp_del = '0'
-
 .endl ff_p25 
+
+
 
 .lib SS_n18 
 .param 
@@ -672,104 +633,104 @@
 
 .lib SS_n105_hvt 
 .param 
-+ dcgso_n105_hvt_fc = -1.15247e-12 
-+ du0_n105_hvt_fc = 140.0029685 
-+ dcgdo_n105_hvt_fc = -1.15247e-12 
-+ daigsd_n105_hvt_fc = 0.00035242 
-+ dcjswgs_n105_hvt_fc = 6.47455e-12 
-+ dcjswgd_n105_hvt_fc = 6.47455e-12 
-+ drdsw_n105_hvt_fc = 215.28385 
-+ dcjs_n105_hvt_fc = 26.47455e-05 
-+ dvth0_n105_hvt_fc = 0.0126678 
-+ dcjswd_n105_hvt_fc = 1.29782e-12 
-+ dcgdl_n105_hvt_fc = -5.43862e-12 
-+ dlvth0_n105_hvt_fc = 0.000538657 
-+ dcgsl_n105_hvt_fc = -5.43862e-12 
-+ dcjd_n105_hvt_fc = 6.47455e-05 
-+ dxw_n105_hvt_fc = 1.058516e-09 
-+ dtoxe_n105_hvt_fc = 1.69957e-11 
-+ dpvth0_n105_hvt_fc = 0 
-+ dxl_n105_hvt_fc = -2.00006491e-09 
-+ dcjsws_n105_hvt_fc = 1.29782e-12 
-+ daigc_n105_hvt_fc = 0.000192445 
++ dcgso_n105_hvt_fc = -2.84241e-12 
++ du0_n105_hvt_fc = -0.004944 
++ dcgdo_n105_hvt_fc = -2.84241e-12 
++ daigsd_n105_hvt_fc = 0.000413882 
++ dcjswgs_n105_hvt_fc = 7.68427e-12 
++ dcjswgd_n105_hvt_fc = 7.68427e-12 
++ drdsw_n105_hvt_fc = 1.5005264 
++ dcjs_n105_hvt_fc = 7.68427e-05 
++ dvth0_n105_hvt_fc = 0.013915 
++ dcjswd_n105_hvt_fc = 1.12152e-12 
++ dcgdl_n105_hvt_fc = -5.02551e-12 
++ dlvth0_n105_hvt_fc = 0.000153011 
++ dcgsl_n105_hvt_fc = -5.02551e-12 
++ dcjd_n105_hvt_fc = 7.68427e-05 
++ dxw_n105_hvt_fc = -2.59344e-09 
++ dtoxe_n105_hvt_fc = 2.01712e-11 
++ dpvth0_n105_hvt_fc = 4.78104e-05 
++ dxl_n105_hvt_fc = 1.0053685e-09 
++ dcjsws_n105_hvt_fc = 1.12152e-12 
++ daigc_n105_hvt_fc = 0.000202591 
 .endl SS_n105_hvt 
 
 
 
 .lib SS_p105_hvt 
 .param 
-+ dcgso_p105_hvt_fc = -1.21721e-12 
-+ du0_p105_hvt_fc = 290.00082204 
-+ dcgdo_p105_hvt_fc = -1.21721e-12 
-+ daigsd_p105_hvt_fc = 0.00017231 
-+ dcjswgs_p105_hvt_fc = 5.17964e-12 
-+ dcjswgd_p105_hvt_fc = 5.17964e-12 
-+ drdsw_p105_hvt_fc = -15.8559 
-+ dcjs_p105_hvt_fc = 15.50336e-05 
-+ dvth0_p105_hvt_fc = -0.0119595 
-+ dcjswd_p105_hvt_fc = 1.92941e-12 
-+ dcgdl_p105_hvt_fc = -5.43862e-12 
-+ dlvth0_p105_hvt_fc = -0.000557834 
-+ dcgsl_p105_hvt_fc = -5.43862e-12 
-+ dcjd_p105_hvt_fc = 5.50336e-05 
-+ dxw_p105_hvt_fc = -29.00018516e-09 
-+ dtoxe_p105_hvt_fc = 1.69957e-11 
-+ dpvth0_p105_hvt_fc = 0 
-+ dxl_p105_hvt_fc = 0.000029491e-09 
-+ dcjsws_p105_hvt_fc = 1.92941e-12 
-+ daigc_p105_hvt_fc = 5.60466e-05 
++ dcgso_p105_hvt_fc = -5.37899e-12 
++ du0_p105_hvt_fc = -11.53379 
++ dcgdo_p105_hvt_fc = -5.37899e-12 
++ daigsd_p105_hvt_fc = 0.000223171 
++ dcjswgs_p105_hvt_fc = 7.68427e-12 
++ dcjswgd_p105_hvt_fc = 7.68427e-12 
++ drdsw_p105_hvt_fc = 17.00998816 
++ dcjs_p105_hvt_fc = 7.68427e-05 
++ dvth0_p105_hvt_fc = -0.0152034 
++ dcjswd_p105_hvt_fc = 1.98254e-12 
++ dcgdl_p105_hvt_fc = -2.61265e-12 
++ dlvth0_p105_hvt_fc = -0.000361259 
++ dcgsl_p105_hvt_fc = -2.61265e-12 
++ dcjd_p105_hvt_fc = 7.68427e-05 
++ dxw_p105_hvt_fc = -2.59344e-09 
++ dtoxe_p105_hvt_fc = 2.01712e-11 
++ dpvth0_p105_hvt_fc = -3.26686e-05 
++ dxl_p105_hvt_fc = 1.53685e-09 
++ dcjsws_p105_hvt_fc = 1.98254e-12 
++ daigc_p105_hvt_fc = 5.44539e-05 
 .endl SS_p105_hvt 
 
 
 
 .lib SS_n105_lvt 
 .param 
-+ dcgso_n105_lvt_fc = -8.41936e-13 
-+ du0_n105_lvt_fc = -0.0066172 
-+ dcgdo_n105_lvt_fc = -8.41936e-13 
-+ daigsd_n105_lvt_fc = 0.000401389 
-+ dcjswgs_n105_lvt_fc = 7.3854e-12 
-+ dcjswgd_n105_lvt_fc = 7.3854e-12 
-+ drdsw_n105_lvt_fc = 27.6953 
-+ dcjs_n105_lvt_fc = 7.3854e-05 
-+ dvth0_n105_lvt_fc = 0.0151111 
-+ dcjswd_n105_lvt_fc = 1.56201e-12 
-+ dcgdl_n105_lvt_fc = -6.72071e-12 
-+ dlvth0_n105_lvt_fc = 0.000420795 
-+ dcgsl_n105_lvt_fc = -6.72071e-12 
-+ dcjd_n105_lvt_fc = 7.3854e-05 
-+ dxw_n105_lvt_fc = -2.49257e-09 
-+ dtoxe_n105_lvt_fc = 1.93867e-11 
-+ dpvth0_n105_lvt_fc = 0 
-+ dxl_n105_lvt_fc = -0.57708e-09 
-+ dcjsws_n105_lvt_fc = 1.56201e-12 
-+ daigc_n105_lvt_fc = 0.00015417 
++ dcgso_n105_lvt_fc = -2.84241e-12 
++ du0_n105_lvt_fc = -0.004944 
++ dcgdo_n105_lvt_fc = -2.84241e-12 
++ daigsd_n105_lvt_fc = 0.000413882 
++ dcjswgs_n105_lvt_fc = 7.68427e-12 
++ dcjswgd_n105_lvt_fc = 7.68427e-12 
++ drdsw_n105_lvt_fc = 1.5005264 
++ dcjs_n105_lvt_fc = 7.68427e-05 
++ dvth0_n105_lvt_fc = 0.013915 
++ dcjswd_n105_lvt_fc = 1.12152e-12 
++ dcgdl_n105_lvt_fc = -5.02551e-12 
++ dlvth0_n105_lvt_fc = 0.000153011 
++ dcgsl_n105_lvt_fc = -5.02551e-12 
++ dcjd_n105_lvt_fc = 7.68427e-05 
++ dxw_n105_lvt_fc = -2.59344e-09 
++ dtoxe_n105_lvt_fc = 2.01712e-11 
++ dpvth0_n105_lvt_fc = 4.78104e-05 
++ dxl_n105_lvt_fc = 1.0053685e-09 
++ dcjsws_n105_lvt_fc = 1.12152e-12 
++ daigc_n105_lvt_fc = 0.000202591 
 .endl SS_n105_lvt 
 
 
 
 .lib SS_p105_lvt 
 .param 
-+ dcgso_p105_lvt_fc = -8.19779e-13 
-+ du0_p105_lvt_fc = -16.902286 
-+ dcgdo_p105_lvt_fc = -8.19779e-13 
-+ daigsd_p105_lvt_fc = 0.000196051 
-+ dcjswgs_p105_lvt_fc = 5.90832e-12 
-+ dcjswgd_p105_lvt_fc = 5.90832e-12 
-+ drdsw_p105_lvt_fc = 1.66172 
-+ dcjs_p105_lvt_fc = 7.3854e-05 
-+ dvth0_p105_lvt_fc = -0.0138765 
-+ dcjswd_p105_lvt_fc = 9.19482e-12 
-+ dcgdl_p105_lvt_fc = -6.75764e-12 
-+ dlvth0_p105_lvt_fc = 0 
-+ dcgsl_p105_lvt_fc = -6.75764e-12 
-+ dcjd_p105_lvt_fc = 7.3854e-05 
-+ dxw_p105_lvt_fc = -3.49257e-09 
-+ dtoxe_p105_lvt_fc = 1.93867e-11 
-+ dpvth0_p105_lvt_fc = 0 
-+ dxl_p105_lvt_fc = 1.37708e-09 
-+ dcjsws_p105_lvt_fc = 9.19482e-12 
-+ daigc_p105_lvt_fc = 7.35751e-05 
++ dcgso_p105_lvt_fc = -5.37899e-12 
++ du0_p105_lvt_fc = -11.53379 
++ dcgdo_p105_lvt_fc = -5.37899e-12 
++ daigsd_p105_lvt_fc = 0.000223171 
++ dcjswgs_p105_lvt_fc = 7.68427e-12 
++ dcjswgd_p105_lvt_fc = 7.68427e-12 
++ drdsw_p105_lvt_fc = 17.00998816 
++ dcjs_p105_lvt_fc = 7.68427e-05 
++ dvth0_p105_lvt_fc = -0.0152034 
++ dcjswd_p105_lvt_fc = 1.98254e-12 
++ dcgdl_p105_lvt_fc = -2.61265e-12 
++ dlvth0_p105_lvt_fc = -0.000361259 
++ dcgsl_p105_lvt_fc = -2.61265e-12 
++ dcjd_p105_lvt_fc = 7.68427e-05 
++ dxw_p105_lvt_fc = -2.59344e-09 
++ dtoxe_p105_lvt_fc = 2.01712e-11 
++ dpvth0_p105_lvt_fc = -3.26686e-05 
++ dxl_p105_lvt_fc = 1.53685e-09 
++ dcjsws_p105_lvt_fc = 1.98254e-12 
++ daigc_p105_lvt_fc = 5.44539e-05 
 .endl SS_p105_lvt 
 
 
@@ -845,8 +806,9 @@
 + n25_wvaro_del = '-1.83968e-09'
 + n25_uo_del = '-0.0029395'
 + n25_cflexp_del = '0'
-
 .endl ss_n25 
+
+
 
 .lib SS_P25
 .param 
@@ -868,8 +830,9 @@
 + p25_wvaro_del = '-1.83968e-09'
 + p25_uo_del = '-0.00107743'
 + p25_cflexp_del = '0'
-
 .endl ss_p25 
+
+
 
 .lib FS_n18 
 .param 
@@ -925,25 +888,25 @@
 
 .lib FS_n105_hvt 
 .param 
-+ dcgso_n105_hvt_fc = 2.22091e-12 
-+ du0_n105_hvt_fc = 2.80732 
-+ dcgdo_n105_hvt_fc = 2.22091e-12 
++ dcgso_n105_hvt_fc = 5.15355e-12 
++ du0_n105_hvt_fc = 3.13476 
++ dcgdo_n105_hvt_fc = 5.15355e-12 
 + daigsd_n105_hvt_fc = 0 
-+ dcjswgs_n105_hvt_fc = -1.2477e-11 
-+ dcjswgd_n105_hvt_fc = -1.2477e-11 
-+ drdsw_n105_hvt_fc = -1.40366 
-+ dcjs_n105_hvt_fc = -0.00012477 
-+ dvth0_n105_hvt_fc = -0.0271947 
-+ dcjswd_n105_hvt_fc = -2.50101e-12 
-+ dcgdl_n105_hvt_fc = 1.04807e-11 
-+ dlvth0_n105_hvt_fc = -0.000368099 
-+ dcgsl_n105_hvt_fc = 1.04807e-11 
-+ dcjd_n105_hvt_fc = -0.00012477 
++ dcjswgs_n105_hvt_fc = -1.39323e-11 
++ dcjswgd_n105_hvt_fc = -1.39323e-11 
++ drdsw_n105_hvt_fc = -2.08984 
++ dcjs_n105_hvt_fc = -0.000139323 
++ dvth0_n105_hvt_fc = -0.0291199 
++ dcjswd_n105_hvt_fc = -2.03341e-12 
++ dcgdl_n105_hvt_fc = 9.1117e-12 
++ dlvth0_n105_hvt_fc = -5.25735e-05 
++ dcgsl_n105_hvt_fc = 9.1117e-12 
++ dcjd_n105_hvt_fc = -0.000139323 
 + dxw_n105_hvt_fc = 0 
 + dtoxe_n105_hvt_fc = 0 
-+ dpvth0_n105_hvt_fc = -0.000427669 
++ dpvth0_n105_hvt_fc = -0.000410765 
 + dxl_n105_hvt_fc = 0 
-+ dcjsws_n105_hvt_fc = -2.50101e-12 
++ dcjsws_n105_hvt_fc = -2.03341e-12 
 + daigc_n105_hvt_fc = 0 
 .endl FS_n105_hvt 
 
@@ -951,51 +914,50 @@
 
 .lib FS_p105_hvt 
 .param 
-+ dcgso_p105_hvt_fc = -1.76993e-12 
-+ du0_p105_hvt_fc = -2.64939 
-+ dcgdo_p105_hvt_fc = -1.76993e-12 
++ dcgso_p105_hvt_fc = -7.8162e-12 
++ du0_p105_hvt_fc = -2.22875 
++ dcgdo_p105_hvt_fc = -7.8162e-12 
 + daigsd_p105_hvt_fc = 0 
-+ dcjswgs_p105_hvt_fc = 7.53163e-12 
-+ dcjswgd_p105_hvt_fc = 7.53163e-12 
-+ drdsw_p105_hvt_fc = 7.0609 
-+ dcjs_p105_hvt_fc = 8.00235e-05 
-+ dvth0_p105_hvt_fc = -0.0173902 
-+ dcjswd_p105_hvt_fc = 2.80553e-12 
-+ dcgdl_p105_hvt_fc = -7.90821e-12 
-+ dlvth0_p105_hvt_fc = -0.000811133 
-+ dcgsl_p105_hvt_fc = -7.90821e-12 
-+ dcjd_p105_hvt_fc = 8.00235e-05 
++ dcjswgs_p105_hvt_fc = 1.1166e-11 
++ dcjswgd_p105_hvt_fc = 1.1166e-11 
++ drdsw_p105_hvt_fc = 4.18725 
++ dcjs_p105_hvt_fc = 0.00011166 
++ dvth0_p105_hvt_fc = -0.0220921 
++ dcjswd_p105_hvt_fc = 2.88083e-12 
++ dcgdl_p105_hvt_fc = -3.79644e-12 
++ dlvth0_p105_hvt_fc = -0.000524947 
++ dcgsl_p105_hvt_fc = -3.79644e-12 
++ dcjd_p105_hvt_fc = 0.00011166 
 + dxw_p105_hvt_fc = 0 
 + dtoxe_p105_hvt_fc = 0 
-+ dpvth0_p105_hvt_fc = -0.000175931 
++ dpvth0_p105_hvt_fc = -0.000237355 
 + dxl_p105_hvt_fc = 0 
-+ dcjsws_p105_hvt_fc = 2.80553e-12 
++ dcjsws_p105_hvt_fc = 2.88083e-12 
 + daigc_p105_hvt_fc = 0 
 .endl FS_p105_hvt 
 
 
-
 .lib FS_n105_lvt 
 .param 
-+ dcgso_n105_lvt_fc = 1.40204e-12 
-+ du0_n105_lvt_fc = 10.2543 
-+ dcgdo_n105_lvt_fc = 1.40204e-12 
++ dcgso_n105_lvt_fc = 5.15355e-12 
++ du0_n105_lvt_fc = 3.13476 
++ dcgdo_n105_lvt_fc = 5.15355e-12 
 + daigsd_n105_lvt_fc = 0 
-+ dcjswgs_n105_lvt_fc = -1.22986e-11 
-+ dcjswgd_n105_lvt_fc = -1.22986e-11 
-+ drdsw_n105_lvt_fc = -4.61197 
-+ dcjs_n105_lvt_fc = -0.000122986 
-+ dvth0_n105_lvt_fc = -0.0244498 
-+ dcjswd_n105_lvt_fc = -2.60115e-12 
-+ dcgdl_n105_lvt_fc = 1.11917e-11 
-+ dlvth0_n105_lvt_fc = -0.000263041 
-+ dcgsl_n105_lvt_fc = 1.11917e-11 
-+ dcjd_n105_lvt_fc = -0.000122986 
++ dcjswgs_n105_lvt_fc = -1.39323e-11 
++ dcjswgd_n105_lvt_fc = -1.39323e-11 
++ drdsw_n105_lvt_fc = -2.08984 
++ dcjs_n105_lvt_fc = -0.000139323 
++ dvth0_n105_lvt_fc = -0.0291199 
++ dcjswd_n105_lvt_fc = -2.03341e-12 
++ dcgdl_n105_lvt_fc = 9.1117e-12 
++ dlvth0_n105_lvt_fc = -5.25735e-05 
++ dcgsl_n105_lvt_fc = 9.1117e-12 
++ dcjd_n105_lvt_fc = -0.000139323 
 + dxw_n105_lvt_fc = 0 
 + dtoxe_n105_lvt_fc = 0 
-+ dpvth0_n105_lvt_fc = -0.000289677 
++ dpvth0_n105_lvt_fc = -0.000410765 
 + dxl_n105_lvt_fc = 0 
-+ dcjsws_n105_lvt_fc = -2.60115e-12 
++ dcjsws_n105_lvt_fc = -2.03341e-12 
 + daigc_n105_lvt_fc = 0 
 .endl FS_n105_lvt 
 
@@ -1003,25 +965,25 @@
 
 .lib FS_p105_lvt 
 .param 
-+ dcgso_p105_lvt_fc = -1.52168e-12 
-+ du0_p105_lvt_fc = -5.61103 
-+ dcgdo_p105_lvt_fc = -1.52168e-12 
++ dcgso_p105_lvt_fc = -7.8162e-12 
++ du0_p105_lvt_fc = -2.22875 
++ dcgdo_p105_lvt_fc = -7.8162e-12 
 + daigsd_p105_lvt_fc = 0 
-+ dcjswgs_p105_lvt_fc = 1.0967e-11 
-+ dcjswgd_p105_lvt_fc = 1.0967e-11 
-+ drdsw_p105_lvt_fc = 3.08448 
-+ dcjs_p105_lvt_fc = 0.000137088 
-+ dvth0_p105_lvt_fc = -0.0257574 
-+ dcjswd_p105_lvt_fc = 1.70675e-11 
-+ dcgdl_p105_lvt_fc = -1.25436e-11 
-+ dlvth0_p105_lvt_fc = 0 
-+ dcgsl_p105_lvt_fc = -1.25436e-11 
-+ dcjd_p105_lvt_fc = 0.000137088 
++ dcjswgs_p105_lvt_fc = 1.1166e-11 
++ dcjswgd_p105_lvt_fc = 1.1166e-11 
++ drdsw_p105_lvt_fc = 4.18725 
++ dcjs_p105_lvt_fc = 0.00011166 
++ dvth0_p105_lvt_fc = -0.0220921 
++ dcjswd_p105_lvt_fc = 2.88083e-12 
++ dcgdl_p105_lvt_fc = -3.79644e-12 
++ dlvth0_p105_lvt_fc = -0.000524947 
++ dcgsl_p105_lvt_fc = -3.79644e-12 
++ dcjd_p105_lvt_fc = 0.00011166 
 + dxw_p105_lvt_fc = 0 
 + dtoxe_p105_lvt_fc = 0 
-+ dpvth0_p105_lvt_fc = -0.000296781 
++ dpvth0_p105_lvt_fc = -0.000237355 
 + dxl_p105_lvt_fc = 0 
-+ dcjsws_p105_lvt_fc = 1.70675e-11 
++ dcjsws_p105_lvt_fc = 2.88083e-12 
 + daigc_p105_lvt_fc = 0 
 .endl FS_p105_lvt 
 
@@ -1098,8 +1060,9 @@
 + n25_wvaro_del = '0'
 + n25_uo_del = '0.00324118'
 + n25_cflexp_del = '0'
-
 .endl fs_n25 
+
+
 
 .lib FS_P25
 .param 
@@ -1121,8 +1084,9 @@
 + p25_wvaro_del = '0'
 + p25_uo_del = '-0.00087849'
 + p25_cflexp_del = '0'
-
 .endl fs_p25 
+
+
 
 .lib SF_n18 
 .param 
@@ -1178,25 +1142,25 @@
 
 .lib SF_n105_hvt 
 .param 
-+ dcgso_n105_hvt_fc = -1.84041e-12 
-+ du0_n105_hvt_fc = -3.6679 
-+ dcgdo_n105_hvt_fc = -1.84041e-12 
++ dcgso_n105_hvt_fc = -4.74204e-12 
++ du0_n105_hvt_fc = -17.508 
++ dcgdo_n105_hvt_fc = -4.74204e-12 
 + daigsd_n105_hvt_fc = 0 
-+ dcjswgs_n105_hvt_fc = 1.03394e-11 
-+ dcjswgd_n105_hvt_fc = 1.03394e-11 
-+ drdsw_n105_hvt_fc = 11.6318 
-+ dcjs_n105_hvt_fc = 0.000103394 
-+ dvth0_n105_hvt_fc = 0.0202295 
-+ dcjswd_n105_hvt_fc = 2.07253e-12 
-+ dcgdl_n105_hvt_fc = -8.6851e-12 
-+ dlvth0_n105_hvt_fc = 0.000860193 
-+ dcgsl_n105_hvt_fc = -8.6851e-12 
-+ dcjd_n105_hvt_fc = 0.000103394 
++ dcjswgs_n105_hvt_fc = 1.28198e-11 
++ dcjswgd_n105_hvt_fc = 1.28198e-11 
++ drdsw_n105_hvt_fc = 19.2297 
++ dcjs_n105_hvt_fc = 0.000128198 
++ dvth0_n105_hvt_fc = 0.0232147 
++ dcjswd_n105_hvt_fc = 1.87105e-12 
++ dcgdl_n105_hvt_fc = -8.38415e-12 
++ dlvth0_n105_hvt_fc = 0.000255271 
++ dcgsl_n105_hvt_fc = -8.38415e-12 
++ dcjd_n105_hvt_fc = 0.000128198 
 + dxw_n105_hvt_fc = 0 
 + dtoxe_n105_hvt_fc = 0 
-+ dpvth0_n105_hvt_fc = 0.000320459 
++ dpvth0_n105_hvt_fc = 0.000398816 
 + dxl_n105_hvt_fc = 0 
-+ dcjsws_n105_hvt_fc = 2.07253e-12 
++ dcjsws_n105_hvt_fc = 1.87105e-12 
 + daigc_n105_hvt_fc = 0 
 .endl SF_n105_hvt 
 
@@ -1204,25 +1168,25 @@
 
 .lib SF_p105_hvt 
 .param 
-+ dcgso_p105_hvt_fc = 2.13975e-12 
-+ du0_p105_hvt_fc = 1.63611 
-+ dcgdo_p105_hvt_fc = 2.13975e-12 
++ dcgso_p105_hvt_fc = 8.26504e-12 
++ du0_p105_hvt_fc = 0.44277 
++ dcgdo_p105_hvt_fc = 8.26504e-12 
 + daigsd_p105_hvt_fc = 0 
-+ dcjswgs_p105_hvt_fc = -9.10533e-12 
-+ dcjswgd_p105_hvt_fc = -9.10533e-12 
-+ drdsw_p105_hvt_fc = -0.853623 
-+ dcjs_p105_hvt_fc = -9.67442e-05 
-+ dvth0_p105_hvt_fc = 0.0264384 
-+ dcjswd_p105_hvt_fc = -3.39174e-12 
-+ dcgdl_p105_hvt_fc = 9.5606e-12 
-+ dlvth0_p105_hvt_fc = 0.000293472 
-+ dcgsl_p105_hvt_fc = 9.5606e-12 
-+ dcjd_p105_hvt_fc = -9.67442e-05 
++ dcjswgs_p105_hvt_fc = -1.18072e-11 
++ dcjswgd_p105_hvt_fc = -1.18072e-11 
++ drdsw_p105_hvt_fc = -0.44277 
++ dcjs_p105_hvt_fc = -0.000118072 
++ dvth0_p105_hvt_fc = 0.0233072 
++ dcjswd_p105_hvt_fc = -3.04626e-12 
++ dcgdl_p105_hvt_fc = 4.01445e-12 
++ dlvth0_p105_hvt_fc = 0.000499855 
++ dcgsl_p105_hvt_fc = 4.01445e-12 
++ dcjd_p105_hvt_fc = -0.000118072 
 + dxw_p105_hvt_fc = 0 
 + dtoxe_p105_hvt_fc = 0 
-+ dpvth0_p105_hvt_fc = 0.000246323 
++ dpvth0_p105_hvt_fc = 0.000224094 
 + dxl_p105_hvt_fc = 0 
-+ dcjsws_p105_hvt_fc = -3.39174e-12 
++ dcjsws_p105_hvt_fc = -3.04626e-12 
 + daigc_p105_hvt_fc = 0 
 .endl SF_p105_hvt 
 
@@ -1230,25 +1194,25 @@
 
 .lib SF_n105_lvt 
 .param 
-+ dcgso_n105_lvt_fc = -1.2381e-12 
-+ du0_n105_lvt_fc = -2.44362 
-+ dcgdo_n105_lvt_fc = -1.2381e-12 
++ dcgso_n105_lvt_fc = -4.74204e-12 
++ du0_n105_lvt_fc = -17.508 
++ dcgdo_n105_lvt_fc = -4.74204e-12 
 + daigsd_n105_lvt_fc = 0 
-+ dcjswgs_n105_lvt_fc = 1.08605e-11 
-+ dcjswgd_n105_lvt_fc = 1.08605e-11 
-+ drdsw_n105_lvt_fc = 40.727 
-+ dcjs_n105_lvt_fc = 0.000108605 
-+ dvth0_n105_lvt_fc = 0.0222214 
-+ dcjswd_n105_lvt_fc = 2.297e-12 
-+ dcgdl_n105_lvt_fc = -9.88309e-12 
-+ dlvth0_n105_lvt_fc = 0.000618795 
-+ dcgsl_n105_lvt_fc = -9.88309e-12 
-+ dcjd_n105_lvt_fc = 0.000108605 
++ dcjswgs_n105_lvt_fc = 1.28198e-11 
++ dcjswgd_n105_lvt_fc = 1.28198e-11 
++ drdsw_n105_lvt_fc = 19.2297 
++ dcjs_n105_lvt_fc = 0.000128198 
++ dvth0_n105_lvt_fc = 0.0232147 
++ dcjswd_n105_lvt_fc = 1.87105e-12 
++ dcgdl_n105_lvt_fc = -8.38415e-12 
++ dlvth0_n105_lvt_fc = 0.000255271 
++ dcgsl_n105_lvt_fc = -8.38415e-12 
++ dcjd_n105_lvt_fc = 0.000128198 
 + dxw_n105_lvt_fc = 0 
 + dtoxe_n105_lvt_fc = 0 
-+ dpvth0_n105_lvt_fc = 0.00025124 
++ dpvth0_n105_lvt_fc = 0.000398816 
 + dxl_n105_lvt_fc = 0 
-+ dcjsws_n105_lvt_fc = 2.297e-12 
++ dcjsws_n105_lvt_fc = 1.87105e-12 
 + daigc_n105_lvt_fc = 0 
 .endl SF_n105_lvt 
 
@@ -1256,25 +1220,25 @@
 
 .lib SF_p105_lvt 
 .param 
-+ dcgso_p105_lvt_fc = 1.62477e-12 
-+ du0_p105_lvt_fc = 3.84043 
-+ dcgdo_p105_lvt_fc = 1.62477e-12 
++ dcgso_p105_lvt_fc = 8.26504e-12 
++ du0_p105_lvt_fc = 0.44277 
++ dcgdo_p105_lvt_fc = 8.26504e-12 
 + daigsd_p105_lvt_fc = 0 
-+ dcjswgs_p105_lvt_fc = -1.17101e-11 
-+ dcjswgd_p105_lvt_fc = -1.17101e-11 
-+ drdsw_p105_lvt_fc = -3.29345 
-+ dcjs_p105_lvt_fc = -0.000146376 
-+ dvth0_p105_lvt_fc = 0.0305907 
-+ dcjswd_p105_lvt_fc = -1.82238e-11 
-+ dcgdl_p105_lvt_fc = 1.33934e-11 
-+ dlvth0_p105_lvt_fc = 0 
-+ dcgsl_p105_lvt_fc = 1.33934e-11 
-+ dcjd_p105_lvt_fc = -0.000146376 
++ dcjswgs_p105_lvt_fc = -1.18072e-11 
++ dcjswgd_p105_lvt_fc = -1.18072e-11 
++ drdsw_p105_lvt_fc = -0.44277 
++ dcjs_p105_lvt_fc = -0.000118072 
++ dvth0_p105_lvt_fc = 0.0233072 
++ dcjswd_p105_lvt_fc = -3.04626e-12 
++ dcgdl_p105_lvt_fc = 4.01445e-12 
++ dlvth0_p105_lvt_fc = 0.000499855 
++ dcgsl_p105_lvt_fc = 4.01445e-12 
++ dcjd_p105_lvt_fc = -0.000118072 
 + dxw_p105_lvt_fc = 0 
 + dtoxe_p105_lvt_fc = 0 
-+ dpvth0_p105_lvt_fc = 0.000273413 
++ dpvth0_p105_lvt_fc = 0.000224094 
 + dxl_p105_lvt_fc = 0 
-+ dcjsws_p105_lvt_fc = -1.82238e-11 
++ dcjsws_p105_lvt_fc = -3.04626e-12 
 + daigc_p105_lvt_fc = 0 
 .endl SF_p105_lvt 
 
@@ -1351,8 +1315,9 @@
 + n25_wvaro_del = '0'
 + n25_uo_del = '-0.00490746'
 + n25_cflexp_del = '0'
-
 .endl sf_n25 
+
+
 
 .lib SF_P25
 .param 
@@ -1374,8 +1339,9 @@
 + p25_wvaro_del = '0'
 + p25_uo_del = '0.00110322'
 + p25_cflexp_del = '0'
-
 .endl sf_p25 
+
+
 
 .lib TT
 .lib 'saed32nm.lib' TT_n18
@@ -1389,7 +1355,7 @@
 .lib 'saed32nm.lib' TT_N25
 .lib 'saed32nm.lib' TT_P25
 .lib 'saed32nm.lib' MOS
-.endl tt 
+.endl TT 
 
 .lib FF
 .lib 'saed32nm.lib' FF_n18
@@ -1403,7 +1369,7 @@
 .lib 'saed32nm.lib' FF_N25
 .lib 'saed32nm.lib' FF_P25
 .lib 'saed32nm.lib' MOS
-.endl ff 
+.endl FF 
 
 .lib SS
 .lib 'saed32nm.lib' SS_n18
@@ -1417,7 +1383,7 @@
 .lib 'saed32nm.lib' SS_N25
 .lib 'saed32nm.lib' SS_P25
 .lib 'saed32nm.lib' MOS
-.endl ss 
+.endl SS 
 
 .lib FS
 .lib 'saed32nm.lib' FS_n18
@@ -1431,7 +1397,7 @@
 .lib 'saed32nm.lib' FS_N25
 .lib 'saed32nm.lib' FS_P25
 .lib 'saed32nm.lib' MOS
-.endl fs 
+.endl FS 
 
 .lib SF
 .lib 'saed32nm.lib' SF_n18
@@ -1445,12 +1411,14 @@
 .lib 'saed32nm.lib' SF_N25
 .lib 'saed32nm.lib' SF_P25
 .lib 'saed32nm.lib' MOS
-.endl sf 
+.endl SF 
+
 
 .lib nov_sub  
 .lib 'saed32nm.lib' N25_nov_sub 
 .lib 'saed32nm.lib' P25_nov_sub 
 .endl nov_sub
+
 
 .lib  noacvsubckt 
 .lib 'saed32nm.lib' n105_hvt_noacvsubckt  
@@ -1463,77 +1431,79 @@
 .LIB 'saed32nm.lib' p18_noacvsubckt 
 .endl  noacvsubckt 
 
+
+
 .lib model_n18
 
 .model  n18  nmos (level=54
-+ a0=1.07                a1=0                     a2=1                     
-+ acde=0.4               acnqsmod=0               af=1                     
-+ agidl=1e-07            ags=0.6166               aigbacc=0.0128           
-+ aigbinv=0.11           alpha0=3.802e-09         alpha1=0.01622           
-+ at=20000               b0=2.63e-07              b1=1e-07                 
-+ beta0=7.943            bgidl=2.92e+09           bigbacc=0.0023           
-+ bigbinv=0.0099         bigc=0.00191             bigsd=0.0015             
++ a0=1                   a1=0                     a2=1                     
++ acde=0.398             acnqsmod=0               af=1                     
++ agidl=1.0056e-07       ags=0.62                 aigbacc=0.013           
++ aigbinv=0.0998         alpha0=3.802e-09         alpha1=0.0163           
++ at=20000               b0=0                     b1=0                 
++ beta0=8.192            bgidl=2.92e+09           bigbacc=0.0023           
++ bigbinv=0.00714        bigc=0.002               bigsd=0.002             
 + binunit=1              capmod=2                 cdsc=0                   
 + cdscb=0                cdscd=0                  cgbo=1e-12               
-+ cgidl=1.5              cigbacc=0.07             cigbinv=0.006            
-+ cigc=0.088             cigsd=0.075              cit=0                    
-+ ckappad=1.903          ckappas=1.903            clc=0                    
-+ cle=0.6                delta=0.008266           diomod=1                 
-+ dlcig=5e-09            dmcg=9e-07               dmci=3.5e-08             
-+ dmdg=7e-08             drout=0.56               dsub=0.7098              
-+ dvt0=1.4145            dvt0w=0.30371            dvt1=0.028208                 
-+ dvt1w=1684300          dvt2=0.192               dvt2w=0.1911             
++ cgidl=0.03             cigbacc=0.07             cigbinv=0.01            
++ cigc=0.0881            cigsd=0.0814             cit=0                    
++ ckappad=2.007          ckappas=1.903            clc=0                    
++ cle=0.6                delta=0.0083             diomod=1                 
++ dlcig=4.85e-09         dmcg=9e-07               dmci=3.5e-08             
++ dmdg=0                 drout=0.56               dsub=0.7098              
++ dvt0=1.4145            dvt0w=0.304              dvt1=0.0281                 
++ dvt1w=1684300          dvt2=0.192               dvt2w=0.201             
 + dvtp0=1.48e-06         dvtp1=0.06902            dwb=0                    
 + dwc=0                  dwg=-1e-08               dwj=0                    
-+ ef=0.98                egidl=0.006527           eigbinv=1.1              
-+ em=4.1e+07             epsrox=3.9               etab=-0.1702             
-+ eu=1.67                fnoimod=1                fprout=500               
++ ef=1.54                egidl=0.007              eigbinv=1.1              
++ em=3.998e+07           epsrox=3.9               etab=-0.1702             
++ eu=1.83                fnoimod=1                fprout=500               
 + geomod=0               igbmod=1                 igcmod=1                 
-+ jsd=6.48e-07           jss=6.48e-07             jswd=1.878e-13           
-+ jswgd=2.339e-13        jswgs=2.339e-13          jsws=1.878e-13           
-+ jtsd=0.0005            jtss=0.0005              jtsswd=0                 
-+ jtsswgd=2e-07          jtsswgs=2e-07            jtssws=0                 
-+ k1=0.36675              k2we=0                   k3=-10.799                
-+ k3b=-0.001141          keta=0.03                kf=1.2e-27               
-+ kt1=-0.1499            kt1l=-7.244e-09          kt2=-0.03366             
++ jsd=6.87e-07           jss=6.48e-07             jswd=1.88e-13           
++ jswgd=2.42e-13         jswgs=2.34e-13           jsws=1.88e-13           
++ jtsd=0.002             jtss=0.0005              jtsswd=0                 
++ jtsswgd=1e-07          jtsswgs=2e-07            jtssws=0                 
++ k1=0.37                k2we=0                   k3=-10.8                
++ k3b=-0.0012            keta=0.03                kf=1.2e-27               
++ kt1=-0.15              kt1l=-7.198e-09          kt2=-0.03366             
 + ku0=-4e-09             ku0we=0                  kvsat=0.4                
-+ kvth0=0.6e-09          la0=-0.2208              lags=0.04514             
++ kvth0=0.6e-09          la0=-0.2208              lags=0.0448             
 + lambda=0               lc=5e-09                 lk2we=0                  
 + lku0=0                 lku0we=0                 lkvth0=0                 
 + ll=0                   lln=1                    llodku0=1                
-+ llodvth=1              lnfactor=-0.06           lodeta0=1                
++ llodvth=1              lnfactor=-0.058          lodeta0=1                
 + lodk2=1                lp=3.069e-07             lpdits=0                 
-+ lpe0=-7.1128e-008      lpeb=-8.248e-08          lvoffcv=0                
++ lpe0=-7.135e-008       lpeb=-8.25e-08           lvoffcv=0                
 + lw=0                   lwl=0                    lwn=1                    
-+ minv=-0.2761           mjd=0.3753               mjs=0.3753               
-+ mjswd=0.4762           mjswgd=0.9               mjswgs=0.9               
++ minv=-0.282            mjd=0.38                 mjs=0.376               
++ mjswd=0.484            mjswgd=0.9               mjswgs=0.9               
 + mjsws=0.4762           mobmod=0                 moin=9.903               
-+ ndep=1.585e+17         nfactor=2                ngate=1.356e+21          
++ ndep=1.585e+17         nfactor=2                ngate=1.358e+21          
 + nigbacc=2              nigbinv=3                nigc=1                   
-+ njd=1.185              njs=1.185                njts=20                  
++ njd=1.185              njs=1.19                 njts=20                  
 + njtsswg=15             noff=2.16                nsd=1e+20                
 + ntnoi=1                ntox=1                   paramchk=0               
-+ pbd=0.706              pbs=0.706                pbswd=1.453              
-+ pbswgd=0.687           pbswgs=0.687             pbsws=1.453              
-+ pclm=0.2965            pdiblc1=1e-07            pdiblc2=0.000475         
-+ pdiblcb=0              pdits=0.04521            pditsd=0                 
-+ pditsl=1e+07           permod=1                 phin=0.1969              
++ pbd=0.706              pbs=0.706                pbswd=1.454              
++ pbswgd=0.69            pbswgs=0.69              pbsws=1.454              
++ pclm=0.2965            pdiblc1=1e-07            pdiblc2=0.00048         
++ pdiblcb=0              pdits=0.046              pditsd=0                 
++ pditsl=1e+07           permod=1                 phin=0.1971              
 + pigcd=2                pk2we=0                  pku0=0                   
 + pkvth0=0               poxedge=0.9              prt=0                    
 + prwb=0                 prwg=0                   pscbe1=5e+09             
 + pscbe2=5e-06           pvag=0                   rdsmod=0                 
 + rdswmin=0              rsh=12                   saref=5.325e-007              
-+ sbref=5.325e-007        scref=2e-06              steta0=0                 
-+ stk2=0                 tcj=0.0008244            tcjsw=0.000124           
-+ tcjswg=0.0009244       tempmod=0                tku0=0                   
++ sbref=5.35e-007        scref=2e-06              steta0=0                 
++ stk2=0                 tcj=0.001                tcjsw=0.001           
++ tcjswg=0.00093         tempmod=0                tku0=0                   
 + tnjtsswg=1.532         tnoimod=0                tnom=25                  
-+ toxm=3.52e-009          toxref=3.52e-009          tpb=0.001539             
-+ tpbsw=0                tpbswg=0.000912          trnqsmod=0               
-+ tvoff=0.003            ua=1.396e-11             ua1=7.919e-09            
-+ ub=4.259e-18           ub1=-5.663e-18           uc=6.764e-10             
-+ uc1=-1.5e-11           ud=9.634e+17             up=-0.2284               
-+ ute=-0.4026            version=4.5              voff=-0.1906             
-+ voffcv=-0.1844         voffl=-6.3e-09           vtl=0                    
++ toxm=3.52e-009         toxref=3.52e-009         tpb=0.002             
++ tpbsw=0                tpbswg=0.0014            trnqsmod=0               
++ tvoff=0.003            ua=1.396e-11             ua1=7.92e-09            
++ ub=4.3e-18             ub1=-5.67e-18            uc=6.77-10             
++ uc1=-1.5e-11           ud=9.64e+17              up=-0.2284               
++ ute=-0.4026            version=4.5              voff=-0.189             
++ voffcv=-0.185          voffl=-6.3e-09           vtl=0                    
 + vtss=10                vtsswgd=1                vtsswgs=1                
 + w0=8.109e-08           web=2e+06                wec=-1e+06               
 + wint=0                 wk2we=0                  wku0=0                   
@@ -1543,7 +1513,7 @@
 + wr=1                   wvoff=0.012              ww=0                     
 + wwl=0                  wwn=1                    xj=1e-07                 
 + xn=3                   xpart=0                  xtid=3                   
-+ xtis=3                 xtsswgd=0.4186           xtsswgs=0.4186
++ xtis=3                 xtsswgd=0.419            xtsswgs=0.419
 + lk3     = 0.3
 + ldvt1   = 0.0092
 + lvsat   = -800           
@@ -1599,76 +1569,76 @@
 .lib model_p18
 
 .model  p18  pmos (level=54
-+ a0=1.456               a1=0                     a2=0.96                     
++ a0=1                   a1=0                     a2=1                     
 + acde=0.4               acnqsmod=0               af=1                     
-+ agidl=1e-10            ags=0.10209              aigbacc=0.0128           
-+ aigbinv=0.01128        alpha0=1e-09             alpha1=4.8               
-+ at=53000              b0=-2.43e-07             b1=0                     
-+ beta0=20.28            bgidl=1.483e+09          bigbacc=0.00301          
-+ bigbinv=0.001257       bigc=0.0009525           bigsd=1e-06              
-+ binunit=1              capmod=2                 cdsc=0.00137             
-+ cdscb=0.0005818        cdscd=0.000112           cgbo=1e-12               
-+ cgidl=8.422            cigbacc=0.07997          cigbinv=0.0005285        
-+ cigc=0.01408           cigsd=0.00826            cit=0                    
-+ ckappad=1.755          ckappas=1.755            clc=0                    
-+ cle=0.6                delta=0.009              diomod=1                 
++ agidl=1e-10            ags=0.1021               aigbacc=0.013           
++ aigbinv=0.0113         alpha0=1e-09             alpha1=4.8               
++ at=53000               b0=-2.43e-07             b1=0                     
++ beta0=20.28            bgidl=1.48e+09           bigbacc=0.003          
++ bigbinv=0.00126        bigc=0.0015              bigsd=1e-06              
++ binunit=1              capmod=2                 cdsc=0.0014             
++ cdscb=0.0006           cdscd=0.00017            cgbo=1e-12               
++ cgidl=8.422            cigbacc=0.081            cigbinv=0.00105        
++ cigc=0.0141            cigsd=0.0092             cit=0                    
++ ckappad=1.755          ckappas=1.81             clc=0                    
++ cle=0.6                delta=0.01               diomod=1                 
 + dlcig=2e-08            dmcg=9e-07               dmci=3.5e-08             
-+ dmdg=7e-08             drout=0.56               dsub=0.039459              
-+ dvt0=0.2101          dvt0w=0                  dvt1=0.1722              
-+ dvt1w=0                dvt2=0.06                 dvt2w=0                  
++ dmdg=7e-08             drout=0.56               dsub=0.0395              
++ dvt0=0.224             dvt0w=0                  dvt1=0.173              
++ dvt1w=0                dvt2=0.06                dvt2w=0                  
 + dvtp0=2.63e-07         dvtp1=0                  dwb=0                    
 + dwc=0                  dwg=0                    dwj=0                    
 + ef=1.1                 egidl=0.01               eigbinv=1.1              
-+ em=4.1e+07             epsrox=3.9               etab=-0.001063            
++ em=4.2e+07             epsrox=3.9               etab=-0.0012            
 + eu=1                   fnoimod=1                fprout=0.02              
 + geomod=0               igbmod=1                 igcmod=1                 
-+ jsd=6.48e-07           jss=6.48e-07             jswd=1.878e-13           
-+ jswgd=2.339e-13        jswgs=2.339e-13          jsws=1.878e-13           
++ jsd=6.48e-07           jss=6.48e-07             jswd=1.88e-13           
++ jswgd=2.34e-13         jswgs=2.34e-13           jsws=1.88e-13           
 + jtsd=5e-4              jtss=5e-4                jtsswd=0                 
 + jtsswgd=1.3e-08        jtsswgs=1.3e-08          jtssws=0                 
-+ k1=0.35469              k3=0.4                  k3b=2.5                    
-+ keta=-0.03             kf=1.2e-27               kt1=-0.253              
-+ kt1l=-1e-08            kt2=-0.04824             ku0=-2.8e-09             
-+ kvsat=0.4              kvth0=-1e-09             la0=-0.0257              
-+ lags=0.9863            lambda=0                 lc=5e-09                 
++ k1=0.355               k3=0.4                   k3b=2.5                    
++ keta=-0.03             kf=1.2e-27               kt1=-0.254              
++ kt1l=-1e-08            kt2=-0.0491              ku0=-2.8e-09             
++ kvsat=0.4              kvth0=-1e-09             la0=-0.0261              
++ lags=1.005             lambda=0                 lc=5e-09                 
 + lku0=0                 lkvth0=0                 ll=0                     
 + lln=1                  llodku0=1                llodvth=1                
 + llpe0=0                llpeb=0                  lndep=0                  
-+ lnfactor=-0.125        lodeta0=1                lodk2=1                  
-+ lp=1e-06               lpe0=6.9946e-008         lpeb=-1.5e-8               
-+ lua=3.056e-13          lub=1.622e-19            lute=0.04227             
-+ lvoffcv=0.01097        lw=0                     lwl=0                    
-+ lwn=1                  minv=-0.2                mjd=0.3254               
-+ mjs=0.3254             mjswd=0.1181             mjswgd=0.3376            
-+ mjswgs=0.3376          mjsws=0.1181             mobmod=0                 
-+ moin=8.419             ndep=9.683e+16           nfactor=0.986            
-+ ngate=3e+20            nigbacc=1                nigbinv=0.7041           
++ lnfactor=-0.131        lodeta0=1                lodk2=1                  
++ lp=1e-06               lpe0=6.95e-008           lpeb=-1.5e-8               
++ lua=3.056e-13          lub=1.64e-19             lute=0.043             
++ lvoffcv=0.012          lw=0                     lwl=0                    
++ lwn=1                  minv=-0.2                mjd=0.326               
++ mjs=0.3254             mjswd=0.121              mjswgd=0.3362            
++ mjswgs=0.34            mjsws=0.121              mobmod=0                 
++ moin=8.419             ndep=9.71e+16            nfactor=1.05            
++ ngate=3e+20            nigbacc=1                nigbinv=0.71           
 + nigc=1.813             njd=1.185                njs=1.185                
 + njts=20                njtssw=20                njtsswg=20               
-+ noff=2.448             nsd=1e+20                ntnoi=1                  
-+ ntox=1.5               paramchk=0               pbd=0.6219               
-+ pbs=0.6219             pbswd=0.85               pbswgd=0.2619            
-+ pbswgs=0.2619          pbsws=0.85               pclm=1.18                
-+ pdiblc1=0.002958       pdiblc2=0.00228          pdiblcb=0.0015           
++ noff=2.45              nsd=1e+20                ntnoi=1                  
++ ntox=1.5               paramchk=0               pbd=0.622               
++ pbs=0.623              pbswd=0.87               pbswgd=0.262            
++ pbswgs=0.2619          pbsws=0.87               pclm=1.18                
++ pdiblc1=0.003          pdiblc2=0.0024           pdiblcb=0.0016           
 + pdits=1e-09            pditsd=-1                pditsl=100000            
-+ permod=1               phin=0.06669             pigcd=1                  
++ permod=1               phin=0.0701              pigcd=1                  
 + pku0=0                 pkvth0=0                 poxedge=1                
-+ prt=-0.0263            prwb=0.1                 prwg=0.2                 
++ prt=-0.0271            prwb=0.1                 prwg=0.2                 
 + pscbe1=1e+08           pscbe2=1e-10             pvag=0                   
 + rdsmod=0               rdswmin=0                rsh=9                    
-+ saref=5.325e-007          sbref=5.325e-007            scref=2e-06              
-+ steta0=0               stk2=0                   tcj=0.000856             
-+ tcjsw=0.000124         tcjswg=0.0021            tempmod=0                
++ saref=5.34e-007        sbref=5.33e-007          scref=2e-06              
++ steta0=0               stk2=0                   tcj=0.00104             
++ tcjsw=0.0002           tcjswg=0.0021            tempmod=0                
 + tku0=0                 tnjts=1                  tnjtsswg=-1.1            
 + tnoimod=0              tnom=25                  toxm=3.74e-009           
-+ toxref=3.74e-009        tpb=0.00147              tpbsw=0                  
-+ tpbswg=0.000912        trnqsmod=0               ua=1.476e-010             
-+ ua1=3.802e-09          ub=9.772e-19             ub1=-2.291e-18           
-+ uc=7.244e-11           uc1=0                    up=-0.01901              
++ toxref=3.74e-009       tpb=0.00151              tpbsw=0                  
++ tpbswg=0.0014          trnqsmod=0               ua=1.476e-010             
++ ua1=3.802e-09          ub=9.781e-19             ub1=-2.292e-18           
++ uc=7.244e-11           uc1=0                    up=-0.021              
 + ute=-0.35              version=4.5              voff=-0.13               
-+ voffcv=-0.05134        voffl=-2.032e-09         vtl=0                    
-+ w0=6.1378e-008         web=700000               wec=-1e-06               
-+ wint=0                 wk1=0.00999              wku0=0                   
++ voffcv=-0.0517         voffl=-2.032e-09         vtl=0                    
++ w0=6.138e-008          web=700000               wec=-1e-06               
++ wint=0                 wk1=0.014                wku0=0                   
 + wkvth0=0               wl=0                     wln=1                    
 + wlod=0                 wlodku0=1                wlodvth=1                
 + wpemod=1               wr=1                     ww=0                     
@@ -1725,94 +1695,101 @@
 
 
 
-.LIB n105_hvt_model
+.LIB n105_hvt_model  
 
 .model  n105_hvt  nmos (level=54
-+ a0=1.80000e00          a1=0.00000e00            a2=4.00000e-01           
-+ acde=4.00000e-01       acnqsmod=0.00000e00      af=1.00000e00            
-+ agidl=1.50e-10      ags=1.23240e00           aigbacc=1.35600e-02      
-+ aigbinv=1.14230e-02    alpha0=4.00000e-12       alpha1=0.00000e00        
-+ at=1.22000e-03         b0=0.00000e00            b1=0.00000e00            
-+ beta0=2.00000e00       bgidl=9.74880e08         bigbacc=2.79000e-03      
-+ bigbinv=1.21200e-03    bigc=9.86840e-04         bigsd=7.74210e-04        
-+ binunit=1.00000e00     bvs=1.20000e01           capmod=2.00000e00        
-+ cdsc=0.00000e00        cdscb=-4.14980e-03       cdscd=0.00000e00         
-+ cgbo=1.00000e-12       cgidl=3.20000e00         cigbacc=1.08650e-02      
-+ cigbinv=1.47900e-03    cigc=2.95950e-04         cigsd=1.46380e-02        
-+ cit=0.00000e00         ckappad=4.50000e00       ckappas=4.50000e00       
-+ clc=0                  cle=6.00000e-01          delta=5.00000e-03        
-+ diomod=1.00000e00      dlcig=5.00000e-09        dmcg=7.00000e-08         
-+ dmci=3.50000e-08       dmdg=6.00000e-08         drout=6.00000e-02        
-+ dsub=9.00000e-01       dvt0=3.5712              dvt0w=-0.002336       
-+ dvt1=8.00000e-01       dvt1w=4.27800e05         dvt2=6.00000e-02         
-+ dvt2w=1.50000e-01      dvtp0=1.20000e-06        dvtp1=0.00000e00         
-+ dwb=0.00000e00         dwg=0.00000e00           ef=0.95            
-+ egidl=1.00000e-02      eigbinv=1.10000e00       em=4.10000e07            
-+ epsrox=3.90000e00      etab=-1.20000e-01        eu=1.67000e00            
-+ fnoimod=1.00000e00     fprout=5.00000e01        geomod=0.00000e00        
-+ igbmod=1.00000e00      igcmod=1.00000e00        ijthsfwd=1.00000e-01     
-+ ijthsrev=1.00000e-01   jsd=1.00000e-06          jss=1.00000e-06          
-+ jswd=1.48360e-13       jswgd=7.17230e-13        jswgs=7.17230e-13        
-+ jsws=1.48360e-13       jtsd=5.00000e-06         jtss=5.00000e-06         
-+ jtsswd=1.20000e-10     jtsswgd=1.63400e-08      jtsswgs=1.63400e-08      
-+ jtssws=1.20000e-10     k1=3.43480e-01           k3=-2.15           
-+ k3b=-0.22              keta=0.00000e00          kf=1.50000e-27           
-+ kt1=-2.79610e-01       kt1l=1.00000e-11         kt2=-2.32000e-02         
-+ ku0=0.00000e00         ku0we=0.00000e00         kvsat=0.00000e00         
-+ kvth0=6.5e-010         laigc=-7.70000e-06       lambda=0.00000e00        
-+ lbgidl=-5.00000e06     lku0=0.00000e00          lkvth0=0.00000e00        
-+ ll=0.00000e00          llc=0.00000e00           lln=1.00000e00           
-+ llodku0=0.00000e00     llodvth=0.00000e00       llpe0=2.50000e-09        
-+ lnfactor=5.00000e-02   lnoff=8.00000e-02        lodeta0=1.00000e00       
-+ lodk2=1.00000e00       lp=9.65020e-08           lpe0=1.00000e-08         
-+ lpeb=2e-008            lute=3.88590e-02         lw=0.00000e00            
-+ lwc=0.00000e00         lwl=0.00000e00           lwlc=0.00000e00          
-+ lwn=1.00000e00         minv=-1.68000e-01        mjd=4.07680e-01          
-+ mjs=4.07680e-01        mjswd=5.12770e-01        mjswgd=9.80000e-01       
-+ mjswgs=9.80000e-01     mjsws=5.12770e-01        mobmod=0.00000e00        
-+ moin=5.00000e00        ndep=5.00000e17          nfactor=1.90000e00       
-+ ngate=1.00000e23       nigbacc=8.22980e00       nigbinv=3.00000e00       
-+ nigc=3.29440e00        njd=1.10400e00           njs=1.10400e00           
-+ njts=2.00000e01        njtssw=6.00000e01        njtsswg=7.85400e00       
-+ noff=2.11760e00        nsd=1.00000e20           ntnoi=1.00000e00         
-+ ntox=1.00000e00        paramchk=0.00000e00      pbd=8.97730e-01          
-+ pbs=8.97730e-01        pbswd=1.00000e00         pbswgd=1.44200e00        
-+ pbswgs=1.44200e00      pbsws=1.00000e00         pclm=5.19750e-01         
-+ pdiblc1=1.50000e-04    pdiblc2=2.50000e-02      pdiblcb=-7.00000e-01     
-+ pdits=5.29870e-01      pditsd=9.00000e-01       pditsl=2.50000e06        
-+ permod=1.00000e00      phin=1.00000e-01         pigcd=1.00000e00         
-+ pku0=0.00000e00        pkvth0=0.00000e00        poxedge=1.27600e00       
-+ prt=1.50000e-02        prwb=1.00000e-01         prwg=0.00000e00          
-+ pscbe1=5.00000e09      pscbe2=5.00000e-06       pvag=6.00000e00          
-+ rdsmod=0.00000e00      rdswmin=0.00000e00       rdwmin=1.80000e02        
-+ rsh=1.20000e01         rswmin=1.80000e02        saref=4.48e-007        
-+ sbref=4.48e-007        scref=2.50000e-06        steta0=0.00000e00        
-+ stk2=0.00000e00        tcj=7.11140e-04          tcjsw=5.49780e-04        
-+ tcjswg=6.60000e-05     tempmod=1.00000e00       tnjts=0.00000e00         
-+ tnjtssw=8.00000e-01    tnjtsswg=4.00000e-02     tnoia=1.50000e00         
-+ tnoib=3.50000e00       tnoimod=0.00000e00       tnom=2.50000e01          
-+ toxm=2.390000e-09       toxref=2.390000e-09       tpb=1.25130e-03          
-+ tpbsw=1.08000e-03      tpbswg=2.58790e-03       trnqsmod=0.00000e00      
-+ tvoff=3.65970e-04      ua=9.20920e-10           ua1=3.82680e-03          
-+ ub=2.20690e-18         ub1=-4.40630e-03         uc=2.60000e-10           
-+ uc1=0.00000e00         ud=0.00000e00            ud1=0.00000e00           
-+ up=7.70000e-01         ute=-1.91                version=4.50000e00       
-+ vfb=-1.00000e00        vfbcv=-1.00000e00        voff=-1.55440e-01        
-+ voffcv=-2.84260e-01    voffl=-2.94050e-09       vtsd=2.00000e01          
-+ vtss=2.00000e01        vtsswd=1.00000e01        vtsswgd=1.08000e01       
-+ vtsswgs=1.08000e01     vtssws=1.00000e01        w0=0           
-+ web=7.50000e05         wec=-1.00000e05          wint=0.00000e00          
-+ wku0=0.00000e00        wkvth0=0.00000e00        wl=0.00000e00            
-+ wlc=0.00000e00         wln=1.00000e00           wlodku0=0.00000e00       
-+ wlodvth=0.00000e00     wpemod=1.00000e00        wr=1.00000e00            
-+ ww=0.00000e00          wwc=0.00000e00           wwl=0.00000e00           
-+ wwlc=0.00000e00        wwn=1.00000e00           xj=1.00000e-07           
-+ xjbvs=1.00000e00       xpart=0.00000e00         xtid=-6.00000e-01        
-+ xtis=-6.00000e-01      xtsd=2.00000e-02         xtss=2.00000e-02         
-+ xtsswd=5.84200e-01     xtsswgd=9.00000e-02      xtsswgs=9.00000e-02      
-+ xtssws=5.84200e-01     
-+  pvsat= pvsat_n105_hvt 
-+  wu0= wu0_n105_hvt 
++ a0=1.4                 a1=0                     a2=0.5                   
++ acde=0.4               acnqsmod=0               af=1                     
++ agidl=9.069e-010       ags=0.06                 aigbacc=0.01301          
++ aigbinv=0.01131        alpha0=4e-012            alpha1=0                 
++ at=0.0008              b0=0                     b1=1                     
++ beta0=2.8              bgidl=1.3054e009         bigbacc=0.002586         
++ bigbinv=0.0012         bigc=0.0012168           bigsd=0.00071704         
++ binunit=1              bvs=12                   capmod=2                 
++ cdsc=0                 cdscb=-0.035634          cdscd=0                  
++ cgbo=1e-012            cgidl=7.2017             cigbacc=0.005625         
++ cigbinv=0.001479       cigc=0.0009984           cigsd=0.007319           
++ cit=0.001              ckappad=3.8436           ckappas=3.8436           
++ clc=0                  cle=0.6                  delta=0.01               
++ diomod=1               dlcig=5e-009             dmcg=7e-008              
++ dmci=3.5e-008          dmdg=6e-008              drout=1.8174             
++ dsub=0.51352           dvt0=28.161              dvt0w=-0.02048             
++ dvt1=0.79916           dvt1w=689270             dvt2=0.07028             
++ dvt2w=0.075            dvtp0=1.3e-006           dvtp1=2.5                
++ dwb=0                  dwg=0                    ef=0.95                  
++ egidl=0.12651          eigbinv=1.1              em=41000000              
++ epsrox=3.9             etab=-0.28728            eu=1.67                  
++ fnoimod=1              fprout=150               geomod=0                 
++ igbmod=1               igcmod=1                 ijthsfwd=0.1             
++ ijthsrev=0.1           jsd=1.8969e-007          jss=1.8969e-007          
++ jswd=3.6931e-014       jswgd=1.15e-013          jswgs=1.15e-013          
++ jsws=3.6931e-014       jtsd=0                   jtss=0                   
++ jtsswd=7e-011          jtsswgd=1e-009           jtsswgs=1e-009           
++ jtssws=7e-011          k1=0.40                  k3=-3.9796                 
++ k3b=0.2                 keta=0                   kf=1.5e-027              
++ kt1=-0.15509           kt1l=7.2e-010            kt2=-0.036946            
++ ku0=0                  ku0we=0                  kvsat=0                  
++ kvth0=4.5e-010        laigc=-1e-005            lambda=0                 
++ ldvt0=1.80             letab=0.004725           lk3=-0.03844               
++ lku0=0                 lku0we=0                 lkvth0=0                 
++ ll=0                   llc=0                    lln=1                    
++ llodku0=0              llodvth=0                llpe0=3.0e-009           
++ llpeb=0                lminv=-0.0075            lndep=1.9725e017         
++ lnoff=0.04             lodeta0=1                lodk2=1                  
++ lp=3.0937e-008         lpe0=2e-009              lpeb=1.5e-008            
++ lute=0.05646           lw=0                     lwc=0                    
++ lwl=0                  lwlc=0                   lwn=1                    
++ minv=-0.36135          mjd=0.39452              mjs=0.39452              
++ mjswd=0.35491          mjswgd=0.92118           mjswgs=0.92118           
++ mjsws=0.35491          mobmod=0                 moin=15                  
++ ndep=1.5e017           nfactor=1                ngate=1e023              
++ nigbacc=5.6646         nigbinv=3                nigc=3                   
++ njd=1.0218             njs=1.0218               njts=60                  
++ njtssw=60              njtsswg=2.1              noff=2.0769              
++ nsd=1e020              ntnoi=1                  ntox=1                   
++ paramchk=0             pbd=0.83103              pbs=0.83103              
++ pbswd=0.96331          pbswgd=1.5028            pbswgs=1.5028            
++ pbsws=0.52809          pclm=1e-010              pdiblc1=0.077778         
++ pdiblc2=0.0011179      pdiblcb=-0.62            pdits=0.49415            
++ pditsd=0.97707         pditsl=356320            permod=1                 
++ phin=0.15              pigcd=1                  pku0=0                   
++ pku0we=0               pkvth0=0                 plpeb=0                  
++ poxedge=1.3            prt=0.0059508            prwb=0                   
++ prwg=0                 pscbe1=5e009             pscbe2=5e-006            
++ pvag=0                 rdsmod=0                 rdswmin=0                
++ rdwmin=180             rsh=12                   rswmin=180               
++ saref=4.48e-007        sbref=4.48e-007           scref=2.5e-006           
++ steta0=0               stk2=0                   tcj=0.00067619           
++ tcjsw=0.00062574       tcjswg=0                 tempmod=1                
++ tnjts=0                tnjtssw=0                tnjtsswg=0               
++ tnoia=1.5              tnoib=3.5                tnoimod=0                
++ tnom=25                toxm=2.39e-009            toxref=2.39e-009          
++ tpb=0.001244           tpbsw=0.00066006         tpbswg=0.0024412         
++ trnqsmod=0             tvoff=0.0020635          ua=4.8019e-012           
++ ua1=0.081102           ub=2.6607e-018           ub1=-0.0012278           
++ uc=1.3777e-010         uc1=-5.6e-011            ud=0                     
++ ud1=0                  up=0.36                  ute=-1.46                
++ version=4.5            vfb=-1                   vfbcv=0                  
++ vfbsdoff=0             voff=-0.20372            voffcv=-0.15475          
++ voffl=-8.2166e-010     vtsd=10                  vtss=10                  
++ vtsswd=10              vtsswgd=0.9              vtsswgs=0.9              
++ vtssws=10              w0=1.6582e-008           web=750000               
++ wec=-100000            wint=0                   wku0=0                   
++ wku0we=0               wkvth0=0                 wl=0                     
++ wlc=0                  wln=1                    wlodku0=0                
++ wlodvth=0              wlpeb=0                  wpemod=1                 
++ wr=1                   wvoff=0.006              ww=0                     
++ wwc=0                  wwl=0                    wwlc=0                   
++ wwn=1                  xj=1e-007                xjbvs=1                  
++ xpart=0                xtid=3                   xtis=3                   
++ xtsd=0.02              xtss=0.02                xtsswd=0.02              
++ xtsswgd=0.02           xtsswgs=0.02             xtssws=0.02              
++ wvsat=2000
++ wdsub=0.008
++ lu0=4.488
++ lvsat=-2400
++ la0 = -0.2
++ lags= 0.136
 +  lvth0= lvth0_n105_hvt 
 +  pvth0= pvth0_n105_hvt 
 +  xl= xl_n105_hvt 
@@ -1851,6 +1828,7 @@
 +  dlc= dlc_n105_hvt 
 +  lint= lint_n105_hvt 
 ) 
+
 .ENDL n105_hvt_model
 
 
@@ -1858,86 +1836,85 @@
 .LIB p105_hvt_model
 
 .model  p105_hvt  pmos (level=54
-+ a0=4.3                 a1=0                     a2=0.3157                
-+ acde=0.5               acnqsmod=0               af=1                     
-+ agidl=1.19e-011        ags=1.0476               aigbacc=0.01249          
-+ aigbinv=0.01311        alpha0=8.656e-012        alpha1=0                 
-+ at=0.0017              b0=0                     b1=0                     
-+ beta0=6                bgidl=3.415e008          bigbacc=0.00233          
-+ bigbinv=0.002519       bigc=0.001215            bigsd=0                  
-+ binunit=1              bvd=12                   bvs=12                   
-+ capmod=2               cdsc=0.02157             cdscb=0.001              
-+ cdscd=0.001494         cgbo=0                   cgidl=15                 
-+ cigbacc=-1e-010        cigbinv=0.0005126        cigc=0.1                 
-+ cigsd=0                cit=0                    ckappad=2.973            
-+ ckappas=2.973          clc=0                    cle=0.6                  
-+ delta=0.01             diomod=1                 dlcig=7e-009             
-+ dmcg=7e-008            dmci=3.5e-008            dmdg=6e-008              
-+ drout=0.56             dsub=0.43456             dvt0=0.63358               
-+ dvt0w=-0.0008095       dvt1=1.1581              dvt1w=1854000            
-+ dvt2=0.12              dvt2w=1                  dvtp0=8.467e-006         
-+ dvtp1=3.222            dwb=0                    dwg=0                    
-+ ef=1.04                egidl=1e-008             eigbinv=1.726e-006       
-+ em=4.1e007             epsrox=3.9               etab=-4.4195e-2          
-+ eu=1                   fnoimod=1                fprout=60                
-+ geomod=0               igbmod=1                 igcmod=1                 
-+ ijthdfwd=0.1           ijthdrev=0.1             ijthsfwd=0.1             
-+ ijthsrev=0.1           jsd=8.942e-007           jss=8.942e-007           
-+ jswd=2.348e-013        jswgd=2.339e-013         jswgs=2.339e-013         
-+ jsws=2.348e-013        jtsd=0.0017              jtss=0.0017              
-+ jtsswd=1e-011          jtsswgd=7.788e-010       jtsswgs=7.788e-010       
-+ jtssws=1e-011          k1=0.37                  k3=-1.2837                   
-+ k3b=0.52               keta=0                   kf=0                     
-+ kt1=-0.327             kt1l=-2.7e-009           kt2=-0.035               
-+ ku0=-1.31e-009         kvth0=-1.18e-009         lags=0.0              
-+ laigc=-1.69e-005       lambda=0                 ldvt0=0.097294             
-+ letab=1.2637e-3        ll=0                     llc=0                    
-+ lln=1                  llpe0=2.3e-009           llpeb=0                  
-+ lminv=-0.026           lnfactor=0.045           lnoff=0.05705            
-+ lp=3.199e-007          lpe0=2.05e-008           lpeb=1.000e-008          
-+ lute=0.0425            lvoffcv=-0.0034          lw=0                     
-+ lwc=0                  lwl=0                    lwlc=0                   
-+ lwn=1                  minv=0.5                 mjd=0.3146               
-+ mjs=0.3146             mjswd=0.1452             mjswgd=0.564             
-+ mjswgs=0.564           mjsws=0.1452             mobmod=0                 
-+ moin=5                 ndep=1.7e017             nfactor=1                
-+ ngate=2.452e020        nigbacc=2.856            nigbinv=1                
-+ nigc=1.77              njd=1.098                njs=1.098                
-+ njtsswg=2.887          noff=2.401               nsd=1e020                
-+ ntnoi=1                ntox=1                   paramchk=0               
-+ pbd=0.6893             pbs=0.6893               pbswd=0.2669             
-+ pbswgd=0.65            pbswgs=0.65              pbsws=0.2669             
-+ pclm=0.06233           pdiblc1=1.014e-007       pdiblc2=1.5e-005         
-+ pdiblcb=0              pdits=0.8644             pditsd=0.7248            
-+ pditsl=1000000         permod=1                 phin=0                   
-+ pigcd=1                plpeb=0                  poxedge=1.467            
-+ prt=0.009              prwb=0                   prwg=0                   
-+ pscbe1=5e009           pscbe2=5e-006            pvag=0                   
-+ rdsmod=0               rdswmin=0                rdwmin=0                 
-+ rsh=9                  rswmin=0                 saref=4.48e-007             
-+ sbref=4.48e-007        scref=2.5e-006           tcj=0.0008822            
-+ tcjsw=0.0007589        tcjswg=0.0007282         tempmod=1                
-+ tnjtsswg=0.32          tnoia=1.5                tnoib=3.5                
-+ tnoimod=0              tnom=25                  toxm=2.62e-009            
-+ toxref=2.62e-009        tpb=0.001392             tpbsw=0.0009973          
-+ tpbswg=0.0003417       trnqsmod=0               ua=8.24e-013             
-+ ua1=0.0001027          ub=1.714e-018            ub1=-5e-005              
-+ uc=1e-010              uc1=-0.000605            ud=0                     
-+ up=0.262               ute=-1.72                version=4.5              
-+ vfb=-1                 voff=-0.13               voffcv=-0.075            
-+ voffl=-3.507e-009      vtl=200000               vtsswgd=1                
-+ vtsswgs=1              w0=6e-009                web=670000               
-+ wec=-700000            wint=0                   wl=0                     
-+ wlc=0                  wln=1                    wlpeb=0                  
-+ wpemod=1               wr=1                     ww=0                     
-+ wwc=0                  wwl=0                    wwlc=0                   
-+ wwn=1                  xj=1e-007                xjbvd=1                  
-+ xjbvs=1                xpart=0                  xtid=3                   
-+ xtis=3                 xtsswgd=0.08619          xtsswgs=0.08619          
-+ pdsub=0.0003
++ a0=4.50910e00          a1=0.00000e00            a2=1.00000e00            
++ acde=5.18000e-01       acnqsmod=0.00000e00      af=1.00000e00            
++ agidl=4.61200e-11      ags=8.19800e-01          aigbacc=1.24180e-02      
++ aigbinv=1.31070e-02    alpha0=8.65600e-12       alpha1=0.00000e00        
++ at=0.00000e00          b0=2.00000e-08           b1=0.00000e00            
++ beta0=6.00000e00       bgidl=6.49460e08         bigbacc=2.43940e-03      
++ bigbinv=2.51920e-03    bigc=1.29980e-03         bigsd=3.00000e-04        
++ binunit=1.00000e00     bvs=1.20000e01           capmod=2.00000e00        
++ cdsc=1.60520e-01       cdscb=3.00000e-02        cdscd=0.00000e00         
++ cgbo=0.00000e00        cgidl=2.11480e01         cigbacc=-1.50000e-10     
++ cigbinv=5.12600e-04    cigc=5.00000e-02         cigsd=8.84660e-03        
++ cit=0.00000e00         ckappad=6.60000e-01      ckappas=6.60000e-01      
++ clc=0                  cle=6.00000e-01          delta=1.00000e-02        
++ diomod=1.00000e00      dlcig=5.46190e-09        dmcg=7.00000e-08         
++ dmci=3.50000e-08       dmdg=6.00000e-08         drout=5.60000e-01        
++ dsub=0.3276            dvt0=1.52000e01          dvt0w=-0.0015922       
++ dvt1=1.3798000e00        dvt1w=1.0000e06         dvt2=6.76000e-02         
++ dvt2w=2.50000e-01      dvtp0=8.00000e-07        dvtp1=0.00000e00         
++ dwb=0.00000e00         dwg=0.00000e00           ef=1.04            
++ egidl=2.45690e-01      eigbinv=1.72600e-06      em=4.10000e07            
++ epsrox=3.90000e00      etab=-8.43000e-02        eu=1.00000e00            
++ fnoimod=1.00000e00     fprout=3.00760e02        geomod=0.00000e00        
++ igbmod=1.00000e00      igcmod=1.00000e00        ijthsfwd=1.00000e-01     
++ ijthsrev=1.00000e-01   jsd=8.94240e-07          jss=8.94240e-07          
++ jswd=1.34750e-13       jswgd=1.33890e-13        jswgs=1.33890e-13        
++ jsws=1.34750e-13       jtsd=2.00000e-03         jtss=2.00000e-03         
++ jtsswgd=3.80000e-11    jtsswgs=3.80000e-11      k1=4.22500e-01           
++ k3=-0.1500000e00         k3b=0.34800e-01          keta=5.36540e-02         
++ kf=0.00000e00          kt1=-1.67330e-01         kt1l=-5.20580e-09        
++ kt2=-2.13960e-02       ku0=-2.75000e-09         kvth0=-1.11500e-09       
++ lags=0.35085           laigc=-2.00000e-05       lambda=0.00000e00        
++ letab=2.32410e-03      ll=0.00000e00            llc=0.00000e00           
++ lln=1.00000e00         llpe0=0                  llpeb=0                  
++ lminv=3.84330e-02      lndep=7.82600e16         lnfactor=-7.00000e-03    
++ lnoff=5.04780e-02      lp=6.00000e-08           lpe0=5.00000e-08         
++ lpeb=3.77670e-09       lute=1.62570e-02         lvoffcv=-1.94250e-03     
++ lw=0.00000e00          lwc=0.00000e00           lwl=0.00000e00           
++ lwlc=0.00000e00        lwn=1.00000e00           minv=7.35970e-01         
++ mjd=3.52100e-01        mjs=3.52100e-01          mjswd=1.18480e-01        
++ mjswgd=5.34500e-01     mjswgs=5.34500e-01       mjsws=1.18480e-01        
++ mobmod=0.00000e00      moin=1.50000e01          ndep=1.00000e17          
++ nfactor=1.00000e00     ngate=2.45240e20         nigbacc=8.97750e00       
++ nigbinv=1.00000e00     nigc=3.00000e00          njd=1.09800e00           
++ njs=1.09800e00         njtsswg=1.69530e00       noff=1.80120e00          
++ nsd=1.00000e20         ntnoi=1.00000e00         ntox=1.00000e00          
++ paramchk=0.00000e00    pbd=7.28250e-01          pbs=7.28250e-01          
++ pbswd=9.40000e-01      pbswgd=7.40800e-01       pbswgs=7.40800e-01       
++ pbsws=9.40000e-01      pclm=1.35200e-01         pdiblc1=1.00000e-07      
++ pdiblc2=1.00000e-05    pdiblcb=0.00000e00       pdits=6.76000e-01        
++ pditsd=6.15630e-01     pditsl=1.54260e06        permod=1.00000e00        
++ phin=-1.00000e-01      pigcd=1.00000e00         plpeb=0                  
++ poxedge=1.40400e00     prt=1.70000e-03          prwb=0.00000e00          
++ prwg=0.00000e00        pscbe1=5.00000e09        pscbe2=5.00000e-06       
++ pvag=2.00000e00        rdsmod=0.00000e00        rdswmin=0.00000e00       
++ rdwmin=0.00000e00      rsh=9.00000e00           rswmin=0.00000e00        
++ saref=4.48e-007        sbref=4.48e-007          scref=2.50000e-06        
++ tcj=1.02810e-03        tcjsw=1.04900e-03        tcjswg=6.75570e-04       
++ tempmod=1.00000e00     tnjtsswg=3.20000e-01     tnoia=1.50000e00         
++ tnoib=3.50000e00       tnoimod=0.00000e00       tnom=2.50000e01          
++ toxm=2.620000e-09       toxref=2.620000e-09       tpb=1.52940e-03          
++ tpbsw=4.98670e-04      tpbswg=3.41720e-04       trnqsmod=0.00000e00      
++ tvoff=1.74400e-02      ua=1.20300e-15           ua1=-8.41350e-04         
++ ub=1.66950e-19         ub1=2.18120e-03          uc=2.85270e-15           
++ uc1=-1.20650e-02       ud=0.00000e00            up=-4.50000e-01          
++ ute=-9.85860e-01       version=4.50000e00       vfb=-1.00000e00          
++ vfbcv=-1.00000e00      voff=-2.23900e-02        voffcv=8.10510e-02       
++ voffl=-2.14400e-09     vtl=2.00000e05           vtsswgd=9.37600e-01      
++ vtsswgs=9.37600e-01    w0=0.00000e00            web=6.70000e05           
++ wec=-7.00000e05        wint=0.00000e00          wl=0.00000e00            
++ wlc=0.00000e00         wln=1.00000e00           wlpeb=0                  
++ wpemod=1.00000e00      wr=1.00000e00            ww=0.00000e00            
++ wwc=0.00000e00         wwl=0.00000e00           wwlc=0.00000e00          
++ wwn=1.00000e00         xj=1.00000e-07           xjbvs=1.00000e00         
++ xpart=0.00000e00       xtid=3.00000e00          xtis=3.00000e00          
++ xtsswgd=8.61940e-02    xtsswgs=8.61940e-02
++ la0 = 0.22      
++  peta0= peta0_p105_hvt 
 +  pvsat= pvsat_p105_hvt 
 +  wu0= wu0_p105_hvt 
-+  pu0= pu0_p105_hvt 
 +  lvth0= lvth0_p105_hvt 
 +  pvth0= pvth0_p105_hvt 
 +  xl= xl_p105_hvt 
@@ -1981,101 +1958,102 @@
 
 
 
+
 .LIB n105_lvt_model
 
 .model  n105_lvt  nmos (level=54
-+ a0=1.7667              a1=0                     a2=0.45                  
++ a0=1.4                 a1=0                     a2=0.5                   
 + acde=0.4               acnqsmod=0               af=1                     
-+ agidl=6.939e-010       ags=1.6015               aigbacc=0.013229         
-+ aigbinv=0.011309       alpha0=4e-012            alpha1=0                 
-+ at=0.0005              b0=0                     b1=0                     
-+ beta0=2                bgidl=1.251e009          bigbacc=0.0034457        
-+ bigbinv=0.001212       bigc=0.0013074           bigsd=0.00122            
++ agidl=9.069e-010       ags=0.06                 aigbacc=0.01301          
++ aigbinv=0.01131        alpha0=4e-012            alpha1=0                 
++ at=0.0008              b0=0                     b1=1                     
++ beta0=2.8              bgidl=1.3054e009         bigbacc=0.002586         
++ bigbinv=0.0012         bigc=0.0012168           bigsd=0.00071704         
 + binunit=1              bvs=12                   capmod=2                 
-+ cdsc=0.0059798         cdscb=0.0010962          cdscd=0.002              
-+ cgbo=1e-012            cgidl=4.8                cigbacc=0.0093439        
-+ cigbinv=0.001479       cigc=0.00042463          cigsd=0.014638           
-+ cit=0                  ckappad=4                ckappas=4                
-+ clc=0                  cle=0.6                  delta=0.005              
++ cdsc=0                 cdscb=-0.035634          cdscd=0                  
++ cgbo=1e-012            cgidl=7.2017             cigbacc=0.005625         
++ cigbinv=0.001479       cigc=0.0009984           cigsd=0.007319           
++ cit=0.001              ckappad=3.8436           ckappas=3.8436           
++ clc=0                  cle=0.6                  delta=0.01               
 + diomod=1               dlcig=5e-009             dmcg=7e-008              
-+ dmci=3.5e-008          dmdg=6e-008              drout=0.8                
-+ dsub=0.62              dvt0=20.283              dvt0w=-0.01544              
-+ dvt1=0.62              dvt1w=496250             dvt2=0.005                
-+ dvt2w=0.09             dvtp0=5.55e-007          dvtp1=0                  
++ dmci=3.5e-008          dmdg=6e-008              drout=1.8174             
++ dsub=0.51352           dvt0=28.161              dvt0w=-0.02048             
++ dvt1=0.79916           dvt1w=689270             dvt2=0.07028             
++ dvt2w=0.075            dvtp0=1.3e-006           dvtp1=2.5                
 + dwb=0                  dwg=0                    ef=0.95                  
-+ egidl=0.009            eigbinv=1.1              em=41000000              
-+ epsrox=3.9             etab=-0.27082            eu=1.67                  
-+ fnoimod=1              fprout=80                geomod=0                 
++ egidl=0.12651          eigbinv=1.1              em=41000000              
++ epsrox=3.9             etab=-0.28728            eu=1.67                  
++ fnoimod=1              fprout=150               geomod=0                 
 + igbmod=1               igcmod=1                 ijthsfwd=0.1             
-+ ijthsrev=0.1           jsd=6.4e-006             jss=6.4e-006             
-+ jswd=1.4836e-013       jswgd=1.1e-011           jswgs=1.1e-011           
-+ jsws=1.4836e-013       jtsd=3.12e-005           jtss=3.12e-005           
-+ jtsswd=8.4092e-011     jtsswgd=8.46e-009        jtsswgs=8.46e-009        
-+ jtssws=8.4092e-011     k1=0.35814               k3=-2.8227                  
-+ k3b=0.2                keta=0                   kf=1.5e-027              
-+ kt1=-0.10266           kt1l=-2e-009             kt2=-0.03                
++ ijthsrev=0.1           jsd=1.8969e-007          jss=1.8969e-007          
++ jswd=3.6931e-014       jswgd=1.15e-013          jswgs=1.15e-013          
++ jsws=3.6931e-014       jtsd=0                   jtss=0                   
++ jtsswd=7e-011          jtsswgd=1e-009           jtsswgs=1e-009           
++ jtssws=7e-011          k1=0.40                  k3=-3.9796                 
++ k3b=0.2                 keta=0                   kf=1.5e-027              
++ kt1=-0.15509           kt1l=7.2e-010            kt2=-0.036946            
 + ku0=0                  ku0we=0                  kvsat=0                  
-+ kvth0=4.5e-010         lambda=0                 lbgidl=-2000000          
-+ lbigc=8.04e-006        letab=0.00768            lku0=0                   
-+ lkvth0=0               ll=0                     llc=0                    
-+ lln=1                  llodku0=0                llodvth=0                
-+ llpe0=1.94e-009        lnfactor=0.0025          lodeta0=1                
-+ lodk2=1                lp=2.6834e-008           lpe0=9.945e-009          
-+ lpeb=1.5e-008          lute=0.03                lw=0                     
-+ lwc=0                  lwl=0                    lwlc=0                   
-+ lwn=1                  minv=-0.44759            mjd=0.40256              
-+ mjs=0.40256            mjswd=0.15711            mjswgd=0.98              
-+ mjswgs=0.98            mjsws=0.15711            mobmod=0                 
-+ moin=5                 ndep=5e017               nfactor=1                
-+ ngate=1.19e021         nigbacc=7.3468           nigbinv=3                
-+ nigc=2.4401            njd=1.15                 njs=1.15                 
-+ njts=15.4              njtssw=60                njtsswg=5.859            
-+ noff=3.0713            nsd=1e020                ntnoi=1                  
-+ ntox=1                 paramchk=0               pbd=0.87925              
-+ pbs=0.87925            pbswd=0.1085             pbswgd=0.85343           
-+ pbswgs=0.85343         pbsws=0.1085             pclm=0.76465             
-+ pdiblc1=0.1            pdiblc2=0.014            pdiblcb=0.065            
-+ pdits=0.3              pditsd=8                 pditsl=10000000          
-+ permod=1               phin=0.176               pigcd=1                  
-+ pku0=0                 pkvth0=0                 poxedge=1.276            
-+ prt=0                  prwb=0                   prwg=0                   
-+ pscbe1=5e009           pscbe2=5e-006            pvag=0.90956             
-+ rdsmod=0               rdswmin=0                rdwmin=180               
-+ rsh=12                 rswmin=180               saref=4.48e-007             
-+ sbref=4.48e-007        scref=2.5e-006           steta0=0                 
-+ stk2=0                 tcj=0.00066711           tcjsw=0.0018974          
-+ tcjswg=0               tempmod=1                tnjts=0                  
-+ tnjtssw=0              tnjtsswg=0               tnoia=1.5                
-+ tnoib=3.5              tnoimod=0                tnom=25                  
-+ toxm=2.39e-009         toxref=2.39e-009          tpb=0.0011498            
-+ tpbsw=0.00063          tpbswg=0.0012682         trnqsmod=0               
-+ tvoff=0.0017           ua=6.0647e-010           ua1=-0.00216             
-+ ub=2.2238e-018         ub1=0                    uc=1e-010                
-+ uc1=0.0008             ud=0                     ud1=0                    
-+ up=0.91821             ute=-1.34                version=4.5              
-+ vfb=-1                 vfbcv=-1                 voff=-0.18382            
-+ voffcv=-0.18248        voffl=-3.31e-009         vtsd=10                  
-+ vtss=10                vtsswd=10                vtsswgd=1.2              
-+ vtsswgs=1.2            vtssws=10                w0=5e-008                
-+ web=750000             wec=-100000              wint=0                   
-+ wku0=0                 wkvth0=0                 wl=0                     
++ kvth0=4.5e-010        laigc=-1e-005            lambda=0                 
++ ldvt0=1.80             letab=0.004725           lk3=-0.03844               
++ lku0=0                 lku0we=0                 lkvth0=0                 
++ ll=0                   llc=0                    lln=1                    
++ llodku0=0              llodvth=0                llpe0=3.0e-009           
++ llpeb=0                lminv=-0.0075            lndep=1.9725e017         
++ lnoff=0.04             lodeta0=1                lodk2=1                  
++ lp=3.0937e-008         lpe0=2e-009              lpeb=1.5e-008            
++ lute=0.05646           lw=0                     lwc=0                    
++ lwl=0                  lwlc=0                   lwn=1                    
++ minv=-0.36135          mjd=0.39452              mjs=0.39452              
++ mjswd=0.35491          mjswgd=0.92118           mjswgs=0.92118           
++ mjsws=0.35491          mobmod=0                 moin=15                  
++ ndep=1.5e017           nfactor=1                ngate=1e023              
++ nigbacc=5.6646         nigbinv=3                nigc=3                   
++ njd=1.0218             njs=1.0218               njts=60                  
++ njtssw=60              njtsswg=2.1              noff=2.0769              
++ nsd=1e020              ntnoi=1                  ntox=1                   
++ paramchk=0             pbd=0.83103              pbs=0.83103              
++ pbswd=0.96331          pbswgd=1.5028            pbswgs=1.5028            
++ pbsws=0.52809          pclm=1e-010              pdiblc1=0.077778         
++ pdiblc2=0.0011179      pdiblcb=-0.62            pdits=0.49415            
++ pditsd=0.97707         pditsl=356320            permod=1                 
++ phin=0.15              pigcd=1                  pku0=0                   
++ pku0we=0               pkvth0=0                 plpeb=0                  
++ poxedge=1.3            prt=0.0059508            prwb=0                   
++ prwg=0                 pscbe1=5e009             pscbe2=5e-006            
++ pvag=0                 rdsmod=0                 rdswmin=0                
++ rdwmin=180             rsh=12                   rswmin=180               
++ saref=4.48e-007        sbref=4.48e-007           scref=2.5e-006           
++ steta0=0               stk2=0                   tcj=0.00067619           
++ tcjsw=0.00062574       tcjswg=0                 tempmod=1                
++ tnjts=0                tnjtssw=0                tnjtsswg=0               
++ tnoia=1.5              tnoib=3.5                tnoimod=0                
++ tnom=25                toxm=2.39e-009            toxref=2.39e-009          
++ tpb=0.001244           tpbsw=0.00066006         tpbswg=0.0024412         
++ trnqsmod=0             tvoff=0.0020635          ua=4.8019e-012           
++ ua1=0.081102           ub=2.6607e-018           ub1=-0.0012278           
++ uc=1.3777e-010         uc1=-5.6e-011            ud=0                     
++ ud1=0                  up=0.36                  ute=-1.46                
++ version=4.5            vfb=-1                   vfbcv=0                  
++ vfbsdoff=0             voff=-0.20372            voffcv=-0.15475          
++ voffl=-8.2166e-010     vtsd=10                  vtss=10                  
++ vtsswd=10              vtsswgd=0.9              vtsswgs=0.9              
++ vtssws=10              w0=1.6582e-008           web=750000               
++ wec=-100000            wint=0                   wku0=0                   
++ wku0we=0               wkvth0=0                 wl=0                     
 + wlc=0                  wln=1                    wlodku0=0                
-+ wlodvth=0              wpemod=1                 wr=1                     
-+ ww=0                   wwc=0                    wwl=0                    
-+ wwlc=0                 wwn=1                    xj=1e-007                
-+ xjbvs=1                xpart=0                  xtid=0.1                 
-+ xtis=0.1               xtsd=0.3                 xtss=0.3                 
-+ xtsswd=0.5842          xtsswgd=0.15             xtsswgs=0.15             
-+ xtssws=0.5842 
-+ wvsat=2000 
++ wlodvth=0              wlpeb=0                  wpemod=1                 
++ wr=1                   wvoff=0.006              ww=0                     
++ wwc=0                  wwl=0                    wwlc=0                   
++ wwn=1                  xj=1e-007                xjbvs=1                  
++ xpart=0                xtid=3                   xtis=3                   
++ xtsd=0.02              xtss=0.02                xtsswd=0.02              
++ xtsswgd=0.02           xtsswgs=0.02             xtssws=0.02              
++ wvsat=2000
 + wdsub=0.008
-+ lk3 = 0.033
-+ wk2 = -0.0018
-+ wua = -1e-010
-+ wub = 4e-020
-+ wpdiblc2= 0.0007
-+ wpdiblcb= -0.0549        
-+  pvsat= pvsat_n105_lvt 
++ lu0=4.488
++ lvsat=-2400
++ la0 = -0.2
++ lags= 0.136
 +  lvth0= lvth0_n105_lvt 
 +  pvth0= pvth0_n105_lvt 
 +  xl= xl_n105_lvt 
@@ -2122,88 +2100,85 @@
 .LIB p105_lvt_model
 
 .model  p105_lvt  pmos (level=54
-+ a0=6.508               a1=0                     a2=0.5                   
-+ acde=0.5               acnqsmod=0               af=1                     
-+ agidl=7.499e-010       ags=1.0157               aigbacc=0.01229          
-+ aigbinv=0.01311        alpha0=8.656e-012        alpha1=0                 
-+ at=0.0015              b0=0                     b1=0                     
-+ beta0=6                bgidl=1.009e009          bigbacc=0.001303         
-+ bigbinv=0.002519       bigc=0.0009592           bigsd=0                  
-+ binunit=1              bvs=12                   capmod=2                 
-+ cdsc=0.02488           cdscb=0.001              cdscd=0.01801            
-+ cgbo=0                 cgidl=3.864              cigbacc=0.001            
-+ cigbinv=0.0005126      cigc=0.05                cigsd=0                  
-+ cit=0                  ckappad=3.5              ckappas=3.5              
-+ clc=0                  cle=0.6                  delta=0.02               
-+ diomod=1               dlcig=1.027e-008         dmcg=7e-008              
-+ dmci=3.5e-008          dmdg=6e-008              drout=0.2855             
-+ dsub=0.5335            dvt0=0.16163             dvt0w=0.015                  
-+ dvt1=1.3784            dvt1w=1854000            dvt2=-0.0540              
-+ dvt2w=0.2              dvtp0=5e-007             dvtp1=0.05               
-+ dwb=0                  dwg=0                    ef=1.04                
-+ egidl=0.3226           eigbinv=1.726e-006       em=4.1e007               
-+ epsrox=3.9             etab=-0.006              eu=1                     
-+ fnoimod=1              fprout=118.8             geomod=0                 
-+ igbmod=1               igcmod=1                 ijthsfwd=0.1             
-+ ijthsrev=0.1           jsd=8.942e-007           jss=8.942e-007           
-+ jswd=1.348e-013        jswgd=1.339e-013         jswgs=1.339e-013         
-+ jsws=1.348e-013        jtsd=0.0017              jtss=0.0017              
-+ jtsswd=1e-011          jtsswgd=7e-011           jtsswgs=7e-011           
-+ jtssws=1e-011          k1=0.44                  k3=1.44                    
-+ k3b=5.0                keta=0                   kf=0                     
-+ kt1=-0.265             kt1l=-4.5e-009           kt2=-0.035               
-+ ku0=-2.48e-009         kvth0=-0.7e-009          lags=0.5282              
-+ laigc=-1.328e-005      lambda=0                 ldvt0=0.081000           
-+ lk3=0.06               ll=0                     llc=0                    
-+ lln=1                  llpe0=2.641e-010         llpeb=0                  
-+ lnfactor=0.06101       lnoff=0.034              lp=7.728e-009            
-+ lpe0=2.642e-08         lpeb=-7.800e-09          lute=0.04                
-+ lvoffcv=-0.003         lw=0                     lwc=0                    
-+ lwl=0                  lwlc=0                   lwn=1                    
-+ minv=-0.45             mjd=0.3821               mjs=0.3821               
-+ mjswd=0.5108           mjswgd=0.564             mjswgs=0.564             
-+ mjsws=0.5108           mobmod=0                 moin=5                   
-+ ndep=1.7e017           nfactor=1.2              ngate=2.452e020          
-+ nigbacc=2.856          nigbinv=1                nigc=1.77                
-+ njd=1.098              njs=1.098                njtsswg=2.253            
-+ noff=2.3               nsd=1e020                ntnoi=1                  
-+ ntox=1                 paramchk=0               pbd=0.6817               
-+ pbs=0.6817             pbswd=0.1313             pbswgd=0.65              
-+ pbswgs=0.65            pbsws=0.1313             pclm=0.3413              
-+ pdiblc1=0.006304       pdiblc2=2.5e-005         pdiblcb=0                
-+ pdits=0.9919           pditsd=0.8263            pditsl=2028000           
-+ permod=1               phin=0                   pigcd=1                  
-+ pk3=0.1078             plpeb=0                  poxedge=1.467            
-+ prt=0.009              prwb=0                   prwg=0                   
-+ pscbe1=5e009           pscbe2=5e-006            pvag=9                   
-+ rdsmod=0               rdswmin=0                rdwmin=0                 
-+ rsh=9                  rswmin=0                 saref=4.48e-007             
-+ sbref=4.48e-007        scref=2.5e-006           tcj=0.001046             
-+ tcjsw=0.0006           tcjswg=0.0006022         tempmod=1                
-+ tnjtsswg=0.32          tnoia=1.5                tnoib=3.5                
-+ tnoimod=0              tnom=25                  toxm=2.62e-009            
-+ toxref=2.62e-009        tpb=0.00135              tpbsw=0.0009973          
-+ tpbswg=0.0003417       trnqsmod=0               ua=1.016e-010                
-+ ua1=0.003488           ub=2.0322e-018           ub1=-0.001               
-+ uc=2e-011              uc1=-0.000605            ud=0                     
-+ up=0.582               ute=-1.65                version=4.5              
-+ vfb=-1                 voff=-0.114              voffcv=-0.07             
-+ voffl=-4.256e-009      vtl=200000               vtsswgd=0.8              
-+ vtsswgs=0.8            w0=8.39e-007             web=670000               
-+ wec=-700000            wint=0                   wk3=-1.4                 
-+ wl=0                   wlc=0                    wln=1                    
-+ wlpeb=0                wpemod=1                 wr=1                     
-+ ww=0                   wwc=0                    wwl=0                    
-+ wwlc=0                 wwn=1                    xj=1e-007                
-+ xjbvs=1                xpart=0                  xtid=3                   
-+ xtis=3                 xtsswgd=0.08619          xtsswgs=0.08619          
-+ peta0=-1.8e-4
-+ lub= -2.52e-020
-+ wub= -3.4e-020
-+ pdsub= -0.0002
++ a0=4.50910e00          a1=0.00000e00            a2=1.00000e00            
++ acde=5.18000e-01       acnqsmod=0.00000e00      af=1.00000e00            
++ agidl=4.61200e-11      ags=8.19800e-01          aigbacc=1.24180e-02      
++ aigbinv=1.31070e-02    alpha0=8.65600e-12       alpha1=0.00000e00        
++ at=0.00000e00          b0=2.00000e-08           b1=0.00000e00            
++ beta0=6.00000e00       bgidl=6.49460e08         bigbacc=2.43940e-03      
++ bigbinv=2.51920e-03    bigc=1.29980e-03         bigsd=3.00000e-04        
++ binunit=1.00000e00     bvs=1.20000e01           capmod=2.00000e00        
++ cdsc=1.60520e-01       cdscb=3.00000e-02        cdscd=0.00000e00         
++ cgbo=0.00000e00        cgidl=2.11480e01         cigbacc=-1.50000e-10     
++ cigbinv=5.12600e-04    cigc=5.00000e-02         cigsd=8.84660e-03        
++ cit=0.00000e00         ckappad=6.60000e-01      ckappas=6.60000e-01      
++ clc=0                  cle=6.00000e-01          delta=1.00000e-02        
++ diomod=1.00000e00      dlcig=5.46190e-09        dmcg=7.00000e-08         
++ dmci=3.50000e-08       dmdg=6.00000e-08         drout=5.60000e-01        
++ dsub=0.3276            dvt0=1.52000e01          dvt0w=-0.0015922       
++ dvt1=1.3798000e00        dvt1w=1.0000e06         dvt2=6.76000e-02         
++ dvt2w=2.50000e-01      dvtp0=8.00000e-07        dvtp1=0.00000e00         
++ dwb=0.00000e00         dwg=0.00000e00           ef=1.04            
++ egidl=2.45690e-01      eigbinv=1.72600e-06      em=4.10000e07            
++ epsrox=3.90000e00      etab=-8.43000e-02        eu=1.00000e00            
++ fnoimod=1.00000e00     fprout=3.00760e02        geomod=0.00000e00        
++ igbmod=1.00000e00      igcmod=1.00000e00        ijthsfwd=1.00000e-01     
++ ijthsrev=1.00000e-01   jsd=8.94240e-07          jss=8.94240e-07          
++ jswd=1.34750e-13       jswgd=1.33890e-13        jswgs=1.33890e-13        
++ jsws=1.34750e-13       jtsd=2.00000e-03         jtss=2.00000e-03         
++ jtsswgd=3.80000e-11    jtsswgs=3.80000e-11      k1=4.22500e-01           
++ k3=-0.1500000e00         k3b=0.34800e-01          keta=5.36540e-02         
++ kf=0.00000e00          kt1=-1.67330e-01         kt1l=-5.20580e-09        
++ kt2=-2.13960e-02       ku0=-2.75000e-09         kvth0=-1.11500e-09       
++ lags=0.35085           laigc=-2.00000e-05       lambda=0.00000e00        
++ letab=2.32410e-03      ll=0.00000e00            llc=0.00000e00           
++ lln=1.00000e00         llpe0=0                  llpeb=0                  
++ lminv=3.84330e-02      lndep=7.82600e16         lnfactor=-7.00000e-03    
++ lnoff=5.04780e-02      lp=6.00000e-08           lpe0=5.00000e-08         
++ lpeb=3.77670e-09       lute=1.62570e-02         lvoffcv=-1.94250e-03     
++ lw=0.00000e00          lwc=0.00000e00           lwl=0.00000e00           
++ lwlc=0.00000e00        lwn=1.00000e00           minv=7.35970e-01         
++ mjd=3.52100e-01        mjs=3.52100e-01          mjswd=1.18480e-01        
++ mjswgd=5.34500e-01     mjswgs=5.34500e-01       mjsws=1.18480e-01        
++ mobmod=0.00000e00      moin=1.50000e01          ndep=1.00000e17          
++ nfactor=1.00000e00     ngate=2.45240e20         nigbacc=8.97750e00       
++ nigbinv=1.00000e00     nigc=3.00000e00          njd=1.09800e00           
++ njs=1.09800e00         njtsswg=1.69530e00       noff=1.80120e00          
++ nsd=1.00000e20         ntnoi=1.00000e00         ntox=1.00000e00          
++ paramchk=0.00000e00    pbd=7.28250e-01          pbs=7.28250e-01          
++ pbswd=9.40000e-01      pbswgd=7.40800e-01       pbswgs=7.40800e-01       
++ pbsws=9.40000e-01      pclm=1.35200e-01         pdiblc1=1.00000e-07      
++ pdiblc2=1.00000e-05    pdiblcb=0.00000e00       pdits=6.76000e-01        
++ pditsd=6.15630e-01     pditsl=1.54260e06        permod=1.00000e00        
++ phin=-1.00000e-01      pigcd=1.00000e00         plpeb=0                  
++ poxedge=1.40400e00     prt=1.70000e-03          prwb=0.00000e00          
++ prwg=0.00000e00        pscbe1=5.00000e09        pscbe2=5.00000e-06       
++ pvag=2.00000e00        rdsmod=0.00000e00        rdswmin=0.00000e00       
++ rdwmin=0.00000e00      rsh=9.00000e00           rswmin=0.00000e00        
++ saref=4.48e-007        sbref=4.48e-007          scref=2.50000e-06        
++ tcj=1.02810e-03        tcjsw=1.04900e-03        tcjswg=6.75570e-04       
++ tempmod=1.00000e00     tnjtsswg=3.20000e-01     tnoia=1.50000e00         
++ tnoib=3.50000e00       tnoimod=0.00000e00       tnom=2.50000e01          
++ toxm=2.620000e-09       toxref=2.620000e-09       tpb=1.52940e-03          
++ tpbsw=4.98670e-04      tpbswg=3.41720e-04       trnqsmod=0.00000e00      
++ tvoff=1.74400e-02      ua=1.20300e-15           ua1=-8.41350e-04         
++ ub=1.66950e-19         ub1=2.18120e-03          uc=2.85270e-15           
++ uc1=-1.20650e-02       ud=0.00000e00            up=-4.50000e-01          
++ ute=-9.85860e-01       version=4.50000e00       vfb=-1.00000e00          
++ vfbcv=-1.00000e00      voff=-2.23900e-02        voffcv=8.10510e-02       
++ voffl=-2.14400e-09     vtl=2.00000e05           vtsswgd=9.37600e-01      
++ vtsswgs=9.37600e-01    w0=0.00000e00            web=6.70000e05           
++ wec=-7.00000e05        wint=0.00000e00          wl=0.00000e00            
++ wlc=0.00000e00         wln=1.00000e00           wlpeb=0                  
++ wpemod=1.00000e00      wr=1.00000e00            ww=0.00000e00            
++ wwc=0.00000e00         wwl=0.00000e00           wwlc=0.00000e00          
++ wwn=1.00000e00         xj=1.00000e-07           xjbvs=1.00000e00         
++ xpart=0.00000e00       xtid=3.00000e00          xtis=3.00000e00          
++ xtsswgd=8.61940e-02    xtsswgs=8.61940e-02
++ la0 = 0.22      
++  peta0= peta0_p105_lvt 
 +  pvsat= pvsat_p105_lvt 
 +  wu0= wu0_p105_lvt 
-+  pu0= pu0_p105_lvt 
 +  lvth0= lvth0_p105_lvt 
 +  pvth0= pvth0_p105_lvt 
 +  xl= xl_p105_lvt 
@@ -2244,6 +2219,7 @@
 ) 
 
 .ENDL p105_lvt_model
+
 
 
 .LIB n105_model
@@ -2743,8 +2719,8 @@ main  1 2 3 4 p18 l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale ps=ps_
 + u0_n105_hvt = 'u0_n105_hvt_g * u0_mult * (1 + u0_factor/10) '   
 + rdsw_n105_hvt = rdsw_n105_hvt_g   
 + vth0_n105_hvt = 'vth0_n105_hvt_g + p_vta'  
-+ k2_n105_hvt = '-0.031712 ' 
-+ eta0_n105_hvt = '2.63000e-01 ' 
++ k2_n105_hvt = '-0.050161 ' 
++ eta0_n105_hvt = '0.58072 ' 
 + rgatemod_n105_hvt = '(pre_layout_f <= 3) * pre_layout_f' 
 + cf_cnr_n105_hvt=0
 + mc_cnr_round=agauss(0,1,3)
@@ -2752,19 +2728,17 @@ main  1 2 3 4 p18 l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale ps=ps_
 + cnr_rnd_skew =  '(((mc_cnr_rnd)*mc_sw)+ (acv_uncorr * (cnr_rnd_rss)*(mc_sw == 0)))*fet_cnr_sw'
 + cf_n105_hvt1='(pre_layout_f * ((pre_layout_f == 0) || (pre_layout_f ==1)) * pc_ca_cap)*cf_global' 
 + cf_n105_hvt = 'cf_n105_hvt1 + (sqrt(cnr_switch+1e-40)*(cf_cnr_n105_hvt/(sqrt(l_scale)*pow(w_scale,1.5)))*cnr_rnd_skew)'
-+ vsat_n105_hvt = '2.14120e05 ' 
-+ noia_n105_hvt = '1.68000e42  * ((fnoicor==0)*0.0160+(fnoicor==1)*0.0160*4.5+(fnoicor==2)*0.0160/4.5)*25'
-+ noib_n105_hvt = '4.33000e25  * ((fnoicor==0)*0.0005+(fnoicor==1)*0.0005*5.0+(fnoicor==2)*0.0005/5.0)*25'
-+ noic_n105_hvt = '1.83000e09  * ((fnoicor==0)*0.0500+(fnoicor==1)*0.0500*2.0+(fnoicor==2)*0.0500/2.0)*25' 
-+ aigc_n105_hvt = '1.08600e-02 +  daigc_n105_hvt_fc   ' 
-+ aigsd_n105_hvt = '8.89000e-03 +  daigsd_n105_hvt_fc   ' 
++ vsat_n105_hvt = '266000 ' 
++ noia_n105_hvt = '4.18e042  * ((fnoicor==0)*0.0160+(fnoicor==1)*0.0160*4.5+(fnoicor==2)*0.0160/4.5)*5' 
++ noib_n105_hvt = '1.18e025  * ((fnoicor==0)*0.0005+(fnoicor==1)*0.0005*5.0+(fnoicor==2)*0.0005/5.0)*5'
++ noic_n105_hvt = '3.25e008  * ((fnoicor==0)*0.0500+(fnoicor==1)*0.0500*2.0+(fnoicor==2)*0.0500/2.0)*5' 
++ aigc_n105_hvt = '0.011318 +  daigc_n105_hvt_fc   ' 
++ aigsd_n105_hvt = '0.008722 +  daigsd_n105_hvt_fc   ' 
 + xrcrg1_n105_hvt = '12' 
 + xrcrg2_n105_hvt = '1' 
-+ xgl_n105_hvt = '-2.00000e-09 ' 
-+ xgw_n105_hvt = '4.00000e-08 ' 
-+ rshg_n105_hvt = '1.10000e01 ' 
-+ pvsat_n105_hvt = '2.23300e02 ' 
-+  wu0_n105_hvt = '((mulu0_n105_hvt * (17.808)) + (17.808)) * u0_mult' 
++ xgl_n105_hvt = '-2e-009 ' 
++ xgw_n105_hvt = '4e-008 ' 
++ rshg_n105_hvt = '11 ' 
 + lvth0_n105_hvt = '0 +  dlvth0_n105_hvt_fc   ' 
 + pvth0_n105_hvt = '0 +  dpvth0_n105_hvt_fc   ' 
 + p_leff = 'l_scale + xl_n105_hvt'
@@ -2774,13 +2748,13 @@ main  1 2 3 4 p18 l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale ps=ps_
 +    sca_f = '(gwells == 0)*0 + sca*(gwells > 0)*(nwp_logic > 0) + 2.056e+02*(gwells == 2)*(nwp_logic == 0) '
 +    scb_f = '(gwells == 0)*0 + scb*(gwells > 0)*(nwp_logic > 0) + 3.395e-02*(gwells == 2)*(nwp_logic == 0) '
 +    scc_f = '(gwells == 0)*0 + scc*(gwells > 0)*(nwp_logic > 0) + 1.399e-02*(gwells == 2)*(nwp_logic == 0) '
-+   kvth0we_total = '(1.00000e-06+ (0.00000e00*1e-6/p_weff) + (0.00000e00*1e-6/p_leff) + (4.00000e-09*1e-12/(p_leff*p_weff)))*0.5'
++   kvth0we_total = '(1e-006+ (0*1e-6/p_weff) + (0*1e-6/p_leff) + (4e-009*1e-12/(p_leff*p_weff)))*0.5'
 +    kvth0we_n105_hvt  = 'kvth0we_total * (ptwell == 0) + (kvth0we_total/tw_factor)*(ptwell == 1)'
 +    sti_logic = '(((sa_scale != 0.0) + (sb_scale != 0.0) + (sd_scale != 0.0)) >= 1)'
 +    sa_f = '(sti_logic == 0)*p_sti + sa_scale*(sti_logic == 1)*(gstis > 0)'
 +    sb_f = '(sti_logic == 0)*p_sti + sb_scale*(sti_logic == 1)*(gstis > 0)'
 +    sd_f = 'sd_scale*(sti_logic == 1)*(gstis > 0)'
-.lib  'saed32nm.lib' n105_hvt_model  
+.lib  'saed32nm.lib' n105_hvt_model   
 main  1 2 3 4 n105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale ps=ps_scale nf=nf nrd=nrd nrs=nrs dtemp=dtemp sa=sa_f sb=sb_f sd=sd_f sca=sca_f scb=scb_f scc=scc_f
 .ends  n105_hvt 
 .endl  n105_hvt_noacvsubckt 
@@ -2813,8 +2787,8 @@ main  1 2 3 4 n105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 + u0_p105_hvt = 'u0_p105_hvt_g * u0_mult * (1 + u0_factor/10) '   
 + rdsw_p105_hvt = rdsw_p105_hvt_g   
 + vth0_p105_hvt = 'vth0_p105_hvt_g + p_vta'  
-+ k2_p105_hvt = '-0.024793 ' 
-+ eta0_p105_hvt = '4.493e-2 ' 
++ k2_p105_hvt = '-3.580000e-02 ' 
++ eta0_p105_hvt = '1.55030e-01 ' 
 + rgatemod_p105_hvt = '(pre_layout_f <= 3) * pre_layout_f' 
 + cf_cnr_p105_hvt=0
 + mc_cnr_round=agauss(0,1,3)
@@ -2822,20 +2796,20 @@ main  1 2 3 4 n105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 + cnr_rnd_skew =  '(((mc_cnr_rnd)*mc_sw)+ (acv_uncorr * (cnr_rnd_rss)*(mc_sw == 0)))*fet_cnr_sw'
 + cf_p105_hvt1='(pre_layout_f * ((pre_layout_f == 0) || (pre_layout_f ==1)) * pc_ca_cap)*cf_global' 
 + cf_p105_hvt = 'cf_p105_hvt1 + (sqrt(cnr_switch+1e-40)*(cf_cnr_p105_hvt/(sqrt(l_scale)*pow(w_scale,1.5)))*cnr_rnd_skew)'
-+ vsat_p105_hvt = '160630 ' 
-+ noia_p105_hvt = '1.26e043  * ((fnoicor==0)*0.0095+(fnoicor==1)*0.0095*4.5+(fnoicor==2)*0.0095/4.5)*9' 
-+ noib_p105_hvt = '5.30e025  * ((fnoicor==0)*0.0001+(fnoicor==1)*0.0001*5.0+(fnoicor==2)*0.0001/5.0)*9'
-+ noic_p105_hvt = '2.36e010  * ((fnoicor==0)*0.0800+(fnoicor==1)*0.0800*2.5+(fnoicor==2)*0.0800/2.0)*9' 
-+ aigc_p105_hvt = '0.007152 +  daigc_p105_hvt_fc   ' 
-+ aigsd_p105_hvt = '0.004214 +  daigsd_p105_hvt_fc   ' 
++ vsat_p105_hvt = '7.58000e04 ' 
++ noia_p105_hvt = '7.85000e42  * ((fnoicor==0)*0.0095+(fnoicor==1)*0.0095*4.5+(fnoicor==2)*0.0095/4.5)*11' 
++ noib_p105_hvt = '1.77000e25  * ((fnoicor==0)*0.0001+(fnoicor==1)*0.0001*5.0+(fnoicor==2)*0.0001/5.0)*11' 
++ noic_p105_hvt = '3.73000e09  * ((fnoicor==0)*0.0800+(fnoicor==1)*0.0800*2.5+(fnoicor==2)*0.0800/2.0)*11' 
++ aigc_p105_hvt = '7.66000e-03 +  daigc_p105_hvt_fc   ' 
++ aigsd_p105_hvt = '4.65000e-03 +  daigsd_p105_hvt_fc   ' 
 + xrcrg1_p105_hvt = '12' 
 + xrcrg2_p105_hvt = '1' 
-+ xgl_p105_hvt = '-2e-009 ' 
-+ xgw_p105_hvt = '4e-008 ' 
-+ rshg_p105_hvt = '11 ' 
-+ pvsat_p105_hvt = '10.20 ' 
-+  wu0_p105_hvt = '((mulu0_p105_hvt * (1.9)) + (1.9)) * u0_mult' 
-+  pu0_p105_hvt = '((mulu0_p105_hvt * (0)) + (0)) * u0_mult' 
++ xgl_p105_hvt = '-2.00000e-09 ' 
++ xgw_p105_hvt = '4.00000e-08 ' 
++ rshg_p105_hvt = '1.10000e01 ' 
++ peta0_p105_hvt = '-2.00000e-04 ' 
++ pvsat_p105_hvt = '1.30000e02 ' 
++  wu0_p105_hvt = '((mulu0_p105_hvt * (2.56500e00)) + (2.56500e00)) * u0_mult' 
 + lvth0_p105_hvt = '0 +  dlvth0_p105_hvt_fc   ' 
 + pvth0_p105_hvt = '0 +  dpvth0_p105_hvt_fc   ' 
 + p_leff = 'l_scale + xl_p105_hvt'
@@ -2845,13 +2819,13 @@ main  1 2 3 4 n105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 +    sca_f = '(gwells == 0)*0 + sca*(gwells > 0)*(nwp_logic > 0) + 1.347e+02*(gwells == 2)*(nwp_logic == 0) '
 +    scb_f = '(gwells == 0)*0 + scb*(gwells > 0)*(nwp_logic > 0) + 3.161e-02*(gwells == 2)*(nwp_logic == 0) '
 +    scc_f = '(gwells == 0)*0 + scc*(gwells > 0)*(nwp_logic > 0) + 1.013e-02*(gwells == 2)*(nwp_logic == 0) '
-+   kvth0we_total = '(-9.23e-007+ (0*1e-6/p_weff) + (0*1e-6/p_leff) + (0*1e-12/(p_leff*p_weff)))'
++   kvth0we_total = '(-1.00000e-06+ (0.00000e00*1e-6/p_weff) + (0.00000e00*1e-6/p_leff) + (0.00000e00*1e-12/(p_leff*p_weff)))'
 +    kvth0we_p105_hvt  = 'kvth0we_total * ( (ptwell == 0)|| (ptwell ==1) ) '
 +    sti_logic = '(((sa_scale != 0.0) + (sb_scale != 0.0) + (sd_scale != 0.0)) >= 1)'
 +    sa_f = '(sti_logic == 0)*p_sti + sa_scale*(sti_logic == 1)*(gstis > 0)'
 +    sb_f = '(sti_logic == 0)*p_sti + sb_scale*(sti_logic == 1)*(gstis > 0)'
 +    sd_f = 'sd_scale*(sti_logic == 1)*(gstis > 0)'
-.lib  'saed32nm.lib' p105_hvt_model   
+.lib  'saed32nm.lib' p105_hvt_model  
 main  1 2 3 4 p105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale ps=ps_scale nf=nf nrd=nrd nrs=nrs dtemp=dtemp sa=sa_f sb=sb_f sd=sd_f sca=sca_f scb=scb_f scc=scc_f
 .ends  p105_hvt 
 .endl  p105_hvt_noacvsubckt 
@@ -2885,8 +2859,8 @@ main  1 2 3 4 p105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 + u0_n105_lvt = 'u0_n105_lvt_g * u0_mult * (1 + u0_factor/10) '   
 + rdsw_n105_lvt = rdsw_n105_lvt_g   
 + vth0_n105_lvt = 'vth0_n105_lvt_g + p_vta'  
-+ k2_n105_lvt = '-0.042499 ' 
-+ eta0_n105_lvt = '0.16 ' 
++ k2_n105_lvt = '-0.050161 ' 
++ eta0_n105_lvt = '0.58072 ' 
 + rgatemod_n105_lvt = '(pre_layout_f <= 3) * pre_layout_f' 
 + cf_cnr_n105_lvt=0
 + mc_cnr_round=agauss(0,1,3)
@@ -2894,18 +2868,17 @@ main  1 2 3 4 p105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 + cnr_rnd_skew =  '(((mc_cnr_rnd)*mc_sw)+ (acv_uncorr * (cnr_rnd_rss)*(mc_sw == 0)))*fet_cnr_sw'
 + cf_n105_lvt1='(pre_layout_f * ((pre_layout_f == 0) || (pre_layout_f ==1)) * pc_ca_cap)*cf_global' 
 + cf_n105_lvt = 'cf_n105_lvt1 + (sqrt(cnr_switch+1e-40)*(cf_cnr_n105_lvt/(sqrt(l_scale)*pow(w_scale,1.5)))*cnr_rnd_skew)'
-+ vsat_n105_lvt = '204320 ' 
-+ noia_n105_lvt = '1.36e042  * ((fnoicor==0)*0.0160+(fnoicor==1)*0.0160*4.5+(fnoicor==2)*0.0160/4.5)' 
-+ noib_n105_lvt = '4.57e025  * ((fnoicor==0)*0.0005+(fnoicor==1)*0.0005*5.0+(fnoicor==2)*0.0005/5.0)'
-+ noic_n105_lvt = '4.8e0090  * ((fnoicor==0)*0.0500+(fnoicor==1)*0.0500*2.0+(fnoicor==2)*0.0500/2.0)' 
-+ aigc_n105_lvt = '0.011449 +  daigc_n105_lvt_fc   ' 
-+ aigsd_n105_lvt = '0.0092962 +  daigsd_n105_lvt_fc   ' 
++ vsat_n105_lvt = '266000 ' 
++ noia_n105_lvt = '4.18e042  * ((fnoicor==0)*0.0160+(fnoicor==1)*0.0160*4.5+(fnoicor==2)*0.0160/4.5)*5' 
++ noib_n105_lvt = '1.18e025  * ((fnoicor==0)*0.0005+(fnoicor==1)*0.0005*5.0+(fnoicor==2)*0.0005/5.0)*5'
++ noic_n105_lvt = '3.25e008  * ((fnoicor==0)*0.0500+(fnoicor==1)*0.0500*2.0+(fnoicor==2)*0.0500/2.0)*5' 
++ aigc_n105_lvt = '0.011318 +  daigc_n105_lvt_fc   ' 
++ aigsd_n105_lvt = '0.008722 +  daigsd_n105_lvt_fc   ' 
 + xrcrg1_n105_lvt = '12' 
 + xrcrg2_n105_lvt = '1' 
 + xgl_n105_lvt = '-2e-009 ' 
 + xgw_n105_lvt = '4e-008 ' 
 + rshg_n105_lvt = '11 ' 
-+ pvsat_n105_lvt = '10 ' 
 + lvth0_n105_lvt = '0 +  dlvth0_n105_lvt_fc   ' 
 + pvth0_n105_lvt = '0 +  dpvth0_n105_lvt_fc   ' 
 + p_leff = 'l_scale + xl_n105_lvt'
@@ -2921,7 +2894,7 @@ main  1 2 3 4 p105_hvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 +    sa_f = '(sti_logic == 0)*p_sti + sa_scale*(sti_logic == 1)*(gstis > 0)'
 +    sb_f = '(sti_logic == 0)*p_sti + sb_scale*(sti_logic == 1)*(gstis > 0)'
 +    sd_f = 'sd_scale*(sti_logic == 1)*(gstis > 0)'
-.lib  'saed32nm.lib' n105_lvt_model  
+.lib  'saed32nm.lib' n105_lvt_model   
 main  1 2 3 4 n105_lvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale ps=ps_scale nf=nf nrd=nrd nrs=nrs dtemp=dtemp sa=sa_f sb=sb_f sd=sd_f sca=sca_f scb=scb_f scc=scc_f
 .ends  n105_lvt 
 .endl  n105_lvt_noacvsubckt 
@@ -2954,8 +2927,8 @@ main  1 2 3 4 n105_lvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 + u0_p105_lvt = 'u0_p105_lvt_g * u0_mult * (1 + u0_factor/10) '   
 + rdsw_p105_lvt = rdsw_p105_lvt_g   
 + vth0_p105_lvt = 'vth0_p105_lvt_g + p_vta'  
-+ k2_p105_lvt = '-0.059558 ' 
-+ eta0_p105_lvt = '0.1062 ' 
++ k2_p105_lvt = '-3.580000e-02 ' 
++ eta0_p105_lvt = '1.55030e-01 ' 
 + rgatemod_p105_lvt = '(pre_layout_f <= 3) * pre_layout_f' 
 + cf_cnr_p105_lvt=0
 + mc_cnr_round=agauss(0,1,3)
@@ -2963,20 +2936,20 @@ main  1 2 3 4 n105_lvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 + cnr_rnd_skew =  '(((mc_cnr_rnd)*mc_sw)+ (acv_uncorr * (cnr_rnd_rss)*(mc_sw == 0)))*fet_cnr_sw'
 + cf_p105_lvt1='(pre_layout_f * ((pre_layout_f == 0) || (pre_layout_f ==1)) * pc_ca_cap)*cf_global' 
 + cf_p105_lvt = 'cf_p105_lvt1 + (sqrt(cnr_switch+1e-40)*(cf_cnr_p105_lvt/(sqrt(l_scale)*pow(w_scale,1.5)))*cnr_rnd_skew)'
-+ vsat_p105_lvt = '140000 ' 
-+ noia_p105_lvt = '3.64e041  * ((fnoicor==0)*0.0095+(fnoicor==1)*0.0095*4.5+(fnoicor==2)*0.0095/4.5)*12' 
-+ noib_p105_lvt = '43800000  * ((fnoicor==0)*0.0001+(fnoicor==1)*0.0001*5.0+(fnoicor==2)*0.0001/5.0)*12'
-+ noic_p105_lvt = '3.75e010  * ((fnoicor==0)*0.0800+(fnoicor==1)*0.0800*2.5+(fnoicor==2)*0.0800/2.0)*12' 
-+ aigc_p105_lvt = '0.007174 +  daigc_p105_lvt_fc   ' 
-+ aigsd_p105_lvt = '0.0043 +  daigsd_p105_lvt_fc   ' 
++ vsat_p105_lvt = '7.58000e04 ' 
++ noia_p105_lvt = '7.85000e42  * ((fnoicor==0)*0.0095+(fnoicor==1)*0.0095*4.5+(fnoicor==2)*0.0095/4.5)*11' 
++ noib_p105_lvt = '1.77000e25  * ((fnoicor==0)*0.0001+(fnoicor==1)*0.0001*5.0+(fnoicor==2)*0.0001/5.0)*11' 
++ noic_p105_lvt = '3.73000e09  * ((fnoicor==0)*0.0800+(fnoicor==1)*0.0800*2.5+(fnoicor==2)*0.0800/2.0)*11' 
++ aigc_p105_lvt = '7.66000e-03 +  daigc_p105_lvt_fc   ' 
++ aigsd_p105_lvt = '4.65000e-03 +  daigsd_p105_lvt_fc   ' 
 + xrcrg1_p105_lvt = '12' 
 + xrcrg2_p105_lvt = '1' 
-+ xgl_p105_lvt = '-2e-009 ' 
-+ xgw_p105_lvt = '4e-008 ' 
-+ rshg_p105_lvt = '11 ' 
-+ pvsat_p105_lvt = '128.9 ' 
-+  wu0_p105_lvt = '((mulu0_p105_lvt * (2.8394)) + (2.8394)) * u0_mult' 
-+  pu0_p105_lvt = '((mulu0_p105_lvt * (0.075)) + (0.075)) * u0_mult' 
++ xgl_p105_lvt = '-2.00000e-09 ' 
++ xgw_p105_lvt = '4.00000e-08 ' 
++ rshg_p105_lvt = '1.10000e01 ' 
++ peta0_p105_lvt = '-2.00000e-04 ' 
++ pvsat_p105_lvt = '1.30000e02 ' 
++  wu0_p105_lvt = '((mulu0_p105_lvt * (2.56500e00)) + (2.56500e00)) * u0_mult' 
 + lvth0_p105_lvt = '0 +  dlvth0_p105_lvt_fc   ' 
 + pvth0_p105_lvt = '0 +  dpvth0_p105_lvt_fc   ' 
 + p_leff = 'l_scale + xl_p105_lvt'
@@ -2986,7 +2959,7 @@ main  1 2 3 4 n105_lvt l=l_scale w=w_scale ad=ad_scale as=as_scale pd=pd_scale p
 +    sca_f = '(gwells == 0)*0 + sca*(gwells > 0)*(nwp_logic > 0) + 1.347e+02*(gwells == 2)*(nwp_logic == 0) '
 +    scb_f = '(gwells == 0)*0 + scb*(gwells > 0)*(nwp_logic > 0) + 3.161e-02*(gwells == 2)*(nwp_logic == 0) '
 +    scc_f = '(gwells == 0)*0 + scc*(gwells > 0)*(nwp_logic > 0) + 1.013e-02*(gwells == 2)*(nwp_logic == 0) '
-+   kvth0we_total = '(-1.049e-006+ (0*1e-6/p_weff) + (0*1e-6/p_leff) + (0*1e-12/(p_leff*p_weff)))'
++   kvth0we_total = '(-1.00000e-06+ (0.00000e00*1e-6/p_weff) + (0.00000e00*1e-6/p_leff) + (0.00000e00*1e-12/(p_leff*p_weff)))'
 +    kvth0we_p105_lvt  = 'kvth0we_total * ( (ptwell == 0)|| (ptwell ==1) ) '
 +    sti_logic = '(((sa_scale != 0.0) + (sb_scale != 0.0) + (sd_scale != 0.0)) >= 1)'
 +    sa_f = '(sti_logic == 0)*p_sti + sa_scale*(sti_logic == 1)*(gstis > 0)'
@@ -3282,100 +3255,108 @@ main  1 2 3 4 p25 l=l w=w ad=ad as=as pd=pd ps=ps nf=nf dtemp=dtemp sa=sa_f sb=s
 + tw_factor   = 2			    
 + grm_sti = 0.155e-6
 + p_sti = '(gstis == 2)*grm_sti'	   
-					   
-					   
-+ xl_n105_hvt_g = '2.00000e-09 + dxl_n105_hvt_fc + dxl_n105_hvt_mc + dxl_n105_hvt_skew ' 
-+ xw_n105_hvt_g = '4.30000e-07 + dxw_n105_hvt_fc + dxw_n105_hvt_mc + dxw_n105_hvt_skew ' 
-+ u0_n105_hvt_g = '1900.1 + du0_n105_hvt_fc + du0_n105_hvt_mc + du0_n105_hvt_skew ' 
-+ rdsw_n105_hvt_g = '40.0500000e01 + drdsw_n105_hvt_fc + drdsw_n105_hvt_mc + drdsw_n105_hvt_skew ' 
-+ vth0_n105_hvt_g = '0.44695 + dvth0_n105_hvt_fc + dvth0_n105_hvt_mc + dvth0_n105_hvt_skew ' 
-+ cgdl_n105_hvt = '10.7651500e-10 + dcgdl_n105_hvt_fc + dcgdl_n105_hvt_mc + dcgdl_n105_hvt_skew  ' 
-+ cgdo_n105_hvt = '5.100099808e-011 + dcgdo_n105_hvt_fc + dcgdo_n105_hvt_mc + dcgdo_n105_hvt_skew  ' 
-+ cgsl_n105_hvt = '1.7651500e-10 + dcgsl_n105_hvt_fc + dcgsl_n105_hvt_mc + dcgsl_n105_hvt_skew  ' 
-+ cgso_n105_hvt = '5.100099808e-011 + dcgso_n105_hvt_fc + dcgso_n105_hvt_mc + dcgso_n105_hvt_skew  ' 
-+ cjd_n105_hvt = '0.19346 + dcjd_n105_hvt_fc + dcjd_n105_hvt_mc + dcjd_n105_hvt_skew  ' 
-+ cjs_n105_hvt = '0.19346 + dcjs_n105_hvt_fc + dcjs_n105_hvt_mc + dcjs_n105_hvt_skew  ' 
-+ cjswd_n105_hvt = '8.2e-011 + dcjswd_n105_hvt_fc + dcjswd_n105_hvt_mc + dcjswd_n105_hvt_skew  ' 
-+ cjswgd_n105_hvt = '3.2000e-10 + dcjswgd_n105_hvt_fc + dcjswgd_n105_hvt_mc + dcjswgd_n105_hvt_skew  ' 
-+ cjswgs_n105_hvt = '3.2000e-10 + dcjswgs_n105_hvt_fc + dcjswgs_n105_hvt_mc + dcjswgs_n105_hvt_skew  ' 
-+ cjsws_n105_hvt = '8.2e-011 + dcjsws_n105_hvt_fc + dcjsws_n105_hvt_mc + dcjsws_n105_hvt_skew  ' 
-+ toxe_n105_hvt = '2.390000e-09 + dtoxe_n105_hvt_fc + dtoxe_n105_hvt_mc + dtoxe_n105_hvt_skew  ' 
-+ toxp_n105_hvt = '2.24000e-09 + (toxe_n105_hvt -2.390000e-09)' 
-+ mulu0_n105_hvt = '((u0_n105_hvt_g - 604.1)/604.1)'
-+ dcov_n105_hvt= '(cgso_n105_hvt - (4.808e-011)) + (cgsl_n105_hvt - (1.51500e-10))' 
-+ lcov_n105_hvt= '(dcov_n105_hvt* 2.390000e-09)/(8.854e-12*3.9)' 
-+ lint_n105_hvt= '(0.00000e00)+ (0.1*lcov_n105_hvt)' 
-+ dlc_n105_hvt = 'lcov_n105_hvt + 5.90000e-09'
-+ xl_p105_hvt_g = '2.3e-009 + dxl_p105_hvt_fc + dxl_p105_hvt_mc + dxl_p105_hvt_skew ' 
-+ xw_p105_hvt_g = '0e-09 + dxw_p105_hvt_fc + dxw_p105_hvt_mc + dxw_p105_hvt_skew ' 
-+ u0_p105_hvt_g = '290.9967 + du0_p105_hvt_fc + du0_p105_hvt_mc + du0_p105_hvt_skew ' 
-+ rdsw_p105_hvt_g = '160 + drdsw_p105_hvt_fc + drdsw_p105_hvt_mc + drdsw_p105_hvt_skew ' 
-+ vth0_p105_hvt_g = '-0.34056 + dvth0_p105_hvt_fc + dvth0_p105_hvt_mc + dvth0_p105_hvt_skew ' 
-+ cgdl_p105_hvt = '1.121e-010 + dcgdl_p105_hvt_fc + dcgdl_p105_hvt_mc + dcgdl_p105_hvt_skew  ' 
-+ cgdo_p105_hvt = '6.259e-011 + dcgdo_p105_hvt_fc + dcgdo_p105_hvt_mc + dcgdo_p105_hvt_skew  ' 
-+ cgsl_p105_hvt = '1.121e-010 + dcgsl_p105_hvt_fc + dcgsl_p105_hvt_mc + dcgsl_p105_hvt_skew  ' 
-+ cgso_p105_hvt = '6.259e-011 + dcgso_p105_hvt_fc + dcgso_p105_hvt_mc + dcgso_p105_hvt_skew  ' 
-+ cjd_p105_hvt = '0.19346 + dcjd_p105_hvt_fc + dcjd_p105_hvt_mc + dcjd_p105_hvt_skew  ' 
-+ cjs_p105_hvt = '0.19346 + dcjs_p105_hvt_fc + dcjs_p105_hvt_mc + dcjs_p105_hvt_skew  ' 
+
+
+
++ xl_n105_hvt_g = '2e-009 + dxl_n105_hvt_fc + dxl_n105_hvt_mc + dxl_n105_hvt_skew ' 
++ xw_n105_hvt_g = '0 + dxw_n105_hvt_fc + dxw_n105_hvt_mc + dxw_n105_hvt_skew ' 
++ u0_n105_hvt_g = '30.4 + du0_n105_hvt_fc + du0_n105_hvt_mc + du0_n105_hvt_skew ' 
++ rdsw_n105_hvt_g = '340.531 + drdsw_n105_hvt_fc + drdsw_n105_hvt_mc + drdsw_n105_hvt_skew ' 
+*+ vth0_n105_hvt_g = '0.359 + dvth0_n105_hvt_fc + dvth0_n105_hvt_mc + dvth0_n105_hvt_skew ' *lvt
++ vth0_n105_hvt_g = '0.567 + dvth0_n105_hvt_fc + dvth0_n105_hvt_mc + dvth0_n105_hvt_skew ' *hvt
++ cgdl_n105_hvt = '1.4436e-010 + dcgdl_n105_hvt_fc + dcgdl_n105_hvt_mc + dcgdl_n105_hvt_skew  ' 
++ cgdo_n105_hvt = '9.626e-011 + dcgdo_n105_hvt_fc + dcgdo_n105_hvt_mc + dcgdo_n105_hvt_skew  ' 
++ cgsl_n105_hvt = '1.4436e-010 + dcgsl_n105_hvt_fc + dcgsl_n105_hvt_mc + dcgsl_n105_hvt_skew  ' 
++ cgso_n105_hvt = '9.626e-011 + dcgso_n105_hvt_fc + dcgso_n105_hvt_mc + dcgso_n105_hvt_skew  ' 
++ cjd_n105_hvt = '0.001346 + dcjd_n105_hvt_fc + dcjd_n105_hvt_mc + dcjd_n105_hvt_skew  ' 
++ cjs_n105_hvt = '0.001346 + dcjs_n105_hvt_fc + dcjs_n105_hvt_mc + dcjs_n105_hvt_skew  ' 
++ cjswd_n105_hvt = '8.25e-011 + dcjswd_n105_hvt_fc + dcjswd_n105_hvt_mc + dcjswd_n105_hvt_skew  ' 
++ cjswgd_n105_hvt = '3.04e-010 + dcjswgd_n105_hvt_fc + dcjswgd_n105_hvt_mc + dcjswgd_n105_hvt_skew  ' 
++ cjswgs_n105_hvt = '3.04e-010 + dcjswgs_n105_hvt_fc + dcjswgs_n105_hvt_mc + dcjswgs_n105_hvt_skew  ' 
++ cjsws_n105_hvt = '8.25e-011 + dcjsws_n105_hvt_fc + dcjsws_n105_hvt_mc + dcjsws_n105_hvt_skew  ' 
++ toxe_n105_hvt = '2.39e-009 + dtoxe_n105_hvt_fc + dtoxe_n105_hvt_mc + dtoxe_n105_hvt_skew  ' 
++ toxp_n105_hvt = '2.2206e-009 + (toxe_n105_hvt -2.39e-009)' 
++ dcov_n105_hvt= '(cgso_n105_hvt - (9.626e-011)) + (cgsl_n105_hvt - (1.4436e-010))' 
++ lcov_n105_hvt= '(dcov_n105_hvt* 2.39e-009)/(8.854e-12*3.9)' 
++ lint_n105_hvt= '(0)+ (0.5*lcov_n105_hvt)' 
++ dlc_n105_hvt = 'lcov_n105_hvt + 6.9e-009'
++ xl_p105_hvt_g = '2.00000e-09 + dxl_p105_hvt_fc + dxl_p105_hvt_mc + dxl_p105_hvt_skew ' 
++ xw_p105_hvt_g = '0.00000e00 + dxw_p105_hvt_fc + dxw_p105_hvt_mc + dxw_p105_hvt_skew ' 
++ u0_p105_hvt_g = '60.95 + du0_p105_hvt_fc + du0_p105_hvt_mc + du0_p105_hvt_skew ' 
++ rdsw_p105_hvt_g = '3.909450e02 + drdsw_p105_hvt_fc + drdsw_p105_hvt_mc + drdsw_p105_hvt_skew ' 
+*+ vth0_p105_hvt_g = '-0.213 + dvth0_p105_hvt_fc + dvth0_p105_hvt_mc + dvth0_p105_hvt_skew ' *lvt
++ vth0_p105_hvt_g = '-0.302 + dvth0_p105_hvt_fc + dvth0_p105_hvt_mc + dvth0_p105_hvt_skew ' *hvt
++ cgdl_p105_hvt = '6.50000e-11 + dcgdl_p105_hvt_fc + dcgdl_p105_hvt_mc + dcgdl_p105_hvt_skew  ' 
++ cgdo_p105_hvt = '1.48000e-10 + dcgdo_p105_hvt_fc + dcgdo_p105_hvt_mc + dcgdo_p105_hvt_skew  ' 
++ cgsl_p105_hvt = '6.50000e-11 + dcgsl_p105_hvt_fc + dcgsl_p105_hvt_mc + dcgsl_p105_hvt_skew  ' 
++ cgso_p105_hvt = '1.48000e-10 + dcgso_p105_hvt_fc + dcgso_p105_hvt_mc + dcgso_p105_hvt_skew  ' 
++ cjd_p105_hvt = '1.346000e-03 + dcjd_p105_hvt_fc + dcjd_p105_hvt_mc + dcjd_p105_hvt_skew  ' 
++ cjs_p105_hvt = '1.346000e-03 + dcjs_p105_hvt_fc + dcjs_p105_hvt_mc + dcjs_p105_hvt_skew  ' 
 + cjswd_p105_hvt = '6.5e-11 + dcjswd_p105_hvt_fc + dcjswd_p105_hvt_mc + dcjswd_p105_hvt_skew  ' 
-+ cjswgd_p105_hvt = '3.00e-010 + dcjswgd_p105_hvt_fc + dcjswgd_p105_hvt_mc + dcjswgd_p105_hvt_skew  ' 
-+ cjswgs_p105_hvt = '3.00e-010 + dcjswgs_p105_hvt_fc + dcjswgs_p105_hvt_mc + dcjswgs_p105_hvt_skew  ' 
++ cjswgd_p105_hvt = '2.990000e-10 + dcjswgd_p105_hvt_fc + dcjswgd_p105_hvt_mc + dcjswgd_p105_hvt_skew  ' 
++ cjswgs_p105_hvt = '2.990000e-10 + dcjswgs_p105_hvt_fc + dcjswgs_p105_hvt_mc + dcjswgs_p105_hvt_skew  ' 
 + cjsws_p105_hvt = '6.5e-11 + dcjsws_p105_hvt_fc + dcjsws_p105_hvt_mc + dcjsws_p105_hvt_skew  ' 
-+ toxe_p105_hvt = '2.62e-009 + dtoxe_p105_hvt_fc + dtoxe_p105_hvt_mc + dtoxe_p105_hvt_skew  ' 
-+ toxp_p105_hvt = '2.3e-009 + (toxe_p105_hvt -2.62e-009)' 
-+ mulu0_p105_hvt = '((u0_p105_hvt_g - 121.67)/121.67)'
-+ dcov_p105_hvt= '(cgso_p105_hvt - (6.259e-011)) + (cgsl_p105_hvt - (1.121e-010))' 
-+ lcov_p105_hvt= '(dcov_p105_hvt* 2.62e-009)/(8.854e-12*3.9)' 
-+ lint_p105_hvt= '(0)+ (0.5*lcov_p105_hvt)' 
-+ dlc_p105_hvt = 'lcov_p105_hvt + 5.028e-009'
-+ xl_n105_lvt_g = '0.1e-009 + dxl_n105_lvt_fc + dxl_n105_lvt_mc + dxl_n105_lvt_skew ' 
-+ xw_n105_lvt_g = '110e-009 + dxw_n105_lvt_fc + dxw_n105_lvt_mc + dxw_n105_lvt_skew ' 
-+ u0_n105_lvt_g = '1000 + du0_n105_lvt_fc + du0_n105_lvt_mc + du0_n105_lvt_skew ' 
-+ rdsw_n105_lvt_g = '10.125 + drdsw_n105_lvt_fc + drdsw_n105_lvt_mc + drdsw_n105_lvt_skew ' 
-+ vth0_n105_lvt_g = '0.414 + dvth0_n105_lvt_fc + dvth0_n105_lvt_mc + dvth0_n105_lvt_skew ' 
-+ cgdl_n105_lvt = '1.49e-010 + dcgdl_n105_lvt_fc + dcgdl_n105_lvt_mc + dcgdl_n105_lvt_skew  ' 
-+ cgdo_n105_lvt = '8.927e-011 + dcgdo_n105_lvt_fc + dcgdo_n105_lvt_mc + dcgdo_n105_lvt_skew  ' 
-+ cgsl_n105_lvt = '1.49e-010 + dcgsl_n105_lvt_fc + dcgsl_n105_lvt_mc + dcgsl_n105_lvt_skew  ' 
-+ cgso_n105_lvt = '8.927e-011 + dcgso_n105_lvt_fc + dcgso_n105_lvt_mc + dcgso_n105_lvt_skew  ' 
++ toxe_p105_hvt = '2.62000e-09 + dtoxe_p105_hvt_fc + dtoxe_p105_hvt_mc + dtoxe_p105_hvt_skew  ' 
++ toxp_p105_hvt = '2.29480e-09 + (toxe_p105_hvt -2.62000e-09)' 
++ mulu0_p105_hvt = '((u0_p105_hvt_g - 68.2)/68.2)'
++ dcov_p105_hvt= '(cgso_p105_hvt - (1.48000e-10)) + (cgsl_p105_hvt - (6.50000e-11))' 
++ lcov_p105_hvt= '(dcov_p105_hvt* 2.62000e-09)/(8.854e-12*3.9)' 
++ lint_p105_hvt= '(0.00000e00)+ (0.5*lcov_p105_hvt)' 
++ dlc_p105_hvt = 'lcov_p105_hvt + 7.25550e-09'
+
++ xl_n105_lvt_g = '2e-009 + dxl_n105_lvt_fc + dxl_n105_lvt_mc + dxl_n105_lvt_skew ' 
++ xw_n105_lvt_g = '0 + dxw_n105_lvt_fc + dxw_n105_lvt_mc + dxw_n105_lvt_skew ' 
++ u0_n105_lvt_g = '30.4 + du0_n105_lvt_fc + du0_n105_lvt_mc + du0_n105_lvt_skew ' 
++ rdsw_n105_lvt_g = '340.531 + drdsw_n105_lvt_fc + drdsw_n105_lvt_mc + drdsw_n105_lvt_skew ' 
++ vth0_n105_lvt_g = '0.37 + dvth0_n105_lvt_fc + dvth0_n105_lvt_mc + dvth0_n105_lvt_skew ' *lvt
+*+ vth0_n105_lvt_g = '0.567 + dvth0_n105_lvt_fc + dvth0_n105_lvt_mc + dvth0_n105_lvt_skew ' *hvt
++ cgdl_n105_lvt = '1.4436e-010 + dcgdl_n105_lvt_fc + dcgdl_n105_lvt_mc + dcgdl_n105_lvt_skew  ' 
++ cgdo_n105_lvt = '9.626e-011 + dcgdo_n105_lvt_fc + dcgdo_n105_lvt_mc + dcgdo_n105_lvt_skew  ' 
++ cgsl_n105_lvt = '1.4436e-010 + dcgsl_n105_lvt_fc + dcgsl_n105_lvt_mc + dcgsl_n105_lvt_skew  ' 
++ cgso_n105_lvt = '9.626e-011 + dcgso_n105_lvt_fc + dcgso_n105_lvt_mc + dcgso_n105_lvt_skew  ' 
 + cjd_n105_lvt = '0.001346 + dcjd_n105_lvt_fc + dcjd_n105_lvt_mc + dcjd_n105_lvt_skew  ' 
 + cjs_n105_lvt = '0.001346 + dcjs_n105_lvt_fc + dcjs_n105_lvt_mc + dcjs_n105_lvt_skew  ' 
-+ cjswd_n105_lvt = '8.2e-011 + dcjswd_n105_lvt_fc + dcjswd_n105_lvt_mc + dcjswd_n105_lvt_skew  ' 
-+ cjswgd_n105_lvt = '3.12e-010 + dcjswgd_n105_lvt_fc + dcjswgd_n105_lvt_mc + dcjswgd_n105_lvt_skew  ' 
-+ cjswgs_n105_lvt = '3.12e-010 + dcjswgs_n105_lvt_fc + dcjswgs_n105_lvt_mc + dcjswgs_n105_lvt_skew  ' 
-+ cjsws_n105_lvt = '8.2e-011 + dcjsws_n105_lvt_fc + dcjsws_n105_lvt_mc + dcjsws_n105_lvt_skew  ' 
++ cjswd_n105_lvt = '8.25e-011 + dcjswd_n105_lvt_fc + dcjswd_n105_lvt_mc + dcjswd_n105_lvt_skew  ' 
++ cjswgd_n105_lvt = '3.04e-010 + dcjswgd_n105_lvt_fc + dcjswgd_n105_lvt_mc + dcjswgd_n105_lvt_skew  ' 
++ cjswgs_n105_lvt = '3.04e-010 + dcjswgs_n105_lvt_fc + dcjswgs_n105_lvt_mc + dcjswgs_n105_lvt_skew  ' 
++ cjsws_n105_lvt = '8.25e-011 + dcjsws_n105_lvt_fc + dcjsws_n105_lvt_mc + dcjsws_n105_lvt_skew  ' 
 + toxe_n105_lvt = '2.39e-009 + dtoxe_n105_lvt_fc + dtoxe_n105_lvt_mc + dtoxe_n105_lvt_skew  ' 
-+ toxp_n105_lvt = '2.215e-009 + (toxe_n105_lvt -2.39e-009)' 
-+ dcov_n105_lvt= '(cgso_n105_lvt - (8.927e-011)) + (cgsl_n105_lvt - (1.49e-010))' 
++ toxp_n105_lvt = '2.2206e-009 + (toxe_n105_lvt -2.39e-009)' 
++ dcov_n105_lvt= '(cgso_n105_lvt - (9.626e-011)) + (cgsl_n105_lvt - (1.4436e-010))' 
 + lcov_n105_lvt= '(dcov_n105_lvt* 2.39e-009)/(8.854e-12*3.9)' 
-+ lint_n105_lvt= '(1.5e-009)+ (1*lcov_n105_lvt)' 
-+ dlc_n105_lvt = 'lcov_n105_lvt + 8.1e-009'
-+ xl_p105_lvt_g = '0.1e-009 + dxl_p105_lvt_fc + dxl_p105_lvt_mc + dxl_p105_lvt_skew ' 
-+ xw_p105_lvt_g = '0 + dxw_p105_lvt_fc + dxw_p105_lvt_mc + dxw_p105_lvt_skew ' 
-+ u0_p105_lvt_g = '725.83 + du0_p105_lvt_fc + du0_p105_lvt_mc + du0_p105_lvt_skew ' 
-+ rdsw_p105_lvt_g = '0.6 + drdsw_p105_lvt_fc + drdsw_p105_lvt_mc + drdsw_p105_lvt_skew ' 
-+ vth0_p105_lvt_g = '-0.36005 + dvth0_p105_lvt_fc + dvth0_p105_lvt_mc + dvth0_p105_lvt_skew ' 
-+ cgdl_p105_lvt = '1.924e-010 + dcgdl_p105_lvt_fc + dcgdl_p105_lvt_mc + dcgdl_p105_lvt_skew  ' 
-+ cgdo_p105_lvt = '3.183e-011 + dcgdo_p105_lvt_fc + dcgdo_p105_lvt_mc + dcgdo_p105_lvt_skew  ' 
-+ cgsl_p105_lvt = '1.924e-010 + dcgsl_p105_lvt_fc + dcgsl_p105_lvt_mc + dcgsl_p105_lvt_skew  ' 
-+ cgso_p105_lvt = '3.183e-011 + dcgso_p105_lvt_fc + dcgso_p105_lvt_mc + dcgso_p105_lvt_skew  ' 
-+ cjd_p105_lvt = '0.001346 + dcjd_p105_lvt_fc + dcjd_p105_lvt_mc + dcjd_p105_lvt_skew  ' 
-+ cjs_p105_lvt = '0.001346 + dcjs_p105_lvt_fc + dcjs_p105_lvt_mc + dcjs_p105_lvt_skew  ' 
++ lint_n105_lvt= '(0)+ (0.5*lcov_n105_lvt)' 
++ dlc_n105_lvt = 'lcov_n105_lvt + 6.9e-009'
++ xl_p105_lvt_g = '2.00000e-09 + dxl_p105_lvt_fc + dxl_p105_lvt_mc + dxl_p105_lvt_skew ' 
++ xw_p105_lvt_g = '0.00000e00 + dxw_p105_lvt_fc + dxw_p105_lvt_mc + dxw_p105_lvt_skew ' 
++ u0_p105_lvt_g = '60.95 + du0_p105_lvt_fc + du0_p105_lvt_mc + du0_p105_lvt_skew ' 
++ rdsw_p105_lvt_g = '3.909450e02 + drdsw_p105_lvt_fc + drdsw_p105_lvt_mc + drdsw_p105_lvt_skew ' 
++ vth0_p105_lvt_g = '-0.213 + dvth0_p105_lvt_fc + dvth0_p105_lvt_mc + dvth0_p105_lvt_skew ' *lvt
+*+ vth0_p105_lvt_g = '-0.302 + dvth0_p105_lvt_fc + dvth0_p105_lvt_mc + dvth0_p105_lvt_skew ' *hvt
++ cgdl_p105_lvt = '6.50000e-11 + dcgdl_p105_lvt_fc + dcgdl_p105_lvt_mc + dcgdl_p105_lvt_skew  ' 
++ cgdo_p105_lvt = '1.48000e-10 + dcgdo_p105_lvt_fc + dcgdo_p105_lvt_mc + dcgdo_p105_lvt_skew  ' 
++ cgsl_p105_lvt = '6.50000e-11 + dcgsl_p105_lvt_fc + dcgsl_p105_lvt_mc + dcgsl_p105_lvt_skew  ' 
++ cgso_p105_lvt = '1.48000e-10 + dcgso_p105_lvt_fc + dcgso_p105_lvt_mc + dcgso_p105_lvt_skew  ' 
++ cjd_p105_lvt = '1.346000e-03 + dcjd_p105_lvt_fc + dcjd_p105_lvt_mc + dcjd_p105_lvt_skew  ' 
++ cjs_p105_lvt = '1.346000e-03 + dcjs_p105_lvt_fc + dcjs_p105_lvt_mc + dcjs_p105_lvt_skew  ' 
 + cjswd_p105_lvt = '6.5e-11 + dcjswd_p105_lvt_fc + dcjswd_p105_lvt_mc + dcjswd_p105_lvt_skew  ' 
-+ cjswgd_p105_lvt = '2.49e-010 + dcjswgd_p105_lvt_fc + dcjswgd_p105_lvt_mc + dcjswgd_p105_lvt_skew  ' 
-+ cjswgs_p105_lvt = '2.49e-010 + dcjswgs_p105_lvt_fc + dcjswgs_p105_lvt_mc + dcjswgs_p105_lvt_skew  ' 
++ cjswgd_p105_lvt = '2.990000e-10 + dcjswgd_p105_lvt_fc + dcjswgd_p105_lvt_mc + dcjswgd_p105_lvt_skew  ' 
++ cjswgs_p105_lvt = '2.990000e-10 + dcjswgs_p105_lvt_fc + dcjswgs_p105_lvt_mc + dcjswgs_p105_lvt_skew  ' 
 + cjsws_p105_lvt = '6.5e-11 + dcjsws_p105_lvt_fc + dcjsws_p105_lvt_mc + dcjsws_p105_lvt_skew  ' 
-+ toxe_p105_lvt = '2.62e-009 + dtoxe_p105_lvt_fc + dtoxe_p105_lvt_mc + dtoxe_p105_lvt_skew  ' 
-+ toxp_p105_lvt = '2.30e-009 + (toxe_p105_lvt -2.62e-009)' 
-+ mulu0_p105_lvt = '((u0_p105_lvt_g - 125.83)/125.83)'
-+ dcov_p105_lvt= '(cgso_p105_lvt - (3.183e-011)) + (cgsl_p105_lvt - (1.924e-010))' 
-+ lcov_p105_lvt= '(dcov_p105_lvt* 2.62e-009)/(8.854e-12*3.9)' 
-+ lint_p105_lvt= '(0)+ (0.5*lcov_p105_lvt)' 
-+ dlc_p105_lvt = 'lcov_p105_lvt + 8.297e-009'
++ toxe_p105_lvt = '2.62000e-09 + dtoxe_p105_lvt_fc + dtoxe_p105_lvt_mc + dtoxe_p105_lvt_skew  ' 
++ toxp_p105_lvt = '2.29480e-09 + (toxe_p105_lvt -2.62000e-09)' 
++ mulu0_p105_lvt = '((u0_p105_lvt_g - 68.2)/68.2)'
++ dcov_p105_lvt= '(cgso_p105_lvt - (1.48000e-10)) + (cgsl_p105_lvt - (6.50000e-11))' 
++ lcov_p105_lvt= '(dcov_p105_lvt* 2.62000e-09)/(8.854e-12*3.9)' 
++ lint_p105_lvt= '(0.00000e00)+ (0.5*lcov_p105_lvt)' 
++ dlc_p105_lvt = 'lcov_p105_lvt + 7.25550e-09'
+
+
 + xl_n105_g = '2e-009 + dxl_n105_fc + dxl_n105_mc + dxl_n105_skew ' 
 + xw_n105_g = '0 + dxw_n105_fc + dxw_n105_mc + dxw_n105_skew ' 
 + u0_n105_g = '30.4 + du0_n105_fc + du0_n105_mc + du0_n105_skew ' 
 + rdsw_n105_g = '340.531 + drdsw_n105_fc + drdsw_n105_mc + drdsw_n105_skew ' 
 + vth0_n105_g = '0.44216 + dvth0_n105_fc + dvth0_n105_mc + dvth0_n105_skew ' 
+*+ vth0_n105_g = '0.567 + dvth0_n105_fc + dvth0_n105_mc + dvth0_n105_skew ' *hvt
 + cgdl_n105 = '1.4436e-010 + dcgdl_n105_fc + dcgdl_n105_mc + dcgdl_n105_skew  ' 
 + cgdo_n105 = '9.626e-011 + dcgdo_n105_fc + dcgdo_n105_mc + dcgdo_n105_skew  ' 
 + cgsl_n105 = '1.4436e-010 + dcgsl_n105_fc + dcgsl_n105_mc + dcgsl_n105_skew  ' 
@@ -3397,6 +3378,7 @@ main  1 2 3 4 p25 l=l w=w ad=ad as=as pd=pd ps=ps nf=nf dtemp=dtemp sa=sa_f sb=s
 + u0_p105_g = '60.95 + du0_p105_fc + du0_p105_mc + du0_p105_skew ' 
 + rdsw_p105_g = '3.909450e02 + drdsw_p105_fc + drdsw_p105_mc + drdsw_p105_skew ' 
 + vth0_p105_g = '-0.25648 + dvth0_p105_fc + dvth0_p105_mc + dvth0_p105_skew ' 
+*+ vth0_p105_g = '-0.302 + dvth0_p105_fc + dvth0_p105_mc + dvth0_p105_skew ' *hvt
 + cgdl_p105 = '6.50000e-11 + dcgdl_p105_fc + dcgdl_p105_mc + dcgdl_p105_skew  ' 
 + cgdo_p105 = '1.48000e-10 + dcgdo_p105_fc + dcgdo_p105_mc + dcgdo_p105_skew  ' 
 + cgsl_p105 = '6.50000e-11 + dcgsl_p105_fc + dcgsl_p105_mc + dcgsl_p105_skew  ' 
@@ -3461,12 +3443,12 @@ main  1 2 3 4 p25 l=l w=w ad=ad as=as pd=pd ps=ps nf=nf dtemp=dtemp sa=sa_f sb=s
 + dlc_p18 = 'lcov_p18 + 1.02e-008'
 
 
+
 .param
 + mc_sw = 'mc2_test1 != 0.0 || mc2_test2 != 0.0 || mc2_test3 != 0.0'
 + cnr_acv_uncorr  = '(cor_acv_uncorr)/3.0'
 	
 .ENDL defaults
-
 
 .lib shared_nomc
 .param
@@ -3842,7 +3824,6 @@ main  1 2 3 4 p25 l=l w=w ad=ad as=as pd=pd ps=ps nf=nf dtemp=dtemp sa=sa_f sb=s
 .endl n25
 
 
-
 .lib P25
 .model  p25  pmos (level=69 version=102.3
 + tr=25                   swgidl=1                 alp2l1=0.05715          
@@ -4020,7 +4001,8 @@ main  1 2 3 4 p25 l=l w=w ad=ad as=as pd=pd ps=ps nf=nf dtemp=dtemp sa=sa_f sb=s
 .endl f_res
 
 .lib RESISTOR
-.subckt rnpolyl n1 n2 l=length w=width multi=1 
+
+.subckt rnpoly n1 n2 l=length w=width multi=1 
 .param geo_fac ='1/sqrt(multi*l*w*81e10)'
 .param factmis='0.00413*geo_fac*par_res'
 .param rsh = 'r_rnpolyl'
@@ -4035,9 +4017,10 @@ main  1 2 3 4 p25 l=l w=w ad=ad as=as pd=pd ps=ps nf=nf dtemp=dtemp sa=sa_f sb=s
 .param tfac='1.0+ptc1*(pt-25.0)'
 .param deltaw = 'dw + 3e-10 / (w*9e5)'
 .param rmain = 'rsh*(1+factmis)/multi*l*0.9/(w*0.9-deltaw)*tfac'
-r1 n1 n2 'max(min(rmain*(1+pvc2*(v(n2,n1)/l/0.9)*(v(n2,n1)/l/0.9)), rmain*1.5), rmain/2)'
-.ends rnpolyl
-.subckt rppolyl n1 n2 l=length w=width  multi=1 
+rmain n1 n2 'max(min(rmain*(1+pvc2*(v(n2,n1)/l/0.9)*(v(n2,n1)/l/0.9)), rmain*1.5), rmain/2)'
+.ends rnpoly
+
+.subckt rppoly n1 n2 l=length w=width  multi=1 
 .param geo_fac ='1/sqrt(multi*l*w*81e10)'
 .param factmis='0.00613*geo_fac*par_res'
 .param rsh = 'r_rppolyl'
@@ -4052,8 +4035,9 @@ r1 n1 n2 'max(min(rmain*(1+pvc2*(v(n2,n1)/l/0.9)*(v(n2,n1)/l/0.9)), rmain*1.5), 
 .param ptc1 = '1.010e-5/wum+1.51e-3'
 .param tfac='1.0+ptc1*(pt-25.0)'
 .param rmain = 'rsh*(1+factmis)/multi*l*0.9/(w*0.9-dw)*tfac'
-r1 n1 n2 'max(min(rmain*(1+pvc2_r*(v(n2,n1)/l/0.9)*(v(n2,n1)/l/0.9)), rmain*1.5), rmain/2)'
-.ends rppolyl
+rmain n1 n2 'max(min(rmain*(1+pvc2_r*(v(n2,n1)/l/0.9)*(v(n2,n1)/l/0.9)), rmain*1.5), rmain/2)'
+.ends rppoly
+
 .subckt rnpoly_wos n1 n2 l=length w=width  multi=1
 .param rsh = 'r_rnpolywo'  rendsh='2*rend_rnpolywo*1e6'
 .param dw_etch='-4.1889e-8*(pwr(0.565,x_dxw_rnpolywo)-1)'
@@ -4070,7 +4054,8 @@ r1 n1 n2 'max(min(rmain*(1+pvc2_r*(v(n2,n1)/l/0.9)*(v(n2,n1)/l/0.9)), rmain*1.5)
 .param ro = 'rsh/multi*(lum-dl)/(wum-dw)*tfac'
 rend n1 1 'max(min(rendo/2*2, rendo*1.5), rendo/2)'
 rmain 1 n2 'max(min(ro/2*(3-1/(1+jc1*v(1,n2)*v(1,n2))), ro*1.5), ro/2)'
-.ends rnpolywo
+.ends rnpoly_wos
+
 .subckt rppoly_wos n1 n2 l=length w=width  multi=1 
 .param geo_fac ='1/sqrt(multi*l*w*81e10)'
 .param factmis='0.004857*geo_fac*par_res'
@@ -4090,11 +4075,19 @@ rmain 1 n2 'max(min(ro/2*(3-1/(1+jc1*v(1,n2)*v(1,n2))), ro*1.5), ro/2)'
 rend n1 1 'max(min(rendo/2*2, rendo*1.5), rendo/2)'
 rmain 1 n2 rppoly 'max(min(ro/2*(1+1/(1+jc1*v(1,n2)*v(1,n2))), ro*1.5), ro/2)'
 .model rppoly r l='(lum-dl)*1e-6/1' w='multi*(wum-dw)*1e-6' kf=0 af=2 ef=0.95 wf=1 lf=1
-.ends rppolywo
-.subckt gen_res n1 n2 l=length r=res w=width 
-rmain n1 n2  r
-.ends gen_res
+.ends rppoly_wos
+
+
+.flat rppoly rmain
+.flat rnpoly rmain
+.flat rppoly_wos rmain
+.flat rnpoly_wos rmain
+
+
 .endl resistor
+
+
+
 .lib T_DIO
 .param
 +is_d= 1         x_jsw_d= 0         n_d= 1         rs_d= 1
@@ -4102,6 +4095,7 @@ rmain n1 n2  r
 
 .lib 'saed32nm.lib' DIODE
 .endl t_dio
+
 .lib S_DIO
 .param
 +is_d= 0.7       x_jsw_d= -1       n_d= 0.9975         rs_d= 1.2
@@ -4109,6 +4103,7 @@ rmain n1 n2  r
 
 .lib 'saed32nm.lib' DIODE
 .endl s_dio
+
 .lib F_DIO
 .param
 +is_d= 1.3        x_jsw_d= 1        n_d= 1.0025         rs_d= 0.8
@@ -4116,6 +4111,8 @@ rmain n1 n2  r
 
 .lib 'saed32nm.lib' DIODE
 .endl f_dio
+
+
 .lib DIODE
 .model pd d                                                  
 +level  = 3
@@ -4127,6 +4124,7 @@ rmain n1 n2  r
 +fc     = 0               fcs    = 0                      ik     = 1e20                        
 +pj     = 9.8172e-3       tpb    = 9.7e-04                cta    = 5.7e-04
 +mj     = 5e-01	  ctp    = 1.91e-04                       jtunsw = 8.28e-10
+
 .model nd d 
 +level  = 3
 +n      = '1.19*n_d'      is     = '8.69e-07*is_d'        jsw    = '2.92e-13*pwr(2,x_jsw_d)'
@@ -4256,6 +4254,7 @@ rmain n1 n2  r
 +tvje     = 1.96e-03             )
 .endl bjt
 
+
 .lib MOS
 .lib 'saed32nm.lib' nov_sub
 .lib 'saed32nm.lib' defaults
@@ -4263,5 +4262,36 @@ rmain n1 n2  r
 .lib 'saed32nm.lib' skew_noskew
 .lib 'saed32nm.lib' montecarlo_nomc
 .lib 'saed32nm.lib' noacvsubckt  
+.LIB 'saed32nm.lib' momcap
+
+.flat n105_lvt main
+.flat p105_lvt main
+
+.flat n105 main
+.flat p105 main
+.flat n18 main
+.flat p18 main
+.flat n105_hvt main
+.flat p105_hvt main
+
+.flat N25 main
+.flat P25 main
+
+.flat ccap Cmain
+
 .endl MOS
 
+**********************  Capacitors ****************************
+
+* Metal on metal capacitor
+.LIB momcap
+.subckt ccap n1 n2 w=0.3u l=2u nf=4 startmetal=1 endmetal=2
+.param
++ layers = 'endmetal - startmetal'
++ area_f  = 'l*w'
++ perim_f = '2*(l+w)'
++ Ca = 3.83e-5
++ Cf = 0.114e-5
+Cmain n1 n2 'nf*layers*(Ca*area_f + Cf*perim_f*2.8e-7)'
+.ends ccap
+ .ENDL momcap
