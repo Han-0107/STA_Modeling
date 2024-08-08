@@ -33,13 +33,14 @@ def extract_data_to_csv(file_path, csv_writer):
         print(f"Less than two matches found in {file_path}")
         csv_writer.writerow(['', second_value, third_value, fourth_value])
 
-def process_files(folder_path):
+def process_files(folder_path, output_directory):
     files = glob.glob(os.path.join(folder_path, "*.mt0"))
     if not files:
         print(f"No .mt0 files found in {folder_path}")
         return
     
-    csv_file = "All_data.csv"
+    # Specify the path for the CSV file in the output directory
+    csv_file = os.path.join(output_directory, "All_data.csv")
     with open(csv_file, mode='w', newline='') as file:
         csv_writer = csv.writer(file)
         csv_writer.writerow(["Tphl", "Tplh", "VOL", "Trans", "Cap"])
@@ -50,4 +51,4 @@ def process_files(folder_path):
 
 if __name__ == "__main__":
     folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated'
-    process_files(folder_path)
+    process_files(folder_path, '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results')
