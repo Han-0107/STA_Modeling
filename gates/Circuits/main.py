@@ -24,5 +24,3 @@ for script in scripts:
         subprocess.run(['python', script], check=True)
     except subprocess.CalledProcessError as e:
         break
-
-print('Simulate successfully!')
