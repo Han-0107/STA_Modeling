@@ -22,7 +22,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
     hspice_code = re.sub(r'(VAL=)(\d+(\.\d+)?)', r'\g<1>{}'.format(new_val), hspice_code)
 
     # output txt
-    new_index = f'nand_VOL_{new_vol}_Trans_{new_pulse_rise_fall * 1e12:.2f}p_Cap_{new_cap * 1e15:.2f}ff.txt'
+    new_index = f'nand_VOL_{new_vol}_Trans_{new_pulse_rise_fall * 1e9:.2f}ns_Cap_{new_cap * 1e12:.2f}pf.txt'
     hspice_code = re.sub(r'(\./Delays/nand_VOL_)(\d+(\.\d+)?V)', r'\g<1>{}'.format(new_index), hspice_code)
 
     # save
@@ -35,9 +35,10 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
 
 def main(cir_path):
 
-    vols = [0.63, 0.7, 0.77]
-    pulses = [2.5e-12, 7.5e-12, 10e-12]
-    caps = [0.72e-15, 1.44e-15, 2.88e-15]
+    vols = [1.1]
+    pulses = [0.06e-9, 0.24e-9, 0.48e-9, 0.9e-9, 1.2e-9, 1.8e-9]
+    pulses = [pulse / 0.6 for pulse in pulses]
+    caps = [0.1e-12, 0.5e-12, 1.2e-12, 3e-12, 4e-12, 5e-12]
 
     for v, pulse, cap in itertools.product(vols, pulses, caps):
         new_cir(v, pulse, cap, cir_path)
@@ -46,7 +47,7 @@ def main(cir_path):
 
 
 if __name__ == '__main__':
-    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/nand_model.cir'
+    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/not_model.cir'
     main(cir_path)
 
 
