@@ -1,18 +1,17 @@
-* NAND Gate
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/asap7/7nm_TT_160803.pm
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/asap7/asap7sc6t_26_R.cdl
+* NOT Gate
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/cells.sp
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/gpdk45nm.m
 
-.temp 25
+.temp 27
 .param VOL=1.1
 VDD VDD 0 VOL
 VSS VSS 0 0
 
 VIN_AN an 0 PULSE(0 VOL 0 0.80000n 0.80000n 5n 40n)
-VIN_B b 0 DC VOL
 
 Cout y 0 3.00000p
 
-X1 an b VDD VSS y NAND2x1_ASAP7_6t_R
+X1 y an VDD VSS INVX1
 
 .tran 0.000001n 10n
 

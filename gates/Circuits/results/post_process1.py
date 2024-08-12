@@ -23,8 +23,11 @@ def extract_data_to_csv(file_path, csv_writer):
     
     with open(file_path, "r") as file:
         data = file.read()
-    pattern = r"\d+\.\d+e-\d+"
-    matches = re.findall(pattern, data)
+    lines = data.splitlines()
+    line = lines[3].strip()
+    # 允许匹配整数、浮点数、科学计数法和非数字字符串
+    pattern = r'\S+'
+    matches = re.findall(pattern, line)
     if len(matches) >= 2:
         first_match = matches[0]
         second_match = matches[1]
@@ -51,4 +54,4 @@ def process_files(folder_path, output_directory):
 
 if __name__ == "__main__":
     folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated'
-    process_files(folder_path, '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results')
+    process_files(folder_path, '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/pivot')
