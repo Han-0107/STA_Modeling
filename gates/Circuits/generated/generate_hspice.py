@@ -47,7 +47,7 @@ def main(cir_path):
 
 
 if __name__ == '__main__':
-    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/not_model.cir'
+    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/nand_model.cir'
     main(cir_path)
 
 
