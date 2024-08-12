@@ -3,7 +3,7 @@ Input File: /data/yaohuihan/Research/STA_Modeling/gates/Circuits/generated/nand
 lic:
 lic: FLEXlm: SDK_12.11.3
 lic: USER:   yaohuihan            HOSTNAME: localhost.localdomain
-lic: HOSTID: 7f0100               PID:      59812
+lic: HOSTID: 7f0100               PID:      75466
 lic: Using FLEXlm license file:
 lic: 27020@10.100.0.57
 lic: Checkout 1 hspice
@@ -28,12 +28,12 @@ lic:
  dcop: begin dcop, cpu clock= 5.06E+00
  dcop: end dcop, cpu clock= 5.06E+00 peak memory=     484 mb tot_iter=       7
  sweep: tran tran0    begin, stop_t=  1.00E-08 #sweeps=**** cpu clock= 5.06E+00
- tran: time= 1.1665E-09 tot_iter=      59 conv_iter=      24 cpu clock= 5.07E+00
- tran: time= 2.0845E-09 tot_iter=      63 conv_iter=      26 cpu clock= 5.07E+00
- tran: time= 3.0845E-09 tot_iter=      67 conv_iter=      28 cpu clock= 5.07E+00
- tran: time= 4.0845E-09 tot_iter=      71 conv_iter=      30 cpu clock= 5.07E+00
- tran: time= 5.0845E-09 tot_iter=      75 conv_iter=      32 cpu clock= 5.07E+00
- tran: time= 6.0500E-09 tot_iter=      81 conv_iter=      35 cpu clock= 5.07E+00
+ tran: time= 1.1665E-09 tot_iter=      59 conv_iter=      24 cpu clock= 5.06E+00
+ tran: time= 2.0845E-09 tot_iter=      63 conv_iter=      26 cpu clock= 5.06E+00
+ tran: time= 3.0845E-09 tot_iter=      67 conv_iter=      28 cpu clock= 5.06E+00
+ tran: time= 4.0845E-09 tot_iter=      71 conv_iter=      30 cpu clock= 5.06E+00
+ tran: time= 5.0845E-09 tot_iter=      75 conv_iter=      32 cpu clock= 5.06E+00
+ tran: time= 6.0500E-09 tot_iter=      81 conv_iter=      35 cpu clock= 5.06E+00
  tran: time= 7.2094E-09 tot_iter=     134 conv_iter=      55 cpu clock= 5.07E+00
  tran: time= 8.2094E-09 tot_iter=     138 conv_iter=      57 cpu clock= 5.07E+00
  tran: time= 9.2094E-09 tot_iter=     142 conv_iter=      59 cpu clock= 5.07E+00
