@@ -17,5 +17,7 @@ X1 y an VDD VSS INVX1
 
 .measure tran tpHL TRIG V(an) VAL=0.55 FALL=1 TARG V(y) VAL=0.55 RISE=1
 .measure tran tpLH TRIG V(an) VAL=0.55 RISE=1 TARG V(y) VAL=0.55 FALL=1
+.measure tran tran_up TRIG V(y) VAL=0.22 RISE=1 TARG V(y) VAL=0.88 RISE=1
+.measure tran tran_down TRIG V(y) VAL=0.22 FALL=1 TARG V(y) VAL=0.88 FALL=1
 
 .end
