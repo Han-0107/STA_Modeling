@@ -1,7 +1,7 @@
 * "simulator" "PrimeSim HSPICE"
 * "version" "T-2022.06-SP2-1 linux64"
 * "format" "HSP"
-* "rundate" "02:10:37 08/13/2024 "
+* "rundate" "17:37:24 08/13/2024 "
 * "netlist" "/data/yaohuihan/Research/STA_Modeling/gates/Circuits/generated/nand_VOL_1.1_Trans_2.00ns_Cap_3.00pf.cir "
 * "runtitle" "* not gate"
 * time =    0.            

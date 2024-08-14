@@ -1,4 +1,4 @@
 $DATA1 SOURCE='PrimeSim HSPICE' VERSION='T-2022.06-SP2-1 linux6' PARAM_COUNT=0
 .TITLE '* not gate'
  tphl             tplh             temper           alter#          
-    failed         1.518e-09         27.0000        1               
+  2.118e-09        1.462e-09         27.0000        1               
