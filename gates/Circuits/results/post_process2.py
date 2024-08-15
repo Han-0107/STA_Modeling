@@ -25,7 +25,7 @@ for vol_value in vol_values:
     subset_df = df[df['VOL'] == vol_value].copy()
     output_file = f'vol_{vol_value}_pivot.csv'
     # 使用 .loc 来安全地修改数据
-    subset_df.loc[:, 'Tplh'] = subset_df['Tplh'].apply(lambda x: float(x) * (10 ** 12))
+    subset_df.loc[:, 'Tplh'] = subset_df['Tplh'].apply(lambda x: round(float(x) * (10 ** 9), 5))
     subset_df.to_csv(os.path.join(pivot_folder_path, output_file), index=False, columns=['Trans', 'Cap', 'Tplh'])
 
 for filename in os.listdir(pivot_folder_path):
@@ -39,3 +39,5 @@ for filename in os.listdir(pivot_folder_path):
         pivot_df = pd.read_csv(os.path.join(normal_folder_path, pivot_file))
         pivot_df.columns = pivot_df.columns.str.replace('Trans','')
         pivot_df.to_csv(os.path.join(normal_folder_path, pivot_file), index=False)
+
+print('CSV files have been generated')

@@ -50,7 +50,7 @@ def process_files(folder_path, output_directory):
         for file_path in files:
             extract_data_to_csv(file_path, csv_writer)
     
-    print(f"Data extracted from {len(files)} files saved to {csv_file}")
+    print(f"All data extracted from {len(files)} files saved to {csv_file}")
 
 if __name__ == "__main__":
     folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated'

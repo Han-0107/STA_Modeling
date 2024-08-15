@@ -17,7 +17,8 @@ delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/gates/Circuits/re
 scripts = [ '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/generated/generate_hspice.py', 
             '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated/run_hspice.py', 
             '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/post_process1.py', 
-            '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/post_process2.py']
+            '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/post_process2.py',
+            '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/post_process3.py']
 
 for script in scripts:
     try:

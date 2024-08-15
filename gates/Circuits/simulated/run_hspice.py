@@ -11,6 +11,8 @@ def run_hspice_on_files(directory):
     for cir_file in tqdm(cir_files, desc="Running HSPICE simulations"):
         with open(os.devnull, 'w') as devnull:
             subprocess.run(["hspice", cir_file], cwd=HSPICE_DIR, stdout=devnull, stderr=devnull)
+    
+    print('Simulator: All simulations have been completed')
 
 if __name__ == "__main__":
     run_hspice_on_files(CIR_DIR)
