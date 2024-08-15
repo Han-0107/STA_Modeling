@@ -36,9 +36,9 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
 def main(cir_path):
 
     vols = [1.1]
-    pulses = [0.03e-9, 0.06e-9, 0.24e-9, 0.36e-9, 0.48e-9, 0.6e-9, 0.9e-9, 1.2e-9, 1.8e-9, 2e-9]
+    pulses = [0.06e-9, 0.24e-9, 0.48e-9, 0.9e-9, 1.2e-9, 1.8e-9]
     pulses = [pulse / 0.6 for pulse in pulses]
-    caps = [0.05e-12, 0.1e-12, 0.5e-12, 0.9e-12, 1.2e-12, 2e-12, 3e-12, 4e-12, 5e-12, 6e-12]
+    caps = [0.1e-12, 0.5e-12, 1.2e-12, 3e-12, 4e-12, 5e-12]
 
     for v, pulse, cap in itertools.product(vols, pulses, caps):
         new_cir(v, pulse, cap, cir_path)
