@@ -2,7 +2,7 @@ import os.path
 import re
 import itertools
 
-def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
+def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
     with open(cir_path, 'r') as file:
         hspice_code = file.read()
 
@@ -26,7 +26,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap,  cir_path):
     hspice_code = re.sub(r'(\./Delays/nand_VOL_)(\d+(\.\d+)?V)', r'\g<1>{}'.format(new_index), hspice_code)
 
     # save
-    new_dir = os.path.join(os.path.dirname(cir_path), 'generated')
+    new_dir = os.path.join(os.path.dirname('/data/yaohuihan/Research/STA_Modeling/gates/Circuits/'), 'generated')
     if not os.path.exists(new_dir):
         os.makedirs(new_dir)
     new_filename = new_index.split('.txt')[0]
@@ -47,7 +47,7 @@ def main(cir_path):
 
 
 if __name__ == '__main__':
-    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/not_model.cir'
+    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/models/nand_model.cir'
     main(cir_path)
 
 

@@ -1,4 +1,4 @@
-* NOT Gate
+* NAND Gate
 .include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/cells.sp
 .include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/gpdk45nm.m
 
@@ -8,10 +8,11 @@ VDD VDD 0 VOL
 VSS VSS 0 0
 
 VIN_AN an 0 PULSE(0 VOL 0 0.10000n 0.10000n 50n 500n)
+VIN_B b 0 DC VOL
 
 Cout y 0 3.00000p
 
-X1 y an VDD VSS INVX1
+X1 y b an VDD VSS NAND2X1
 
 .tran 0.000001n 300n
 

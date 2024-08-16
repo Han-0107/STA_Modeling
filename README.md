@@ -16,4 +16,12 @@
 2. subckt: /data/yaohuihan/Research/SAED32nm/SAED32nm_EDK/lib/stdcell_rvt/lvs/saed32nm_rvt.cdl
 3. NLDM libs: /data/yaohuihan/Research/SAED32nm/SAED32nm_EDK/lib/stdcell_rvt
 
+## 1.2V LIBs
 
+* INVX1: cell_fall, cell_rise
+* NAND2X1: cell_rise_A, cell_fall_A
+* AND2X1: 
+* OR2X1: 
+* NOR2X1: 
+* XOR2X1: 
+* XNOR2X1: 
