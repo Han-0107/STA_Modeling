@@ -25,14 +25,14 @@ for vol_value in vol_values:
     subset_df = df[df['VOL'] == vol_value].copy()
     output_file = f'vol_{vol_value}_pivot.csv'
     # 使用 .loc 来安全地修改数据
-    subset_df.loc[:, 'Tphl'] = subset_df['Tphl'].apply(lambda x: round(float(x) * (10 ** 9), 5))
-    subset_df.to_csv(os.path.join(pivot_folder_path, output_file), index=False, columns=['Trans', 'Cap', 'Tphl'])
+    subset_df.loc[:, 'Tplh'] = subset_df['Tplh'].apply(lambda x: round(float(x) * (10 ** 9), 5))
+    subset_df.to_csv(os.path.join(pivot_folder_path, output_file), index=False, columns=['Trans', 'Cap', 'Tplh'])
 
 for filename in os.listdir(pivot_folder_path):
     if filename.startswith('vol_') and filename.endswith('_pivot.csv'):
         file_path = os.path.join(pivot_folder_path, filename)
         df = pd.read_csv(file_path)
-        pivot_df = df.pivot(index='Trans', columns='Cap', values='Tphl')
+        pivot_df = df.pivot(index='Trans', columns='Cap', values='Tplh')
         pivot_file = filename.replace('_pivot.csv', '.csv')
         pivot_df.to_csv(os.path.join(normal_folder_path, pivot_file))
         # 加载 CSV 文件并清空 A1 单元格

@@ -19,9 +19,19 @@
 ## 1.2V LIBs
 
 * INVX1: cell_fall, cell_rise
-* NAND2X1: cell_rise_A, cell_fall_A
-* AND2X1: 
-* OR2X1: 
-* NOR2X1: 
-* XOR2X1: 
+* NAND2X1: cell_rise_A, cell_fall_A, cell_rise_B, cell_fall_B
+* AND2X1: cell_fall_A, cell_rise_A, cell_fall_B, cell_rise_B
+* OR2X1: cell_fall_A, cell_rise_A, cell_fall_B, cell_rise_B
+* NOR2X1: cell_fall_A, cell_rise_A, cell_fall_B, cell_rise_B
+* XOR2X1: cell_fall_A, cell_rise_A, cell_fall_B, cell_rise_B
+* XNOR2X1: cell_fall_A, cell_rise_A, cell_fall_B, cell_rise_B
+
+## 1.1V LIBs
+
+* INVX1: cell_fall, cell_rise
+* NAND2X1: cell_rise_A, cell_fall_A, cell_rise_B, cell_fall_B
+* AND2X1: cell_rise_A, cell_fall_A, cell_rise_B, cell_fall_B
+* OR2X1: cell_rise_A, cell_fall_A, cell_rise_B, cell_fall_B
+* NOR2X1: cell_rise_A, cell_fall_A, cell_rise_B, cell_fall_B
+* XOR2X1: cell_rise_A, cell_fall_A, cell_rise_B, cell_fall_B
 * XNOR2X1: 

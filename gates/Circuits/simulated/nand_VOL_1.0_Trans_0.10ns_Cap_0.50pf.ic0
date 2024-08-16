@@ -1,0 +1,17 @@
+* "simulator" "PrimeSim HSPICE"
+* "version" "T-2022.06-SP2-1 linux64"
+* "format" "HSP"
+* "rundate" "17:43:04 08/16/2024 "
+* "netlist" "/data/yaohuihan/Research/STA_Modeling/gates/Circuits/generated/nand_VOL_1.0_Trans_0.10ns_Cap_0.50pf.cir "
+* "runtitle" "* not gate"
+* time =    0.            
+* temperature =   27.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ an =   0.            
++ vdd =   1.0000        
++ vss =   0.            
++ y = 999.9905m       
+***   END: Saved Operating Point ***                     
