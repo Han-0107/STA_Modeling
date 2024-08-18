@@ -12,7 +12,7 @@ VIN_B b 0 DC VOL
 
 Cout y 0 0.1p
 
-X1 y b an VDD VSS NAND2X1
+X1 y an b VDD VSS NAND2X1
 
 .tran 0.000001n 300n
 
