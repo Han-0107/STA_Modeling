@@ -1,6 +1,7 @@
 import os.path
 import re
 import itertools
+import numpy as np
 
 def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
     with open(cir_path, 'r') as file:
@@ -35,10 +36,10 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
 
 def main(cir_path):
 
-    vols = [1.0]
-    pulses = [0.06e-9, 0.24e-9, 0.48e-9, 0.9e-9, 1.2e-9, 1.8e-9]
+    vols = np.arange(0.9, 1.25, 0.05)
+    pulses = [0.06e-9, 1.8e-9]
     pulses = [pulse / 0.6 for pulse in pulses]
-    caps = [0.1e-12, 0.5e-12, 1.2e-12, 3e-12, 4e-12, 5e-12]
+    caps = [0.1e-12, 5e-12]
 
     for v, pulse, cap in itertools.product(vols, pulses, caps):
         new_cir(v, pulse, cap, cir_path)
