@@ -8,6 +8,8 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
         hspice_code = file.read()
 
     new_val = new_vol/2
+    new_val = round(new_val, 3)
+    new_vol = round(new_vol, 3)
     # VOL
     hspice_code = re.sub(r'(\.param VOL=)(\d+(\.\d+)?)', r'\g<1>{}'.format(new_vol), hspice_code)
 
