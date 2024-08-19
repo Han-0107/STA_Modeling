@@ -1,6 +1,7 @@
 * TEST
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/cells.sp
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/gpdk45nm.m
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK++/INVX1.pex.netlist.INVX1.pxi
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK++/INVX1.pex.netlist
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK++/gpdk45nm.m
 
 .temp 27
 .param VOL=1.1
@@ -11,7 +12,7 @@ VIN_AN a1 0 PULSE(0 VOL 0 0.1n 0.1n 50n 500n)
 
 X0 y1 a1 VDD VSS INVX1
 
-Cout1 y1 0 0.030635p
+Cout1 y1 0 0.01860p
 
 Cout2 y2 0 0.1p
 
