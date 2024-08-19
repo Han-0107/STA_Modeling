@@ -1,0 +1,27 @@
+* TEST
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/cells.sp
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/gpdk45nm.m
+
+.temp 27
+.param VOL=1.1
+VDD VDD 0 VOL
+VSS VSS 0 0
+
+VIN_AN a1 0 PULSE(0 VOL 0 0.1n 0.1n 50n 500n)
+
+X0 y1 a1 VDD VSS INVX1
+
+Cout1 y1 0 0.030635p
+
+Cout2 y2 0 0.1p
+
+X1 y2 y1 VDD VSS INVX1
+
+.tran 0.000001n 300n
+
+.measure tran trans_down TRIG V(y1) VAL=0.88 FALL=1 TARG V(y1) VAL=0.22 FALL=1
+.measure tran trans_up TRIG V(y1) VAL=0.22 RISE=1 TARG V(y1) VAL=0.88 RISE=1
+.measure tran tpHL TRIG V(y1) VAL=0.55 FALL=1 TARG V(y2) VAL=0.55 RISE=1
+.measure tran tpLH TRIG V(y1) VAL=0.55 RISE=1 TARG V(y2) VAL=0.55 FALL=1
+
+.end
