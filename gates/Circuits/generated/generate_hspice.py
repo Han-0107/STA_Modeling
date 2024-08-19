@@ -38,7 +38,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
 
 def main(cir_path):
 
-    vols = np.arange(0.9, 1.25, 0.05)
+    vols = np.arange(0.9, 1.25, 0.01)
     pulses = [0.06e-9, 1.8e-9]
     pulses = [pulse / 0.6 for pulse in pulses]
     caps = [0.1e-12, 5e-12]
