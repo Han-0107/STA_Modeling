@@ -1,5 +1,6 @@
 * XNOR Gate
-.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/cells.sp
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/subckts/XNOR2X1.pex.netlist
+.include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/subckts/XNOR2X1.pex.netlist.INVX1.pxi
 .include /data/yaohuihan/Research/STA_Modeling/gates/Libs/FreePDK/gpdk45nm.m
 
 .temp 27

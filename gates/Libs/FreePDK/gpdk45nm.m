@@ -1,5 +1,4 @@
-
-.model  nmos  nmos  level = 54
+.model  NMOS_VTL  nmos  level = 54
 
 +version = 4.0    binunit = 1    paramchk= 1    mobmod  = 0
 +capmod  = 2      igcmod  = 1    igbmod  = 1    geomod  = 1
@@ -78,7 +77,7 @@
 +rbps    = 15           rbdb    = 15           rbsb    = 15           ngcon   = 1          
 
 
-.model  pmos  pmos  level = 54
+.model  PMOS_VTL  pmos  level = 54
 
 +version = 4.0    binunit = 1    paramchk= 1    mobmod  = 0
 +capmod  = 2      igcmod  = 1    igbmod  = 1    geomod  = 1
