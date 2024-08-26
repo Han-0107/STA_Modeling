@@ -2,8 +2,8 @@ import os
 import subprocess
 from tqdm import tqdm
 
-CIR_DIR = "/data/yaohuihan/Research/STA_Modeling/gates/Circuits/generated"
-HSPICE_DIR = "/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated"  
+CIR_DIR = "/data/yaohuihan/Research/STA_Modeling/gates/Cirs/generated"
+HSPICE_DIR = "/data/yaohuihan/Research/STA_Modeling/gates/Cirs/simulated"  
 
 def run_hspice_on_files(directory):
     cir_files = [os.path.join(directory, filename) for filename in os.listdir(directory) if filename.endswith(".cir")]

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-file_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/pivot/All_data.csv'
+file_path = '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/results/pivot/All_data.csv'
 df = pd.read_csv(file_path)
 vol_values = df['VOL'].unique()
 
@@ -17,8 +17,8 @@ df['Tplh'] = df['Tplh'].map(replace_failed_with_zero)
 df['Tphl'] = df['Tphl'].map(replace_failed_with_zero)
 
 # 定义文件夹路径以分别存储CSV文件和pivot CSV文件
-normal_folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results'
-pivot_folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/pivot'
+normal_folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/results'
+pivot_folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/results/pivot'
 
 # 创建文件夹，如果不存在
 os.makedirs(normal_folder_path, exist_ok=True)

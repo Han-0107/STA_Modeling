@@ -57,6 +57,6 @@ def process_folder(folder_path):
             save_data(file_path, data)
 
 
-folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results'
+folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/results'
 process_folder(folder_path)
 print('LIB files have been generated')

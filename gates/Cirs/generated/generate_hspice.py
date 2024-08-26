@@ -29,7 +29,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
     hspice_code = re.sub(r'(\./Delays/nand_VOL_)(\d+(\.\d+)?V)', r'\g<1>{}'.format(new_index), hspice_code)
 
     # save
-    new_dir = os.path.join(os.path.dirname('/data/yaohuihan/Research/STA_Modeling/gates/Circuits/'), 'generated')
+    new_dir = os.path.join(os.path.dirname('/data/yaohuihan/Research/STA_Modeling/gates/Cirs/'), 'generated')
     if not os.path.exists(new_dir):
         os.makedirs(new_dir)
     new_filename = new_index.split('.txt')[0]
@@ -50,7 +50,7 @@ def main(cir_path):
 
 
 if __name__ == '__main__':
-    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/models/and_model.cir'
+    cir_path = '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/models/and_model.cir'
     main(cir_path)
 
 

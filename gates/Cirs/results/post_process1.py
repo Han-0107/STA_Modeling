@@ -53,5 +53,5 @@ def process_files(folder_path, output_directory):
     print(f"All data extracted from {len(files)} files saved to {csv_file}")
 
 if __name__ == "__main__":
-    folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/simulated'
-    process_files(folder_path, '/data/yaohuihan/Research/STA_Modeling/gates/Circuits/results/pivot')
+    folder_path = '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/simulated'
+    process_files(folder_path, '/data/yaohuihan/Research/STA_Modeling/gates/Cirs/results/pivot')
