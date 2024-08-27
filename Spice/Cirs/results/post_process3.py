@@ -59,4 +59,4 @@ def process_folder(folder_path):
 
 folder_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results'
 process_folder(folder_path)
-print('LIB files have been generated')
+print('\033[1;32mPost Process\033[0m: LIB files have been generated')

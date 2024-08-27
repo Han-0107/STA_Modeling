@@ -57,4 +57,4 @@ for filename in os.listdir(pivot_folder_path):
         pivot_df.columns = pivot_df.columns.str.replace('Trans', '')
         pivot_df.to_csv(os.path.join(normal_folder_path, pivot_file), index=False)
 
-print('CSV files have been generated')
+print('\033[1;32mPost Process\033[0m: CSV files have been generated')

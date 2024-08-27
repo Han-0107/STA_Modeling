@@ -36,7 +36,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
     with open(new_dir + '/' + f'{new_filename}.cir', 'w') as file:
         file.write(hspice_code)
 
-def main(cir_path):
+def generate(cir_path):
 
     vols = np.arange(0.9, 1.0, 0.1)
     pulses = [0.06e-9, 1.8e-9]
@@ -46,11 +46,7 @@ def main(cir_path):
     for v, pulse, cap in itertools.product(vols, pulses, caps):
         new_cir(v, pulse, cap, cir_path)
     
-    print('Generator: All .cir files have been generated')
+    print('\033[1;32mGenerator\033[0m: All .cir files have been generated')
 
-
-if __name__ == '__main__':
-    cir_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/models/and_model.cir'
-    main(cir_path)
-
-
+cir_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/models/and_model.cir'
+generate(cir_path)
