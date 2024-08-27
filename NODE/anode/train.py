@@ -68,11 +68,11 @@ class Trainer():
         num_epochs : int
         """
         for epoch in range(num_epochs):
-            avg_loss = self._train_epoch(data_loader)
             if self.verbose:
-                print("Epoch {}: {:.3f}".format(epoch + 1, avg_loss))
+                print("\n\033[1;33mTrain Epoch {}\033[0m".format(epoch + 1))
+            avg_loss = self._train_epoch(data_loader, epoch)
 
-    def _train_epoch(self, data_loader):
+    def _train_epoch(self, data_loader, epoch):
         """Trains model for an epoch.
 
         Parameters
@@ -106,12 +106,13 @@ class Trainer():
 
             if i % self.print_freq == 0:
                 if self.verbose:
-                    print("\nIteration {}/{}".format(i, len(data_loader)))
-                    print("Loss: {:.3f}".format(loss.item()))
-                    if not self.is_resnet:
-                        print("NFE: {}".format(iteration_nfes))
-                        print("BNFE: {}".format(iteration_backward_nfes))
-                        print("Total NFE: {}".format(iteration_nfes + iteration_backward_nfes))
+                    print("Loss: {:.4f}".format(loss.item()))
+                    print("Iteration {}/{}".format(i, len(data_loader)))
+                    # print("Loss: {:.3f}".format(loss.item()))
+                    # if not self.is_resnet:
+                    #     print("NFE: {}".format(iteration_nfes))
+                    #     print("BNFE: {}".format(iteration_backward_nfes))
+                    #     print("Total NFE: {}".format(iteration_nfes + iteration_backward_nfes))
 
             # Record information in buffer at every iteration
             self.buffer['loss'].append(loss.item())
