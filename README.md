@@ -11,5 +11,5 @@
 
 This repo refers to https://github.com/EmilienDupont/augmented-neural-odes
 
-* The Dataset for Neural ODE model is saved in `./Libs/Ours/Dataset`.
+* The Dataset for Neural ODE model is saved in `./Spice/Libs/Ours/Dataset`.
 * run `python ./NODE/main.py`.
