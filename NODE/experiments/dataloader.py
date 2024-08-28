@@ -4,8 +4,8 @@ class CellData():
 
     def __getitem__(self, index):
         vector = self.data[index]
-        labels = vector[:1]
-        inputs = vector[1:]
+        labels = vector[6:]
+        inputs = vector[:6]
         return inputs, labels
     
     def __len__(self):

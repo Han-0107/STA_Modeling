@@ -1,4 +1,5 @@
 import json
+import torch
 import torch.nn as nn
 from numpy import mean
 
@@ -42,7 +43,7 @@ class Trainer():
         if self.classification:
             self.loss_func = nn.CrossEntropyLoss()
         else:
-            self.loss_func = nn.SmoothL1Loss()
+            self.loss_func = nn.L1Loss()
         self.print_freq = print_freq
         self.record_freq = record_freq
         self.steps = 0
@@ -107,7 +108,11 @@ class Trainer():
             if i % self.print_freq == 0:
                 if self.verbose:
                     print("Loss: {:.4f}".format(loss.item()))
-                    print("Iteration {}/{}".format(i, len(data_loader)))
+                    # print("Prediction: ", y_pred)
+                    # print("Truth: ", y_batch)
+                    accuracy = self.calculate_accuracy(y_pred, y_batch)
+                    print("Accuracy: ", accuracy)
+                    # print("Iteration {}/{}".format(i, len(data_loader)))
                     # print("Loss: {:.3f}".format(loss.item()))
                     # if not self.is_resnet:
                     #     print("NFE: {}".format(iteration_nfes))
@@ -172,3 +177,12 @@ class Trainer():
             iteration_nfes = self.model.odefunc.nfe
             self.model.odefunc.nfe = 0
         return iteration_nfes
+
+    def calculate_accuracy(self, predictions, truths):
+        # 计算绝对误差
+        absolute_errors = torch.abs(predictions - truths)
+        # 计算相对误差
+        relative_errors = absolute_errors / torch.abs(truths)
+        # 计算平均准确率
+        accuracy = relative_errors.mean().item()
+        return round(accuracy, 4)

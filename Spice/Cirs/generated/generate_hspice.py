@@ -38,10 +38,10 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
 
 def generate(cir_path):
 
-    vols = np.arange(0.9, 1.0, 0.1)
-    pulses = [0.06e-9, 1.8e-9]
+    vols = np.arange(0.9, 1.3, 0.1)
+    pulses = np.arange(0.06e-9, 0.9e-9, 0.05e-9)
     pulses = [pulse / 0.6 for pulse in pulses]
-    caps = [0.1e-12, 5e-12]
+    caps = np.arange(0.1e-12, 1.2e-12, 0.1e-12)
 
     for v, pulse, cap in itertools.product(vols, pulses, caps):
         new_cir(v, pulse, cap, cir_path)

@@ -10,15 +10,18 @@ def delete_non_python_files(folder_path):
 
 delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/generated')
 delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/simulated')
-delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results')
+delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/lib')
+delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/csv')
 delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/pivot')
+
 
 
 scripts = [ '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/generated/generate_hspice.py', 
             '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/simulated/run_hspice.py', 
             '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/post_process1.py', 
             '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/post_process2.py',
-            '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/post_process3.py']
+            '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/post_process3.py',
+            '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/post_process4.py']
 
 for script in scripts:
     try:

@@ -102,8 +102,12 @@ class Tester():
 
                 if i % self.print_freq == 0:
                     if self.verbose:
-                        print("Iteration {}/{}".format(i, len(data_loader)))
-                        print("Loss: {:.4f}".format(loss.item()))
+                        # print("Iteration {}/{}".format(i, len(data_loader)))
+                        # print("Loss: {:.4f}".format(loss.item()))
+                        accuracy = self.calculate_accuracy(y_pred, y_batch)
+                        print("Accuracy: ", accuracy)
+                        print("Prediction: ", y_pred)
+                        print("Truth: ", y_batch)
                         # print("Loss: {:.3f}".format(loss.item()))
                         # if not self.is_resnet:
                         #     print("NFE: {}".format(iteration_nfes))
@@ -168,3 +172,12 @@ class Tester():
             iteration_nfes = self.model.odefunc.nfe
             self.model.odefunc.nfe = 0
         return iteration_nfes
+
+    def calculate_accuracy(self, predictions, truths):
+        # 计算绝对误差
+        absolute_errors = torch.abs(predictions - truths)
+        # 计算相对误差
+        relative_errors = absolute_errors / torch.abs(truths)
+        # 计算平均准确率
+        accuracy = relative_errors.mean().item()
+        return round(accuracy, 4)
