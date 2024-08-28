@@ -110,8 +110,8 @@ class Trainer():
                     print("Loss: {:.4f}".format(loss.item()))
                     # print("Prediction: ", y_pred)
                     # print("Truth: ", y_batch)
-                    accuracy = self.calculate_accuracy(y_pred, y_batch)
-                    print("Accuracy: ", accuracy)
+                    error = self.calculate_error(y_pred, y_batch)
+                    print("Error: ", error)
                     # print("Iteration {}/{}".format(i, len(data_loader)))
                     # print("Loss: {:.3f}".format(loss.item()))
                     # if not self.is_resnet:
@@ -178,11 +178,8 @@ class Trainer():
             self.model.odefunc.nfe = 0
         return iteration_nfes
 
-    def calculate_accuracy(self, predictions, truths):
-        # 计算绝对误差
+    def calculate_error(self, predictions, truths):
         absolute_errors = torch.abs(predictions - truths)
-        # 计算相对误差
         relative_errors = absolute_errors / torch.abs(truths)
-        # 计算平均准确率
-        accuracy = relative_errors.mean().item()
-        return round(accuracy, 4)
+        error = relative_errors.mean().item()
+        return round(error, 4)
