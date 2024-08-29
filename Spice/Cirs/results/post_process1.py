@@ -51,8 +51,8 @@ def extract_data_to_csv(file_path, csv_writer):
     pattern2 = r'\b(and|nand|nor|not|or|xnor|xor)\b'
     matches2 = re.findall(pattern2, line2)
     if len(matches) >= 2:
-        first_match = round(float(matches[0]) * (10 ** 12), 5)
-        second_match = round(float(matches[1]) * (10 ** 12), 5)
+        first_match = round(float(matches[0]) * (10 ** 9), 5)
+        second_match = round(float(matches[1]) * (10 ** 9), 5)
         first_value = get_code_from_list(matches2)
         csv_writer.writerow([first_value, second_value, third_value, fourth_value, first_match, second_match])
     else:

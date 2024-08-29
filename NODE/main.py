@@ -56,5 +56,5 @@ trainer.train(train_loader, train_epochs)
 
 # Test the model
 model.eval()
-tester = Tester(model, device)
+tester = Tester(model, device, print_freq=50)
 tester.test(test_loader, test_epochs)

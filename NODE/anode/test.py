@@ -105,7 +105,7 @@ class Tester():
                         # print("Iteration {}/{}".format(i, len(data_loader)))
                         # print("Loss: {:.4f}".format(loss.item()))
                         error = self.calculate_error(y_pred, y_batch)
-                        print("Error: ", error)
+                        print("\nError: ", error)
                         print("Prediction: ", y_pred)
                         print("Truth: ", y_batch)
                         # print("Loss: {:.3f}".format(loss.item()))

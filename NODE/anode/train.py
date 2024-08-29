@@ -107,11 +107,11 @@ class Trainer():
 
             if i % self.print_freq == 0:
                 if self.verbose:
-                    print("Loss: {:.4f}".format(loss.item()))
-                    # print("Prediction: ", y_pred)
-                    # print("Truth: ", y_batch)
+                    # print("Loss: {:.4f}".format(loss.item()))
                     error = self.calculate_error(y_pred, y_batch)
-                    print("Error: ", error)
+                    print("\nError: ", error)
+                    print("Prediction: ", y_pred)
+                    print("Truth: ", y_batch)
                     # print("Iteration {}/{}".format(i, len(data_loader)))
                     # print("Loss: {:.3f}".format(loss.item()))
                     # if not self.is_resnet:
