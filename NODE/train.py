@@ -8,8 +8,8 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description="ML STA Training")
-parser.add_argument("--train-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/train_data', help="train dir root")
-parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/test_data', help="test dir root")
+parser.add_argument("--train-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset', help="train dir root")
+parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset', help="test dir root")
 parser.add_argument("--save-dir", type=str, default='results/ANODE', help="save dir")
 parser.add_argument("--epoch", type=int, default=250, help="training epoch")
 parser.add_argument("--print-freq", type=int, default=50, help="printing frequency")

@@ -53,7 +53,7 @@ def load_model(model, model_filepath, device):
 def main():
 
     parser = argparse.ArgumentParser(description="ML STA test")
-    parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/test_data', help="test dir root")
+    parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset', help="test dir root")
     parser.add_argument("--filter-str", type=str, default='1.2.txt', help="filter string")
     parser.add_argument("--single-mode", type=bool, default=False, help="whether to test the single test file")
     parser.add_argument("--input-dim", type=int, default=6, help="input data dim")
