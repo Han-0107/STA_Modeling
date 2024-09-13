@@ -15,7 +15,7 @@ data_dim = 6
 hidden_dim = 20
 
 # 指定文件夹路径
-folder_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/'
+folder_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/train_data'
 
 # 初始化一个空列表来存储所有文件的数据
 all_data = []

@@ -223,6 +223,8 @@ class ODENet(nn.Module):
         self.time_dependent = time_dependent
         self.tol = tol
 
+
+
         odefunc = ODEFunc(device, data_dim, hidden_dim, augment_dim,
                           time_dependent, non_linearity)
 

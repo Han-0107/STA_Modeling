@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 file_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/pivot/All_data.csv'
-data_folder_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset'
+data_folder_path = '/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/train_data'
 os.makedirs(data_folder_path, exist_ok=True)
 df = pd.read_csv(file_path)
 vol_values = df['VOL'].unique()

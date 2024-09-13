@@ -69,6 +69,7 @@ class Tester():
             if self.verbose:
                 print("\n\033[1;32mTest Epoch {}\033[0m".format(epoch + 1))
             avg_loss = self._test_epoch(data_loader, epoch)
+            print("epoch loss: {:.4f}".format(avg_loss))
 
     def _test_epoch(self, data_loader, epoch):
         """Tests model for an epoch.
