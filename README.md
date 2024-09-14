@@ -7,7 +7,7 @@
 
 *PS: You can run `python ./Spice/Tools/delete_files.py` to delete complex process files.*
 
-## Splitting data
+## Splitting Data
 
 * Change the parameters in `./Spice/Libs/Ours/Dataset/split_data.py` to decide which voltage is for train or test
 * Run `python ./Spice/Libs/Ours/Dataset/split_data.py` to split data.
