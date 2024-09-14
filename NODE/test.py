@@ -55,7 +55,7 @@ def main():
     parser.add_argument("--single-mode", type=bool, default=False, help="whether to test the single test file")
     parser.add_argument("--input-dim", type=int, default=6, help="input data dim")
     parser.add_argument("--hidden-dim", type=int, default=64, help="hidden dim")
-    parser.add_argument("--pkl-path", type=str, default='/data/yaohuihan/Research/STA_Modeling/NODE/results/ANODE_250/model.pkl', help="pkl file path")
+    parser.add_argument("--pkl-path", type=str, default='/data/yaohuihan/Research/STA_Modeling/NODE/models/ANODE_250/model.pkl', help="pkl file path")
     args = parser.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
