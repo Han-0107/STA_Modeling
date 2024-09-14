@@ -8,11 +8,10 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description="ML STA Training")
-parser.add_argument("--train-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset', help="train dir root")
+parser.add_argument("--train-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/train', help="train dir root")
 parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset', help="test dir root")
 parser.add_argument("--save-dir", type=str, default='results/ANODE', help="save dir")
 parser.add_argument("--epoch", type=int, default=250, help="training epoch")
-parser.add_argument("--print-freq", type=int, default=50, help="printing frequency")
 parser.add_argument("--eval-epoch", type=int, default=5, help="evaluating frequency")
 parser.add_argument("--lr", type=float, default=5e-3, help="learning rate")
 parser.add_argument("--input-dim", type=int, default=6, help="input data dim")
@@ -37,8 +36,7 @@ optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
 # Train
 model.train()
-trainer = Trainer(model, optimizer, device,
-                  print_freq=args.print_freq, save_dir=(f'{args.save_dir}_{args.epoch}', 0),
+trainer = Trainer(model, optimizer, device, save_dir=(f'{args.save_dir}_{args.epoch}', 0),
                   test_loader=test_loader, evaluate_epoch=args.eval_epoch,)
 trainer.train(train_loader, args.epoch)
 torch.save(model.state_dict(), f'{args.save_dir}_{args.epoch}/model.pkl')
