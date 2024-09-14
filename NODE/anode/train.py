@@ -101,8 +101,8 @@ class Trainer():
                 print("\n\033[1;33mTrain Epoch {}\033[0m".format(epoch + 1))
             avg_loss = self._train_epoch(data_loader, epoch)
 
-            print("epoch loss: {:.4f}".format(avg_loss))
-            print("MAPE error: {:.4f} %".format(mean(self.histories['error_history'][-1])))
+            print("Epoch Loss: {:.4f}".format(avg_loss))
+            print("MAPE: {:.4f} %".format(mean(self.histories['error_history'][-1])))
 
             if self.evaluate_epoch and (epoch % self.evaluate_epoch ==0):
                 self.evaluate()
@@ -153,11 +153,11 @@ class Trainer():
                 iteration_backward_nfes = self._get_and_reset_nfes()
                 epoch_backward_nfes += iteration_backward_nfes
 
-            if i % self.print_freq == 0:
-                if self.verbose:
+            # if i % self.print_freq == 0:
+            #     if self.verbose:
                     # print("Loss: {:.4f}".format(loss.item()))
-                    error = self.calculate_error(y_pred, y_batch)
-                    print("\nError: ", error)
+                    # error = self.calculate_error(y_pred, y_batch)
+                    # print("\nError: ", error)
                     # print("Prediction: ", y_pred)
                     # print("Truth: ", y_batch)
                     # print("Iteration {}/{}".format(i, len(data_loader)))

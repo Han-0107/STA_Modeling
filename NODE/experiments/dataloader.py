@@ -15,9 +15,10 @@ class CellData(Dataset):
         all_data = []
 
         for filename in os.listdir(folder_path):
+            # print(f"Checking file: {filename}, filter: {self.filter_str}")
             if filename.endswith(self.filter_str):
                 file_path = os.path.join(folder_path, filename)
-
+                # print(f"Loading file: {filename}")
                 with open(file_path, 'r') as file:
                     data_str = file.read()
 
