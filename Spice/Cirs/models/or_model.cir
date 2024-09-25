@@ -8,7 +8,7 @@
 VDD VDD 0 VOL
 VSS VSS 0 0
 
-VIN_AN an 0 PULSE(0 VOL 0 0.1n 0.1n 50n 500n)
+VIN_AN an 0 PULSE(0 VOL 0 0.1n 0.1n 50n 100n)
 VIN_B b 0 DC 0
 
 Cout y 0 0.1p
