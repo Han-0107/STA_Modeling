@@ -1,7 +1,7 @@
 * AND Gate
-.include /data/yaohuihan/Research/STA_Modeling/Spice/Libs/FreePDK/subckts/AND2X1.pex.netlist
-.include /data/yaohuihan/Research/STA_Modeling/Spice/Libs/FreePDK/subckts/AND2X1.pex.netlist.AND2X1.pxi
-.include /data/yaohuihan/Research/STA_Modeling/Spice/Libs/FreePDK/gpdk45nm.m
+.include ./FreePDK/subckts/AND2X1.pex.netlist
+.include ./FreePDK/subckts/AND2X1.pex.netlist.AND2X1.pxi
+.include ./FreePDK/gpdk45nm.m
 
 .temp 27
 .param VOL=1.1

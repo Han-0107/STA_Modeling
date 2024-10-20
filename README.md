@@ -1,4 +1,4 @@
-## SPICE Simulation
+## Auto SPICE Simulation
 
 1. Ensure there is **hspice** in the current environment.
 2. Put the sub-circuit definition to `./Spice/Cirs/models/XXX.cir`.

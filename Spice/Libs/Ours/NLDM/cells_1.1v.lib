@@ -5,7 +5,7 @@
  capacitance model : typ
  other model :       typ
 */
-library(gscl45nm) {
+library(cells_1.1v) {
 
   delay_model : table_lookup;
   in_place_swap_mode : match_footprint;
