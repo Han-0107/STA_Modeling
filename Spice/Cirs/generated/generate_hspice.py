@@ -25,7 +25,7 @@ def new_cir(new_vol, new_pulse_rise_fall, new_cap, cir_path):
     hspice_code = re.sub(r'(VAL=)(\d+(\.\d+)?)', r'\g<1>{}'.format(new_val), hspice_code)
 
     # output txt
-    new_index = f'nand_VOL_{new_vol}_Trans_{new_pulse_rise_fall * 1e9:.2f}ns_Cap_{new_cap * 1e12:.2f}pf.txt'
+    new_index = f'nand_VOL_{new_vol}_Trans_{new_pulse_rise_fall * 1e12:.2f}ps_Cap_{new_cap * 1e12:.2f}pf.txt'
     hspice_code = re.sub(r'(\./Delays/nand_VOL_)(\d+(\.\d+)?V)', r'\g<1>{}'.format(new_index), hspice_code)
 
     # save
