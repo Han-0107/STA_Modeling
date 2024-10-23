@@ -35,13 +35,13 @@ def new_cir(new_vol, new_cap, cir_path, transition_time):
         file.write(hspice_code)
 
 def generate(cir_path):
-    transition_time = [10, 20, 55]
+    transition_time = [10, 20, 30, 50, 70, 90, 120, 150, 200, 250, 300, 350]
     subprocess.run(["python",
                     "/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/models/waveform/gen_waveform.py",
                     str(transition_time)])
 
-    vols = np.arange(0.7, 0.9, 0.1)
-    caps = np.arange(2.8e-15, 3e-15, 0.1e-15)
+    vols = np.arange(0.6, 0.8, 0.01)
+    caps = np.array([2.88e-15, 5.76e-15, 7e-15, 11.52e-15, 23.04e-15, 30e-15, 46.08e-15, 92.16e-15, 150e-15, 184.32e-15])
     for i in transition_time:
         for v, cap in itertools.product(vols, caps):
             new_cir(v, cap, cir_path, i)

@@ -1,0 +1,23 @@
+* NAND Gate
+.include /data/yaohuihan/Research/STA_Modeling/Spice/Libs/asap7/subckts/7nm_TT_160803.pm
+.include /data/yaohuihan/Research/STA_Modeling/Spice/Libs/asap7/subckts/asap7sc7p5t_28_R.cdl
+
+.option post=2
+.temp 25
+.param VOL=0.77
+VDD VDD 0 VOL
+VSS VSS 0 0
+
+.include /data/yaohuihan/Research/STA_Modeling/Spice/Cirs/models/waveform/driver_20p
+VIN_B b 0 DC VOL
+
+Cout y 0 0.18432p
+
+X1 an b VDD VSS y NAND2x2_ASAP7_75t_R
+
+.tran 0.000001n 500n
+
+.measure tran tpHL TRIG V(an) VAL=0.385 FALL=1 TARG V(y) VAL=0.385 RISE=1
+.measure tran tpLH TRIG V(an) VAL=0.385 RISE=1 TARG V(y) VAL=0.385 FALL=1
+
+.end
