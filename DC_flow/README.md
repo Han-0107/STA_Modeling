@@ -1,3 +1,5 @@
+# Design Compiler flow
+
 ## How does Design Compiler customize library files for synthesis and timing analysis?
 
 * Read the target library: `set target_library "./libs/cells_1.0v.db ./libs/cells_1.2v.db"`
@@ -16,5 +18,7 @@ The transition time is defined in the `.sdc` file, and the load capacitance is d
 
 ## How does Library Compiler converts .lib files to .db files?
 
-* lc_shell> read_lib xxx.lib
-* lc_shell > write_lib -format db xxx -output xx.db
+* `lc_shell> read_lib xxx.lib`
+* `lc_shell > write_lib -format db xxx -output xx.db`
+
+![DC flow](DC_flow/DC.PNG)
