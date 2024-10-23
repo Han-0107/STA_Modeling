@@ -22,3 +22,9 @@ This repo refers to https://github.com/EmilienDupont/augmented-neural-odes. The 
 
 1. Run `python ./NODE/train.py`, the log of training will be stored in `./NODE/log`. You can examine them in [TensorBoard](https://www.tensorflow.org/tensorboard).
 2. Run `python ./NODE/test.py`, you can choose a model manually.
+
+After training, each model will record the changes of its loss and MAPE during training and store them in `./NODE/models/ANODE_xxx`. Like these:
+
+![Loss & Iterations](NODE/models/ANODE_300/training_loss_epoch_300.png)
+
+![MAPE & Iterations](NODE/models/ANODE_300/training_mape_epoch_300.png)
