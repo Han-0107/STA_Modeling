@@ -57,3 +57,9 @@ The transition time is defined in the `.sdc` file, and the load capacitance is d
 
 * lc_shell> read_lib xxx.lib
 * lc_shell > write_lib -format db xxx -output xx.db
+![DC flow](DC_flow/DC.PNG)
+## OpenTimer flow
+
+Please see the details in https://github.com/OpenTimer/OpenTimer
+
+![OT flow](DC_flow/OT.PNG)
