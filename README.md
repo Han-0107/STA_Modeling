@@ -16,6 +16,8 @@ This process is designed to automatically run hspice scripts in large batches an
 1. Change the parameters in `./Spice/Libs/Dataset/split_data.py` to decide which voltage is for train or test
 2. Run `python ./Spice/Libs/Dataset/split_data.py` to split data.
 
+![HSPICE flow](Spice/HSPICE.png)
+
 ## Time Prediction through Neural ODE
 
 ### Data Format
