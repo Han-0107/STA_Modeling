@@ -2,14 +2,13 @@ import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from anode.models import ODENet
-from anode.train import Trainer
+from anode.trainer import Trainer
 from experiments.dataloader import CellData
 import argparse
 
-
 parser = argparse.ArgumentParser(description="ML STA Training")
-parser.add_argument("--train-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset/train', help="train dir root")
-parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Ours/Dataset', help="test dir root")
+parser.add_argument("--train-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset/train', help="train dir root")
+parser.add_argument("--test-dir", type=str, default='/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset', help="test dir root")
 parser.add_argument("--save-dir", type=str, default='models/ANODE', help="save dir")
 parser.add_argument("--epoch", type=int, default=250, help="training epoch")
 parser.add_argument("--eval-epoch", type=int, default=5, help="evaluating frequency")

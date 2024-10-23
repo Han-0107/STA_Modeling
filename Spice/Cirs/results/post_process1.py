@@ -32,7 +32,7 @@ def extract_data_to_csv(file_path, csv_writer):
         if match:
             second_value = match.group(1)
     if 'Trans_' in filename:
-        match = re.search(r'Trans_(\d+\.\d+)', filename)
+        match = re.search(r'Trans_(\d+(\.\d+)?)', filename)
         if match:
             third_value = match.group(1)
     if 'Cap_' in filename:
