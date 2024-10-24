@@ -14,6 +14,9 @@ delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/simula
 delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/lib')
 delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/csv')
 delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Cirs/results/pivot')
+delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset')
+delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset/train')
+delete_non_python_files('/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset/test')
 
 
 

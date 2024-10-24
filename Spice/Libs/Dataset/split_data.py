@@ -1,5 +1,6 @@
 import os
 import shutil
+import numpy as np
 
 def copy_files(train_voltages, test_voltages, source_dir='.'):
     train_dir = os.path.join(source_dir, 'train')
@@ -33,8 +34,10 @@ def copy_files(train_voltages, test_voltages, source_dir='.'):
             print(f"Warning: No file found for voltage {voltage}.")
 
 if __name__ == "__main__":
-    train_voltages = [0.7, 0.9]
-    test_voltages = [0.8] 
+    train_voltages_o = np.arange(0.6, 0.8, 0.01)
+    test_voltages_o = [0.65, 0.7, 0.75]
+    train_voltages = [round(i, 3) for i in train_voltages_o]
+    test_voltages = [round(i, 3) for i in test_voltages_o]
 
     source_dir = '.'
     copy_files(train_voltages, test_voltages, source_dir)
