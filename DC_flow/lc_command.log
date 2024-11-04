@@ -1,0 +1,12 @@
+#@ # 
+#@ # Running lc_shell Version T-2022.03-SP3 for linux64 -- Jul 13, 2022
+#@ # Date:   Mon Nov  4 15:56:30 2024
+#@ # Run by: yaohuihan@localhost.localdomain
+#@ 
+
+ls
+cd libs
+ls
+cd asap7
+ls
+exit

@@ -2,14 +2,14 @@
 
 ## How does Design Compiler customize library files for synthesis and timing analysis?
 
-* Read the target library: `set target_library "./libs/cells_1.0v.db ./libs/cells_1.2v.db"`
-* Read link library: `set link_library "* ./libs/cells_1.0v.db ./libs/cells_1.2v.db"`
+* Read the target library: `set target_library "./libs/asap7/asap7sc7p5t_INVBUF_RVT_FF_ccs_211120.db ./libs/asap7/asap7sc7p5t_INVBUF_RVT_SS_ccs_211120.db ./libs/asap7/asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120.db ./libs/asap7/asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120.db"`
+* Read link library: `set link_library "* ./libs/asap7/asap7sc7p5t_INVBUF_RVT_FF_ccs_211120.db ./libs/asap7/asap7sc7p5t_INVBUF_RVT_SS_ccs_211120.db ./libs/asap7/asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120.db ./libs/asap7/asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120.db"`
 * Read in a Verilog design: `read_verilog ./cirs/nand.v`
 * Create a link: `link`
 * Compile: `compile`
 * Read in the sdc file: `read_sdc ./cirs/nand.sdc`
-* Create operating conditions: `create_operating_conditions -name My_1.1V_Condition -voltage 1.1 -process 1.0 -temperature 27 -library [list cells_1.0v cells_1.2v]`
-* To use custom operating conditions: `set_operating_conditions My_1.1V_Condition`
+* Create operating conditions: `create_operating_conditions -name My_0.7V_Condition -voltage 0.7 -process 1.0 -temperature 25 -library [list asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120 asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120]`
+* To use custom operating conditions: `set_operating_conditions My_0.7V_Condition`
 * Setting the load capacitance: `set_load 1.0 [get_ports y]`
 * View the cells used: `report_cell`
 * View the timing report: `report_timing`

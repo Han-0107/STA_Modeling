@@ -1,0 +1,16 @@
+#@ # 
+#@ # Running lc_shell Version T-2022.03-SP3 for linux64 -- Jul 13, 2022
+#@ # Date:   Mon Nov  4 16:01:12 2024
+#@ # Run by: yaohuihan@localhost.localdomain
+#@ 
+
+read_lib asap7sc7p5t_INVBUF_RVT_FF_ccs_220122.lib
+write_lib -format db asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 -output asap7sc7p5t_INVBUF_RVT_FF_ccs_211120.db
+read_lib asap7sc7p5t_INVBUF_RVT_SS_ccs_220122.lib
+write_lib -format db asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 -output asap7sc7p5t_INVBUF_RVT_SS_ccs_211120.db
+read_lib asap7sc7p5t_INVBUF_SIMPLE_SS_ccs_220122.lib
+read_lib asap7sc7p5t_SIMPLE_RVT_SS_ccs_220122.lib
+read_lib asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120.lib
+read_lib asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120.lib
+write_lib -format db asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120 -output asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120.db
+exit

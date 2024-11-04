@@ -1,0 +1,48 @@
+ 
+                             Library Compiler (TM)
+                                 DesignWare (R)
+
+             Version T-2022.03-SP3 for linux64 - Jul 13, 2022 -SLE
+
+                    Copyright (c) 1988 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Initializing...
+lc_shell> ls
+.   DC.PNG  README.md  command.log  lc_command.log  libs
+..  OT.PNG  cirs       default.svf  lc_output.txt
+lc_shell> cd libs
+lc_shell> ls
+.  ..  FreePDK  asap7
+lc_shell> cd asap7
+lc_shell> ls
+.
+..
+asap7sc7p5t_INVBUF_RVT_FF_ccs_220122.lib
+asap7sc7p5t_INVBUF_RVT_SS_ccs_220122.lib
+asap7sc7p5t_INVBUF_RVT_TT_ccs_211120.db
+asap7sc7p5t_INVBUF_RVT_TT_ccs_220122.lib
+asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120.db
+asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120.lib
+asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120.lib
+asap7sc7p5t_SIMPLE_RVT_TT_ccs_211120.db
+asap7sc7p5t_SIMPLE_RVT_TT_ccs_211120.lib
+lc_shell> exit
+Maximum memory usage for this session: 101.32 MB
+CPU usage for this session:      1 seconds (  0.00 hours)
+Elapsed time for this session:     46 seconds (  0.01 hours)
+Thank you for using Library Compiler.
+
