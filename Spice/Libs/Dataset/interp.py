@@ -55,12 +55,9 @@ def main(txt_directory, Vol, Tran, Cap):
 
 # 设定要插值的点
 Vol = [0.9]
-Vol = []
 Tran = [1,1.2]
-Tran = []
 Cap = [0.6,0.7]
-Cap = []
-result, query_points = main('/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset', Vol, Tran, Cap)
+result, query_points = main('/data/yaohuihan/Research/STA_Modeling/Spice/Libs/Dataset/train', Vol, Tran, Cap)
 
 # 提取并保存数据
 def save_results_to_txt(results, query_points):
