@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version T-2022.03-SP1 for linux64 -- Apr 14, 2022
-#@ # Date:   Mon Nov  4 16:43:54 2024
+#@ # Date:   Mon Nov 25 14:27:57 2024
 #@ # Run by: yaohuihan@localhost.localdomain
 #@ 
 
@@ -8591,9 +8591,11 @@ read_verilog ./cirs/nand.v
 link
 compile
 read_sdc ./cirs/nand.sdc
-create_operating_conditions -name My_0.7V_Condition -voltage 0.7 -process 1.0 -temperature 25 -library [list asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120 asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120]
-set_operating_conditions My_0.7V_Condition
-set_load 92.16 [get_ports y]
-report_cell
+create_operating_conditions -name New_Condition -voltage 0.7 -process 1.0 -temperature 25 -library [list asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120 asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120]
+set_operating_conditions New_Condition
+set_load 0.01 [get_ports y]
 report_timing
-exit
+create_operating_conditions -name New_Condition2 -voltage 0.7 -process 1.0 -temperature 125 -library [list asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120 asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120]
+set_operating_conditions New_Condition2
+set_load 0.01 [get_ports y]
+report_timing

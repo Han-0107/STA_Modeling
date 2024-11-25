@@ -8,8 +8,8 @@
 * Create a link: `link`
 * Compile: `compile`
 * Read in the sdc file: `read_sdc ./cirs/nand.sdc`
-* Create operating conditions: `create_operating_conditions -name My_0.7V_Condition -voltage 0.7 -process 1.0 -temperature 25 -library [list asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120 asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120]`
-* To use custom operating conditions: `set_operating_conditions My_0.7V_Condition`
+* Create operating conditions: `create_operating_conditions -name New_Condition -voltage 0.7 -process 1.0 -temperature 25 -library [list asap7sc7p5t_INVBUF_RVT_FF_ccs_211120 asap7sc7p5t_INVBUF_RVT_SS_ccs_211120 asap7sc7p5t_SIMPLE_RVT_FF_ccs_211120 asap7sc7p5t_SIMPLE_RVT_SS_ccs_211120]`
+* To use custom operating conditions: `set_operating_conditions New_Condition`
 * Setting the load capacitance: `set_load 1.0 [get_ports y]`
 * View the cells used: `report_cell`
 * View the timing report: `report_timing`
